@@ -29,8 +29,8 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4"><path d="m6 9 6 6 6-6"></path></svg>
                     </a>
                     <div class="absolute left-0 mt-0 w-56 bg-background border border-border rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                        <a href="/#mission" class="block px-4 py-2 text-sm text-foreground hover:text-primary hover:bg-muted transition-colors first:rounded-t-md">Vision & Mission</a>
-                        <a href="/#about" class="block px-4 py-2 text-sm text-foreground hover:text-primary hover:bg-muted transition-colors">Laboratory Profile</a>
+                        <a href="/vision-mission" class="block px-4 py-2 text-sm text-foreground hover:text-primary hover:bg-muted transition-colors first:rounded-t-md">Vision & Mission</a>
+                        <a href="/profile" class="block px-4 py-2 text-sm text-foreground hover:text-primary hover:bg-muted transition-colors">Laboratory Profile</a>
                         <a href="/logo" class="block px-4 py-2 text-sm text-foreground hover:text-primary hover:bg-muted transition-colors">Logo</a>
                         <a href="/organization" class="block px-4 py-2 text-sm text-foreground hover:text-primary hover:bg-muted transition-colors last:rounded-b-md">Organizational Structure</a>
                     </div>
@@ -97,8 +97,8 @@
             
             <div class="space-y-1">
                 <div class="px-4 py-2 text-xs font-bold text-muted-foreground uppercase tracking-wider">Profile</div>
-                <a href="/#mission" class="block px-4 py-2 text-sm text-foreground hover:text-primary hover:bg-muted rounded-lg transition-all ml-2">Vision & Mission</a>
-                <a href="/#about" class="block px-4 py-2 text-sm text-foreground hover:text-primary hover:bg-muted rounded-lg transition-all ml-2">Laboratory Profile</a>
+                <a href="/vision-mission" class="block px-4 py-2 text-sm text-foreground hover:text-primary hover:bg-muted rounded-lg transition-all ml-2">Vision & Mission</a>
+                <a href="/profile" class="block px-4 py-2 text-sm text-foreground hover:text-primary hover:bg-muted rounded-lg transition-all ml-2">Laboratory Profile</a>
                 <a href="/logo" class="block px-4 py-2 text-sm text-foreground hover:text-primary hover:bg-muted rounded-lg transition-all ml-2">Logo</a>
                 <a href="/organization" class="block px-4 py-2 text-sm text-foreground hover:text-primary hover:bg-muted rounded-lg transition-all ml-2">Organizational Structure</a>
             </div>

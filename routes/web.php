@@ -9,3 +9,9 @@ Route::get('/', function () {
 Route::get('/organization', function () {
     return view('organization');
 });
+Route::get('/vision-mission', function () {
+    return view('vision-mission');
+});
+Route::get('/profile', function () {
+    return view('profile');
+});
