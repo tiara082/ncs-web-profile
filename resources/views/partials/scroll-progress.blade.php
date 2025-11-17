@@ -1,5 +1,5 @@
 <!-- Scroll Progress Bar -->
-<div id="scroll-progress" class="fixed top-0 left-0 h-1 bg-gradient-to-r from-primary via-accent to-secondary z-[60] transition-all duration-300" style="width: 0%"></div>
+<div id="scroll-progress" class="fixed top-0 left-0 h-1 bg-gradient-to-r from-primary via-accent to-secondary z-[100] transition-all duration-300" style="width: 0%"></div>
 
 <script>
 // Scroll Progress Bar Script

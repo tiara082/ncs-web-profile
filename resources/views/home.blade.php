@@ -1052,28 +1052,7 @@
     <script>
         // Scroll Progress Bar handled by partial (partials/scroll-progress.blade.php)
         // Back to Top handled by shared partial (partials/back-to-top.blade.php)
-
-        // Mobile Menu Toggle
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const menuIcon = document.getElementById('menu-icon');
-        const closeIcon = document.getElementById('close-icon');
-
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('active');
-            menuIcon.classList.toggle('hidden');
-            closeIcon.classList.toggle('hidden');
-        });
-
-        // Close mobile menu when clicking on a link
-        const mobileLinks = mobileMenu.querySelectorAll('a');
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.remove('active');
-                menuIcon.classList.remove('hidden');
-                closeIcon.classList.add('hidden');
-            });
-        });
+        // Mobile Menu Toggle handled by shared partial (partials/shared-scripts.blade.php)
 
         // Intersection Observer for fade-in animations
         const observerOptions = {

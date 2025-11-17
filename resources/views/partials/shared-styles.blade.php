@@ -1,32 +1,24 @@
 <style>
 /* Shared Global Styles */
 
+/* Mobile Menu Overlay */
+.mobile-menu-overlay {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+.mobile-menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
 /* Mobile Menu */
 .mobile-menu {
     transform: translateX(100%);
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .mobile-menu.active {
     transform: translateX(0);
-}
-
-/* Logo Styles */
-.logo-polinema {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-    border-radius: 50%;
-    padding: 1px;
-}
-.logo-polinema img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
 }
 
 /* Hover Effects */
