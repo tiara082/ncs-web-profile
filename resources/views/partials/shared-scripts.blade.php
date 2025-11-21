@@ -64,4 +64,31 @@
         }
     });
 })();
+
+// Navbar Scroll Effect - Solid at top, semi-transparent when scrolled
+(function() {
+    const navbar = document.getElementById('main-navbar');
+    
+    if (navbar) {
+        function updateNavbar() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > 50) {
+                // Scrolled - Semi-transparent navbar with blur (35% white)
+                navbar.classList.remove('bg-white', 'shadow-sm', 'border-border');
+                navbar.classList.add('bg-white/35', 'backdrop-blur-lg', 'border-white/20', 'shadow-md');
+            } else {
+                // At top - Solid white navbar
+                navbar.classList.add('bg-white', 'shadow-sm', 'border-border');
+                navbar.classList.remove('bg-white/35', 'backdrop-blur-lg', 'border-white/20', 'shadow-md');
+            }
+        }
+        
+        // Initial check
+        updateNavbar();
+        
+        // Update on scroll
+        window.addEventListener('scroll', updateNavbar, { passive: true });
+    }
+})();
 </script>

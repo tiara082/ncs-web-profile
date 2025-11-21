@@ -24,6 +24,12 @@ Route::get('/vision-mission', function () {
 Route::get('/profile', function () {
     return view('profile');
 });
+Route::get('/login', function () {
+    return view('login');
+});
+Route::get('/logo', function () {
+    return view('logo');
+});
 
 Route::resource('admin', AdminController::class);
 Route::resource('galleries', GalleryController::class);

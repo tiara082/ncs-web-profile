@@ -16,6 +16,12 @@
                             <img src="https://avatars.githubusercontent.com/u/63681676?s=280&v=4" alt="Polinema Logo" class="w-10 h-10"/>
                         </div>
                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Jti_polinema.svg/328px-Jti_polinema.svg.png?20240606144137" alt="JTI Logo" class="w-10 h-10 object-contain"/>
+                        <!-- Divider -->
+                        <div class="w-px h-8 bg-gradient-to-b from-transparent via-white/20 to-transparent"></div>
+                        <!-- Logo NCS -->
+                        <div class="relative group">
+                            <img src="{{ asset('img/logo.png') }}" alt="NCS Lab Logo" class="w-10 h-10 object-contain group-hover:scale-105 transition-transform"/>
+                        </div>
                     </div>
                     <div>
                         <h4 class="text-lg font-bold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">NCS Lab</h4>
@@ -44,8 +50,8 @@
             <div class="lg:col-span-2">
                 <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Quick Links</h4>
                 <ul class="space-y-2.5">
-                    <li><a href="/" class="text-white/60 hover:text-primary transition-colors flex items-center gap-2 group text-sm"><i data-feather="chevron-right" width="12" height="12" class="text-primary/60 group-hover:translate-x-1 transition-transform"></i>About Lab</a></li>
-                    <li><a href="/profile" class="text-white/60 hover:text-primary transition-colors flex items-center gap-2 group text-sm"><i data-feather="chevron-right" width="12" height="12" class="text-primary/60 group-hover:translate-x-1 transition-transform"></i>Mission</a></li>
+                    <li><a href="/profile" class="text-white/60 hover:text-primary transition-colors flex items-center gap-2 group text-sm"><i data-feather="chevron-right" width="12" height="12" class="text-primary/60 group-hover:translate-x-1 transition-transform"></i>About Lab</a></li>
+                    <li><a href="/vision-mission" class="text-white/60 hover:text-primary transition-colors flex items-center gap-2 group text-sm"><i data-feather="chevron-right" width="12" height="12" class="text-primary/60 group-hover:translate-x-1 transition-transform"></i>Vision Mission</a></li>
                     <li><a href="/services" class="text-white/60 hover:text-primary transition-colors flex items-center gap-2 group text-sm"><i data-feather="chevron-right" width="12" height="12" class="text-primary/60 group-hover:translate-x-1 transition-transform"></i>Services</a></li>
                     <li><a href="/gallery" class="text-white/60 hover:text-primary transition-colors flex items-center gap-2 group text-sm"><i data-feather="chevron-right" width="12" height="12" class="text-primary/60 group-hover:translate-x-1 transition-transform"></i>Gallery</a></li>
                     <li><a href="/admin" class="text-white/60 hover:text-primary transition-colors flex items-center gap-2 group text-sm"><i data-feather="chevron-right" width="12" height="12" class="text-primary/60 group-hover:translate-x-1 transition-transform"></i>Admin Portal</a></li>
@@ -59,7 +65,7 @@
                     <li><a href="/archive" class="text-white/60 hover:text-primary transition-colors flex items-center gap-2 group text-sm"><i data-feather="chevron-right" width="12" height="12" class="text-primary/60 group-hover:translate-x-1 transition-transform"></i>Research Archive</a></li>
                     <li><a href="/publications" class="text-white/60 hover:text-primary transition-colors flex items-center gap-2 group text-sm"><i data-feather="chevron-right" width="12" height="12" class="text-primary/60 group-hover:translate-x-1 transition-transform"></i>Publications</a></li>
                     <li><a href="/events" class="text-white/60 hover:text-primary transition-colors flex items-center gap-2 group text-sm"><i data-feather="chevron-right" width="12" height="12" class="text-primary/60 group-hover:translate-x-1 transition-transform"></i>Events</a></li>
-                    <li><a href="/team" class="text-white/60 hover:text-primary transition-colors flex items-center gap-2 group text-sm"><i data-feather="chevron-right" width="12" height="12" class="text-primary/60 group-hover:translate-x-1 transition-transform"></i>Our Team</a></li>
+                    <li><a href="/organization" class="text-white/60 hover:text-primary transition-colors flex items-center gap-2 group text-sm"><i data-feather="chevron-right" width="12" height="12" class="text-primary/60 group-hover:translate-x-1 transition-transform"></i>Our Team</a></li>
                 </ul>
             </div>
             
@@ -104,66 +110,103 @@
                 </h4>
                 <p class="text-white/50 text-xs">Final Project Team Members</p>
             </div>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-3 max-w-4xl mx-auto">
-                <div class="group p-3 bg-white/5 hover:bg-white/10 rounded-lg border border-white/10 hover:border-primary/50 transition-all">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">BA</div>
-                        <div class="flex-1 min-w-0">
-                            <div class="font-mono text-xs text-primary">244107020226</div>
-                            <div class="text-sm text-white truncate">Bima Arya Prasetyo</div>
-                        </div>
+            
+            <!-- Member Photos Only -->
+            <div class="flex items-center justify-center gap-4 flex-wrap">
+                <!-- Brian - Project Manager -->
+                <div class="group relative">
+                    <img src="{{ asset('img/group-member/brian.png') }}" alt="Brian Serafino Donovan" class="w-16 h-16 rounded-full object-cover ring-2 ring-primary/50 hover:ring-4 hover:ring-primary transition-all hover:scale-110 cursor-pointer"/>
+                    <div class="absolute -bottom-1 -right-1 w-5 h-5 bg-gradient-to-br from-primary to-secondary rounded-full border-2 border-slate-900 flex items-center justify-center">
+                        <i data-feather="briefcase" width="10" height="10" class="text-white"></i>
+                    </div>
+                    <!-- Tooltip -->
+                    <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 bg-slate-800/95 backdrop-blur-sm rounded-lg border border-primary/30 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none whitespace-nowrap shadow-xl z-20 text-center">
+                        <div class="text-xs font-semibold text-white mb-0.5">Brian Serafino Donovan</div>
+                        <div class="text-xs text-primary/80 font-mono">244107020035</div>
+                        <div class="text-xs text-white/60 mt-1">Project Manager</div>
+                        <div class="absolute top-full left-1/2 -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-slate-800/95"></div>
                     </div>
                 </div>
-                <div class="group p-3 bg-white/5 hover:bg-white/10 rounded-lg border border-white/10 hover:border-primary/50 transition-all">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 bg-gradient-to-br from-secondary to-accent rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">BS</div>
-                        <div class="flex-1 min-w-0">
-                            <div class="font-mono text-xs text-primary">244107020035</div>
-                            <div class="text-sm text-white truncate">Brian Serafino Donovan</div>
-                        </div>
+                
+                <!-- Joseph - UI/UX Designer -->
+                <div class="group relative">
+                    <img src="{{ asset('img/group-member/joseph.jpg') }}" alt="Joseph Atem Deng Aruei" class="w-16 h-16 rounded-full object-cover ring-2 ring-primary/50 hover:ring-4 hover:ring-primary transition-all hover:scale-110 cursor-pointer"/>
+                    <div class="absolute -bottom-1 -right-1 w-5 h-5 bg-gradient-to-br from-secondary to-accent rounded-full border-2 border-slate-900 flex items-center justify-center">
+                        <i data-feather="figma" width="10" height="10" class="text-white"></i>
+                    </div>
+                    <!-- Tooltip -->
+                    <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 bg-slate-800/95 backdrop-blur-sm rounded-lg border border-primary/30 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none whitespace-nowrap shadow-xl z-20 text-center">
+                        <div class="text-xs font-semibold text-white mb-0.5">Joseph Atem Deng Aruei</div>
+                        <div class="text-xs text-primary/80 font-mono">244107020242</div>
+                        <div class="text-xs text-white/60 mt-1">UI/UX Designer</div>
+                        <div class="absolute top-full left-1/2 -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-slate-800/95"></div>
                     </div>
                 </div>
-                <div class="group p-3 bg-white/5 hover:bg-white/10 rounded-lg border border-white/10 hover:border-primary/50 transition-all">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 bg-gradient-to-br from-accent to-primary rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">DR</div>
-                        <div class="flex-1 min-w-0">
-                            <div class="font-mono text-xs text-primary">244107020138</div>
-                            <div class="text-sm text-white truncate">Devin Rianto</div>
-                        </div>
+                
+                <!-- Bima - UI/UX Designer -->
+                <div class="group relative">
+                    <img src="{{ asset('img/group-member/bima.png') }}" alt="Bima Arya Prasetyo" class="w-16 h-16 rounded-full object-cover ring-2 ring-primary/50 hover:ring-4 hover:ring-primary transition-all hover:scale-110 cursor-pointer"/>
+                    <div class="absolute -bottom-1 -right-1 w-5 h-5 bg-gradient-to-br from-accent to-primary rounded-full border-2 border-slate-900 flex items-center justify-center">
+                        <i data-feather="figma" width="10" height="10" class="text-white"></i>
+                    </div>
+                    <!-- Tooltip -->
+                    <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 bg-slate-800/95 backdrop-blur-sm rounded-lg border border-primary/30 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none whitespace-nowrap shadow-xl z-20 text-center">
+                        <div class="text-xs font-semibold text-white mb-0.5">Bima Arya Prasetyo</div>
+                        <div class="text-xs text-primary/80 font-mono">244107020226</div>
+                        <div class="text-xs text-white/60 mt-1">UI/UX Designer</div>
+                        <div class="absolute top-full left-1/2 -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-slate-800/95"></div>
                     </div>
                 </div>
-                <div class="group p-3 bg-white/5 hover:bg-white/10 rounded-lg border border-white/10 hover:border-primary/50 transition-all">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">HP</div>
-                        <div class="flex-1 min-w-0">
-                            <div class="font-mono text-xs text-primary">244107020157</div>
-                            <div class="text-sm text-white truncate">Hanzel Putra Wollwage</div>
-                        </div>
+                
+                <!-- Tiara - Frontend & Database -->
+                <div class="group relative">
+                    <img src="{{ asset('img/group-member/tiara.jpeg') }}" alt="Tiara Febrianie" class="w-16 h-16 rounded-full object-cover ring-2 ring-primary/50 hover:ring-4 hover:ring-primary transition-all hover:scale-110 cursor-pointer"/>
+                    <div class="absolute -bottom-1 -right-1 w-5 h-5 bg-gradient-to-br from-primary to-accent rounded-full border-2 border-slate-900 flex items-center justify-center">
+                        <i data-feather="code" width="10" height="10" class="text-white"></i>
+                    </div>
+                    <!-- Tooltip -->
+                    <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 bg-slate-800/95 backdrop-blur-sm rounded-lg border border-primary/30 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none whitespace-nowrap shadow-xl z-20 text-center">
+                        <div class="text-xs font-semibold text-white mb-0.5">Tiara Febrianie</div>
+                        <div class="text-xs text-primary/80 font-mono">244107020097</div>
+                        <div class="text-xs text-white/60 mt-1">Frontend & Database</div>
+                        <div class="absolute top-full left-1/2 -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-slate-800/95"></div>
                     </div>
                 </div>
-                <div class="group p-3 bg-white/5 hover:bg-white/10 rounded-lg border border-white/10 hover:border-primary/50 transition-all">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 bg-gradient-to-br from-secondary to-primary rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">JA</div>
-                        <div class="flex-1 min-w-0">
-                            <div class="font-mono text-xs text-primary">244107020242</div>
-                            <div class="text-sm text-white truncate">Joseph Atem Deng Aruei</div>
-                        </div>
+                
+                <!-- Hanzel - Backend & Database -->
+                <div class="group relative">
+                    <img src="{{ asset('img/group-member/hanzel.jpg') }}" alt="Hanzel Putra Wollwage" class="w-16 h-16 rounded-full object-cover ring-2 ring-primary/50 hover:ring-4 hover:ring-primary transition-all hover:scale-110 cursor-pointer"/>
+                    <div class="absolute -bottom-1 -right-1 w-5 h-5 bg-gradient-to-br from-secondary to-primary rounded-full border-2 border-slate-900 flex items-center justify-center">
+                        <i data-feather="database" width="10" height="10" class="text-white"></i>
+                    </div>
+                    <!-- Tooltip -->
+                    <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 bg-slate-800/95 backdrop-blur-sm rounded-lg border border-primary/30 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none whitespace-nowrap shadow-xl z-20 text-center">
+                        <div class="text-xs font-semibold text-white mb-0.5">Hanzel Putra Wollwage</div>
+                        <div class="text-xs text-primary/80 font-mono">244107020157</div>
+                        <div class="text-xs text-white/60 mt-1">Backend & Database</div>
+                        <div class="absolute top-full left-1/2 -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-slate-800/95"></div>
                     </div>
                 </div>
-                <div class="group p-3 bg-white/5 hover:bg-white/10 rounded-lg border border-white/10 hover:border-primary/50 transition-all">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 bg-gradient-to-br from-accent to-secondary rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">TF</div>
-                        <div class="flex-1 min-w-0">
-                            <div class="font-mono text-xs text-primary">244107020097</div>
-                            <div class="text-sm text-white truncate">Tiara Febrianie</div>
-                        </div>
+                
+                <!-- Devin - Quality Assurance -->
+                <div class="group relative">
+                    <img src="{{ asset('img/group-member/devin.png') }}" alt="Devin Rianto" class="w-16 h-16 rounded-full object-cover ring-2 ring-primary/50 hover:ring-4 hover:ring-primary transition-all hover:scale-110 cursor-pointer"/>
+                    <div class="absolute -bottom-1 -right-1 w-5 h-5 bg-gradient-to-br from-accent to-secondary rounded-full border-2 border-slate-900 flex items-center justify-center">
+                        <i data-feather="check-circle" width="10" height="10" class="text-white"></i>
+                    </div>
+                    <!-- Tooltip -->
+                    <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 bg-slate-800/95 backdrop-blur-sm rounded-lg border border-primary/30 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none whitespace-nowrap shadow-xl z-20 text-center">
+                        <div class="text-xs font-semibold text-white mb-0.5">Devin Rianto</div>
+                        <div class="text-xs text-primary/80 font-mono">244107020138</div>
+                        <div class="text-xs text-white/60 mt-1">Quality Assurance</div>
+                        <div class="absolute top-full left-1/2 -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-slate-800/95"></div>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Bottom Bar -->
-        <div class="pt-6 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-3">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-3">
             <div class="flex items-center gap-2 text-xs text-white/50">
                 <i data-feather="shield" width="14" height="14" class="text-primary/70"></i>
                 <span>© 2025 NCS Lab. All rights reserved.</span>

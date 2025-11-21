@@ -1,4 +1,4 @@
-<!-- Hero Section (Organization) - Shorter -->
+<!-- Hero Section (Organization/Logo) - Shorter -->
 <section class="relative pt-32 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
     <!-- Background Video/Image -->
     <div class="absolute inset-0 z-0">
@@ -11,12 +11,26 @@
     </div>
     <div class="max-w-7xl mx-auto relative z-10 text-center">
         <div class="animate-fade-in-up">
-            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">
-                Organization Structure
-            </h1>
-            <p class="text-lg text-white/80 max-w-2xl mx-auto">
-                Network & Cyber Security Laboratory organizational hierarchy and team structure
-            </p>
+            @php
+                $currentPath = request()->path();
+                $isLogoPage = $currentPath === 'logo';
+            @endphp
+            
+            @if($isLogoPage)
+                <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">
+                    Logo
+                </h1>
+                <p class="text-lg text-white/80 max-w-2xl mx-auto">
+                    Official logos and branding assets of Politeknik Negeri Malang and Jurusan Teknologi Informasi
+                </p>
+            @else
+                <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">
+                    Organization Structure
+                </h1>
+                <p class="text-lg text-white/80 max-w-2xl mx-auto">
+                    Network & Cyber Security Laboratory organizational hierarchy and team structure
+                </p>
+            @endif
         </div>
     </div>
 </section>
