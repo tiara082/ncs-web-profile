@@ -92,7 +92,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="https://sinta.kemdikbud.go.id" target="_blank" class="group flex items-center gap-2 text-white/60 hover:text-primary transition-colors text-sm">
+                        <a href="https://sinta.kemdiktisaintek.go.id/journals/profile/5102" target="_blank" class="group flex items-center gap-2 text-white/60 hover:text-primary transition-colors text-sm">
                             <i data-feather="external-link" width="12" height="12" class="text-primary/60"></i>
                             SINTA
                         </a>

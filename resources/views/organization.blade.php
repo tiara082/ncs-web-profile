@@ -281,7 +281,7 @@
                 <div class="org-chart-container min-w-[900px]">
                     <!-- Level 1: Laboratory Head -->
                     <div class="flex justify-center mb-16">
-                        <div class="org-card-head">
+                        <a href="/member/erfan-rohadi" class="org-card-head cursor-pointer">
                             <div class="org-avatar-container">
                                 <img src="https://i.pravatar.cc/150?img=12" alt="Erfan Rohadi" class="org-avatar-img">
                                 <div class="org-avatar-badge">
@@ -291,7 +291,7 @@
                             <div class="org-badge-head">Laboratory Head</div>
                             <div class="org-name-head">Erfan Rohadi, ST., M.Eng., Ph.D.</div>
                             <div class="org-role">Leading strategic direction and research initiatives</div>
-                        </div>
+                        </a>
                     </div>
 
                     <!-- Connector Line -->
@@ -316,44 +316,44 @@
                     <!-- Level 2: Researchers -->
                     <div class="grid grid-cols-4 gap-6 max-w-6xl mx-auto pt-8">
                         <!-- Researcher 1 -->
-                        <div class="org-card-researcher">
+                        <a href="/member/ade-ismail" class="org-card-researcher cursor-pointer">
                             <div class="org-avatar-container-small">
                                 <img src="https://i.pravatar.cc/150?img=33" alt="Ade Ismail" class="org-avatar-img-small">
                             </div>
                             <div class="org-badge-researcher">Researcher</div>
                             <div class="org-name-researcher">Ade Ismail, S.Kom., M.TI</div>
                             <div class="org-role-small">Cybersecurity research and development</div>
-                        </div>
+                        </a>
 
                         <!-- Researcher 2 -->
-                        <div class="org-card-researcher">
+                        <a href="/member/vipkas-al-hadid-firdaus" class="org-card-researcher cursor-pointer">
                             <div class="org-avatar-container-small">
                                 <img src="https://i.pravatar.cc/150?img=15" alt="Vipkas Al Hadid Firdaus" class="org-avatar-img-small">
                             </div>
                             <div class="org-badge-researcher">Researcher</div>
                             <div class="org-name-researcher">Vipkas Al Hadid Firdaus, ST., MT</div>
                             <div class="org-role-small">Network security and administration</div>
-                        </div>
+                        </a>
 
                         <!-- Researcher 3 -->
-                        <div class="org-card-researcher">
+                        <a href="/member/sofyan-noor-arief" class="org-card-researcher cursor-pointer">
                             <div class="org-avatar-container-small">
                                 <img src="https://i.pravatar.cc/150?img=68" alt="Sofyan Noor Arief" class="org-avatar-img-small">
                             </div>
                             <div class="org-badge-researcher">Researcher</div>
                             <div class="org-name-researcher">Sofyan Noor Arief, S.ST., M.Kom.</div>
                             <div class="org-role-small">System security and testing</div>
-                        </div>
+                        </a>
 
                         <!-- Researcher 4 -->
-                        <div class="org-card-researcher">
+                        <a href="/member/meyti-eka-apriyani" class="org-card-researcher cursor-pointer">
                             <div class="org-avatar-container-small">
                                 <img src="https://i.pravatar.cc/150?img=47" alt="Meyti Eka Apriyani" class="org-avatar-img-small">
                             </div>
                             <div class="org-badge-researcher">Researcher</div>
                             <div class="org-name-researcher">Meyti Eka Apriyani ST., MT.</div>
                             <div class="org-role-small">Digital forensics and incident response</div>
-                        </div>
+                        </a>
                     </div>
                 </div>
             </div>
