@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('galleries', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->text('description')->nullable();
+            $table->string('file_path');
+            $table->string('gallery_type')->default('image');
+            $table->foreignId('uploaded_by')->nullable()->constrained('users')->onDelete('set null');
             $table->timestamps();
         });
     }

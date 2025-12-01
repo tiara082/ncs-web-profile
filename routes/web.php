@@ -31,11 +31,22 @@ Route::get('/logo', function () {
     return view('logo');
 });
 
-Route::resource('admin', AdminController::class);
-Route::resource('galleries', GalleryController::class);
-Route::resource('archives', ArchivesController::class);
-Route::resource('contents', ContentController::class);
-Route::resource('categories', CategoriesController::class);
-Route::resource('members', MembersController::class);
-Route::resource('admin_logs', Admin_LogsController::class);
-Route::resource('links', LinksController::class);
+// Filament Admin Auth Routes
+Route::post('/admin/logout', function () {
+    auth()->guard('web')->logout();
+    request()->session()->invalidate();
+    request()->session()->regenerateToken();
+    return redirect('/admin/login');
+})->name('filament.admin.auth.logout')->middleware('web');
+
+// API Routes for frontend (renamed to avoid conflict with Filament admin panel)
+Route::prefix('api')->group(function () {
+    Route::resource('administrators', AdminController::class);
+    Route::resource('galleries', GalleryController::class);
+    Route::resource('archives', ArchivesController::class);
+    Route::resource('contents', ContentController::class);
+    Route::resource('categories', CategoriesController::class);
+    Route::resource('members', MembersController::class);
+    Route::resource('admin_logs', Admin_LogsController::class);
+    Route::resource('links', LinksController::class);
+});

@@ -1,0 +1,190 @@
+@import '/css/filament/filament/app.css';
+
+/* Custom NCS Lab Theme */
+:root {
+    --primary-50: #e6f5fd;
+    --primary-100: #b3e0f9;
+    --primary-200: #80cbf5;
+    --primary-300: #66bbf2;
+    --primary-400: #4daceb;
+    --primary-500: #339de4;
+    --primary-600: #2d8acc;
+    --primary-700: #2676b3;
+    --primary-800: #1f639a;
+    --primary-900: #195081;
+    
+    --secondary-50: #e8ebf7;
+    --secondary-100: #bfc7e8;
+    --secondary-200: #96a3d9;
+    --secondary-300: #6d7fca;
+    --secondary-400: #445bbb;
+    --secondary-500: #222f7f;
+    --secondary-600: #1e2972;
+    --secondary-700: #1a2365;
+    --secondary-800: #161d58;
+    --secondary-900: #12174b;
+}
+
+/* Custom Sidebar Styling */
+.fi-sidebar {
+    background: linear-gradient(180deg, #66bbf2 0%, #222f7f 100%) !important;
+}
+
+.fi-sidebar-nav-item {
+    transition: all 0.3s ease;
+}
+
+.fi-sidebar-nav-item:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    transform: translateX(4px);
+}
+
+.fi-sidebar-nav-item.fi-active {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border-left: 4px solid #fff;
+}
+
+/* Custom Header */
+.fi-topbar {
+    background: white !important;
+    border-bottom: 2px solid #66bbf2 !important;
+    box-shadow: 0 4px 6px -1px rgba(102, 187, 242, 0.1);
+}
+
+/* Stats Cards */
+.fi-wi-stats-overview-stat {
+    background: linear-gradient(135deg, rgba(102, 187, 242, 0.05) 0%, rgba(34, 47, 127, 0.05) 100%);
+    border: 1px solid rgba(102, 187, 242, 0.2);
+    transition: all 0.3s ease;
+}
+
+.fi-wi-stats-overview-stat:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px -4px rgba(102, 187, 242, 0.3);
+    border-color: #66bbf2;
+}
+
+/* Chart Widget */
+.fi-wi-chart {
+    background: white;
+    border: 1px solid rgba(102, 187, 242, 0.2);
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+/* Table Widget */
+.fi-ta-table {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.fi-ta-header-cell {
+    background: linear-gradient(90deg, #66bbf2 0%, #222f7f 100%);
+    color: white !important;
+    font-weight: 600;
+}
+
+.fi-ta-row:hover {
+    background: rgba(102, 187, 242, 0.05);
+}
+
+/* Buttons */
+.fi-btn-primary {
+    background: linear-gradient(90deg, #66bbf2 0%, #339de4 100%);
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.fi-btn-primary:hover {
+    background: linear-gradient(90deg, #339de4 0%, #2676b3 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px -4px rgba(102, 187, 242, 0.4);
+}
+
+/* Forms */
+.fi-fo-field-wrp {
+    transition: all 0.2s ease;
+}
+
+.fi-fo-field-wrp:focus-within {
+    transform: scale(1.01);
+}
+
+.fi-input:focus {
+    border-color: #66bbf2 !important;
+    box-shadow: 0 0 0 3px rgba(102, 187, 242, 0.1) !important;
+}
+
+/* Badges */
+.fi-badge {
+    font-weight: 600;
+    padding: 0.375rem 0.75rem;
+    border-radius: 9999px;
+}
+
+.fi-badge-primary {
+    background: linear-gradient(90deg, #66bbf2 0%, #4daceb 100%);
+}
+
+.fi-badge-secondary {
+    background: linear-gradient(90deg, #222f7f 0%, #445bbb 100%);
+}
+
+/* Dashboard Grid Animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fi-wi {
+    animation: fadeInUp 0.5s ease-out;
+    animation-fill-mode: both;
+}
+
+.fi-wi:nth-child(1) { animation-delay: 0.1s; }
+.fi-wi:nth-child(2) { animation-delay: 0.2s; }
+.fi-wi:nth-child(3) { animation-delay: 0.3s; }
+.fi-wi:nth-child(4) { animation-delay: 0.4s; }
+.fi-wi:nth-child(5) { animation-delay: 0.5s; }
+.fi-wi:nth-child(6) { animation-delay: 0.6s; }
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #66bbf2 0%, #222f7f 100%);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #4daceb 0%, #445bbb 100%);
+}
+
+/* Loading State */
+.fi-main {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f8fafc 0%, #e6f5fd 100%);
+}
+
+/* Page Heading */
+.fi-header-heading {
+    background: linear-gradient(90deg, #222f7f 0%, #66bbf2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 800;
+}

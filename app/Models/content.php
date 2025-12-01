@@ -10,9 +10,9 @@ class Content extends Model
         'title', 'body', 'content_type', 'created_by'
     ];
 
-    public function admin()
+    public function creator()
     {
-        return $this->belongsTo(Admin::class, 'created_by');
+        return $this->belongsTo(User::class, 'created_by');
     }
 
     public function categories()
