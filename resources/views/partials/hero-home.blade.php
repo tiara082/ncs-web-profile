@@ -26,7 +26,7 @@
             Pioneering research and education in cybersecurity at Malang State Polytechnic. Protecting digital futures through innovation, expertise, and collaboration.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in-up" style="animation-delay:0.4s">
-            <a href="#about" class="group relative px-8 py-4 bg-gradient-to-r from-primary to-secondary text-white font-semibold rounded-xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-primary/50 hover:scale-105">
+            <a href="#about" class="scroll-smooth group relative px-8 py-4 bg-gradient-to-r from-primary to-secondary text-white font-semibold rounded-xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-primary/50 hover:scale-105" onclick="event.preventDefault(); document.querySelector('#about').scrollIntoView({behavior: 'smooth'});">
                 <div class="absolute inset-0 bg-gradient-to-r from-secondary to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <span class="relative flex items-center gap-2">Explore Lab <span class="group-hover:translate-x-1 transition-transform">→</span></span>
             </a>

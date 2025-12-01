@@ -3,10 +3,10 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
             <!-- Logo & Branding -->
-            <div class="flex items-center gap-3">
+            <a href="/" class="flex items-center gap-3">
                 <div class="flex items-center gap-2">
                     <div class="relative group">
-                        <img src="https://avatars.githubusercontent.com/u/63681676?s=280&v=4" alt="Polinema Logo" class="w-10 h-10 object-contain hover:scale-105 transition-transform mix-blend-multiply"/>
+                        <img src="{{ asset('img/polinema.png') }}" alt="Polinema Logo" class="w-10 h-10 object-contain hover:scale-105 transition-transform mix-blend-multiply"/>
                     </div>
                     <div class="relative group">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Jti_polinema.svg/328px-Jti_polinema.svg.png?20240606144137" alt="JTI Logo" class="w-10 h-10 object-contain hover:scale-105 transition-transform mix-blend-multiply"/>
@@ -21,7 +21,7 @@
                     <p class="text-base font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent leading-tight drop-shadow-sm">Network & Cyber Security Lab</p>
                     <p class="text-[11px] text-foreground/80 leading-tight drop-shadow-sm">Politeknik Negeri Malang</p>
                 </div>
-            </div>
+            </a>
             
             <!-- Desktop Menu -->
             <div class="hidden md:flex items-center gap-6">
@@ -109,7 +109,7 @@
         <div class="sticky top-0 bg-white/10 backdrop-blur-sm p-4 flex items-center justify-between border-b border-white/20">
             <div class="flex items-center gap-2">
                 <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-lg">
-                    <img src="https://avatars.githubusercontent.com/u/63681676?s=280&v=4" alt="Logo" class="w-8 h-8"/>
+                    <img src="{{ asset('img/polinema.png') }}" alt="Logo" class="w-8 h-8"/>
                 </div>
                 <div>
                     <h3 class="text-white font-bold text-sm">NCS Lab</h3>

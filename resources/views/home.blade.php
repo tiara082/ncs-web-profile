@@ -466,7 +466,7 @@
                 
                 <div class="grid md:grid-cols-3 gap-8 mb-24">
                     <!-- Card 1 -->
-                    <div class="group relative overflow-hidden">
+                    <a href="/activities" class="group relative overflow-hidden block">
                         <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 rounded-3xl transform group-hover:scale-105 transition-transform duration-500"></div>
                         <div class="relative p-8 bg-white/80 backdrop-blur-sm rounded-3xl border border-cyan-200/50 hover:border-cyan-400/70 transition-all duration-500 hover:shadow-2xl hover:shadow-cyan-500/20 hover:-translate-y-2">
                             <div class="relative mb-6">
@@ -481,10 +481,10 @@
                                 Learn more <span class="ml-2">→</span>
                             </div>
                         </div>
-                    </div>
+                    </a>
 
                     <!-- Card 2 -->
-                    <div class="group relative overflow-hidden">
+                    <a href="/research-documents" class="group relative overflow-hidden block">
                         <div class="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-indigo-500/10 rounded-3xl transform group-hover:scale-105 transition-transform duration-500"></div>
                         <div class="relative p-8 bg-white/80 backdrop-blur-sm rounded-3xl border border-blue-200/50 hover:border-blue-400/70 transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/20 hover:-translate-y-2">
                             <div class="relative mb-6">
@@ -499,10 +499,10 @@
                                 Learn more <span class="ml-2">→</span>
                             </div>
                         </div>
-                    </div>
+                    </a>
 
                     <!-- Card 3 -->
-                    <div class="group relative overflow-hidden">
+                    <a href="/activities" class="group relative overflow-hidden block">
                         <div class="absolute inset-0 bg-gradient-to-br from-indigo-500/10 to-purple-500/10 rounded-3xl transform group-hover:scale-105 transition-transform duration-500"></div>
                         <div class="relative p-8 bg-white/80 backdrop-blur-sm rounded-3xl border border-indigo-200/50 hover:border-indigo-400/70 transition-all duration-500 hover:shadow-2xl hover:shadow-indigo-500/20 hover:-translate-y-2">
                             <div class="relative mb-6">
@@ -517,7 +517,7 @@
                                 Learn more <span class="ml-2">→</span>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
 
                 <!-- Related Courses -->
@@ -1188,6 +1188,32 @@
         setInterval(() => {
             showSlide(currentSlide + 1);
         }, 5000);
+
+        // Scroll reveal animation for sections
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('section, .fade-in-section');
+            sections.forEach((section, index) => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(30px)';
+                section.style.transition = `all 0.8s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.1}s`;
+                observer.observe(section);
+            });
+        });
 
         // Initialize Feather Icons
         feather.replace();

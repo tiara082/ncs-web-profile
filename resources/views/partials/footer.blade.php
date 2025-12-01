@@ -13,7 +13,7 @@
                 <div class="flex items-center gap-3 mb-4">
                     <div class="flex items-center gap-2 p-2 bg-white/5 rounded-lg border border-white/10">
                         <div class="logo-polinema">
-                            <img src="https://avatars.githubusercontent.com/u/63681676?s=280&v=4" alt="Polinema Logo" class="w-10 h-10"/>
+                            <img src="{{ asset('img/polinema.png') }}" alt="Polinema Logo" class="w-10 h-10"/>
                         </div>
                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Jti_polinema.svg/328px-Jti_polinema.svg.png?20240606144137" alt="JTI Logo" class="w-10 h-10 object-contain"/>
                         <!-- Divider -->
@@ -64,7 +64,7 @@
                 <ul class="space-y-2.5">
                     <li><a href="/archive" class="text-white/60 hover:text-primary transition-colors flex items-center gap-2 group text-sm"><i data-feather="chevron-right" width="12" height="12" class="text-primary/60 group-hover:translate-x-1 transition-transform"></i>Research Archive</a></li>
                     <li><a href="/publications" class="text-white/60 hover:text-primary transition-colors flex items-center gap-2 group text-sm"><i data-feather="chevron-right" width="12" height="12" class="text-primary/60 group-hover:translate-x-1 transition-transform"></i>Publications</a></li>
-                    <li><a href="/events" class="text-white/60 hover:text-primary transition-colors flex items-center gap-2 group text-sm"><i data-feather="chevron-right" width="12" height="12" class="text-primary/60 group-hover:translate-x-1 transition-transform"></i>Events</a></li>
+                    <li><a href="/agenda" class="text-white/60 hover:text-primary transition-colors flex items-center gap-2 group text-sm"><i data-feather="chevron-right" width="12" height="12" class="text-primary/60 group-hover:translate-x-1 transition-transform"></i>Events</a></li>
                     <li><a href="/organization" class="text-white/60 hover:text-primary transition-colors flex items-center gap-2 group text-sm"><i data-feather="chevron-right" width="12" height="12" class="text-primary/60 group-hover:translate-x-1 transition-transform"></i>Our Team</a></li>
                 </ul>
             </div>
@@ -206,26 +206,10 @@
         </div>
 
         <!-- Bottom Bar -->
-        <div class="flex flex-col md:flex-row justify-between items-center gap-3">
+        <div class="flex flex-col md:flex-row justify-center items-center gap-3">
             <div class="flex items-center gap-2 text-xs text-white/50">
                 <i data-feather="shield" width="14" height="14" class="text-primary/70"></i>
                 <span>© 2025 NCS Lab. All rights reserved.</span>
-            </div>
-            <div class="flex items-center gap-4 text-xs">
-                <a href="#" class="text-white/50 hover:text-primary transition-colors flex items-center gap-1.5">
-                    <i data-feather="lock" width="12" height="12"></i>
-                    Privacy
-                </a>
-                <span class="text-white/20">•</span>
-                <a href="#" class="text-white/50 hover:text-primary transition-colors flex items-center gap-1.5">
-                    <i data-feather="file-text" width="12" height="12"></i>
-                    Terms
-                </a>
-                <span class="text-white/20">•</span>
-                <a href="#" class="text-white/50 hover:text-primary transition-colors flex items-center gap-1.5">
-                    <i data-feather="map" width="12" height="12"></i>
-                    Sitemap
-                </a>
             </div>
         </div>
     </div>

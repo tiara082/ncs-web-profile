@@ -91,4 +91,39 @@
         window.addEventListener('scroll', updateNavbar, { passive: true });
     }
 })();
+
+// Scroll reveal animation for all pages
+(function() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    // Initialize on DOM ready
+    document.addEventListener('DOMContentLoaded', () => {
+        // Select sections, cards, and elements to animate
+        const animatedElements = document.querySelectorAll('section, .card, .logo-card, .activity-card, .event-card, .member-card, .fade-in-section, main > div > div');
+        
+        animatedElements.forEach((element, index) => {
+            // Skip if element already has animation classes
+            if (element.classList.contains('animate-fade-in-up') || element.classList.contains('animate-slide-down')) {
+                return;
+            }
+            
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(40px)';
+            element.style.transition = `all 0.7s cubic-bezier(0.4, 0, 0.2, 1) ${Math.min(index * 0.08, 0.5)}s`;
+            observer.observe(element);
+        });
+    });
+})();
 </script>

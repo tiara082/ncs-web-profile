@@ -90,7 +90,7 @@ function showNotification(message, type = 'info') {
     };
     
     const notification = document.createElement('div');
-    notification.className = `fixed top-4 right-4 ${colors[type]} text-white px-6 py-4 rounded-lg shadow-2xl flex items-center gap-3 z-50 transform translate-x-full transition-transform duration-300`;
+    notification.className = `fixed top-24 right-4 ${colors[type]} text-white px-6 py-4 rounded-lg shadow-2xl flex items-center gap-3 z-[9999] transform translate-x-full transition-transform duration-300`;
     notification.innerHTML = `
         <i data-feather="${icons[type]}" width="20" height="20"></i>
         <span class="font-medium">${message}</span>
