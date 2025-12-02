@@ -1,8 +1,8 @@
-<!-- Hero Section for Activities -->
+<!-- Hero Section - Community Service -->
 <section class="relative pt-32 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
     <!-- Background Video/Image -->
     <div class="absolute inset-0 z-0">
-        <img src="https://images.unsplash.com/photo-1639322537228-f710d846310a?q=80&w=2000" alt="Cybersecurity Background" class="w-full h-full object-cover"/>
+        <img src="https://images.unsplash.com/photo-1639322537228-f710d846310a?q=80&w=2000" alt="Community Service Background" class="w-full h-full object-cover"/>
         <div class="absolute inset-0 bg-gradient-to-br from-slate-900/90 via-blue-950/85 to-indigo-950/90"></div>
     </div>
     <!-- Animated Grid Pattern -->
@@ -12,10 +12,10 @@
     <div class="max-w-7xl mx-auto relative z-10 text-center">
         <div class="animate-fade-in-up">
             <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">
-                Our Activities
+                Community Service
             </h1>
             <p class="text-lg text-white/80 max-w-2xl mx-auto">
-                Documenting our journey in advancing cybersecurity education and research
+                Empowering communities through cybersecurity education and outreach programs
             </p>
         </div>
     </div>

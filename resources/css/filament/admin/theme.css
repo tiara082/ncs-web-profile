@@ -1,28 +1,247 @@
-@import '/css/filament/filament/app.css';
+/* Custom NCS Lab Theme with Dark/Light Mode Support */
 
-/* Custom NCS Lab Theme */
-:root {
-    --primary-50: #e6f5fd;
-    --primary-100: #b3e0f9;
-    --primary-200: #80cbf5;
-    --primary-300: #66bbf2;
-    --primary-400: #4daceb;
-    --primary-500: #339de4;
-    --primary-600: #2d8acc;
-    --primary-700: #2676b3;
-    --primary-800: #1f639a;
-    --primary-900: #195081;
-    
-    --secondary-50: #e8ebf7;
-    --secondary-100: #bfc7e8;
-    --secondary-200: #96a3d9;
-    --secondary-300: #6d7fca;
-    --secondary-400: #445bbb;
-    --secondary-500: #222f7f;
-    --secondary-600: #1e2972;
-    --secondary-700: #1a2365;
-    --secondary-800: #161d58;
-    --secondary-900: #12174b;
+/* ================================
+   DARK MODE SPECIFIC STYLES
+   ================================ */
+
+/* Dark Mode Sidebar */
+.dark .fi-sidebar {
+    background: linear-gradient(180deg, rgb(15 23 42) 0%, rgb(30 41 59) 100%) !important;
+    border-right: 1px solid rgb(51 65 85);
+}
+
+/* Dark Mode Topbar */
+.dark .fi-topbar {
+    background: rgb(15 23 42 / 0.95) !important;
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgb(51 65 85) !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+}
+
+/* Dark Mode Main Body */
+.dark .fi-body {
+    background: linear-gradient(135deg, rgb(15 23 42) 0%, rgb(30 41 59) 50%, rgb(51 65 85) 100%);
+    background-size: 400% 400%;
+    animation: gradientShift 20s ease infinite;
+}
+
+/* Dark Mode Cards & Sections */
+.dark .fi-section,
+.dark .fi-card {
+    background: rgb(30 41 59 / 0.8) !important;
+    border: 1px solid rgb(51 65 85);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.dark .fi-section:hover,
+.dark .fi-card:hover {
+    background: rgb(30 41 59 / 0.95) !important;
+    border-color: rgba(102, 187, 242, 0.4);
+    box-shadow: 0 8px 24px rgba(102, 187, 242, 0.15);
+}
+
+/* Dark Mode Stats Cards */
+.dark .fi-wi-stats-overview-stat {
+    background: linear-gradient(135deg, rgba(102, 187, 242, 0.15) 0%, rgba(34, 47, 127, 0.2) 100%);
+    border: 1px solid rgba(102, 187, 242, 0.3);
+}
+
+.dark .fi-wi-stats-overview-stat:hover {
+    background: linear-gradient(135deg, rgba(102, 187, 242, 0.25) 0%, rgba(34, 47, 127, 0.3) 100%);
+    box-shadow: 0 12px 24px -4px rgba(102, 187, 242, 0.4);
+}
+
+/* Dark Mode Tables */
+.dark .fi-ta-table {
+    background: rgb(30 41 59) !important;
+    border: 1px solid rgb(51 65 85);
+}
+
+.dark .fi-ta-header-cell {
+    background: linear-gradient(90deg, rgba(102, 187, 242, 0.3) 0%, rgba(34, 47, 127, 0.4) 100%);
+}
+
+.dark .fi-ta-row:hover {
+    background: rgba(102, 187, 242, 0.1) !important;
+}
+
+.dark .fi-ta-row {
+    border-bottom: 1px solid rgb(51 65 85 / 0.5);
+}
+
+/* Dark Mode Forms */
+.dark .fi-input {
+    background: rgb(15 23 42) !important;
+    border-color: rgb(51 65 85) !important;
+    color: rgb(226 232 240) !important;
+}
+
+.dark .fi-input:focus {
+    border-color: #66bbf2 !important;
+    box-shadow: 0 0 0 3px rgba(102, 187, 242, 0.2) !important;
+    background: rgb(30 41 59) !important;
+}
+
+/* Dark Mode Navigation */
+.dark .fi-sidebar-nav-item {
+    color: rgb(203 213 225);
+}
+
+.dark .fi-sidebar-nav-item:hover {
+    background: rgba(102, 187, 242, 0.15) !important;
+    color: rgb(226 232 240);
+}
+
+.dark .fi-sidebar-nav-item.fi-active {
+    background: rgba(102, 187, 242, 0.25) !important;
+    color: white;
+}
+
+.dark .fi-sidebar-group-label {
+    color: rgb(148 163 184);
+}
+
+/* Dark Mode Modal */
+.dark .fi-modal {
+    background: rgb(30 41 59);
+    border: 1px solid rgb(51 65 85);
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+}
+
+.dark .fi-modal-header {
+    background: linear-gradient(to right, rgba(102, 187, 242, 0.15), rgba(34, 47, 127, 0.1));
+    border-bottom: 1px solid rgb(51 65 85);
+}
+
+/* Dark Mode Dropdown */
+.dark .fi-dropdown-panel {
+    background: rgb(30 41 59 / 0.98);
+    border: 1px solid rgb(51 65 85);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(12px);
+}
+
+.dark .fi-dropdown-list-item:hover {
+    background: rgba(102, 187, 242, 0.15);
+}
+
+/* Dark Mode Tabs */
+.dark .fi-tabs-item {
+    color: rgb(203 213 225);
+}
+
+.dark .fi-tabs-item:hover {
+    background: rgba(102, 187, 242, 0.12);
+    color: rgb(226 232 240);
+}
+
+.dark .fi-tabs-item.fi-active {
+    background: linear-gradient(135deg, rgba(102, 187, 242, 0.25), rgba(102, 187, 242, 0.15));
+    color: rgb(186 230 253);
+}
+
+/* Dark Mode Notifications */
+.dark .fi-no {
+    background: rgb(30 41 59 / 0.95);
+    border: 1px solid rgb(51 65 85);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(16px);
+}
+
+/* Dark Mode Scrollbar */
+.dark ::-webkit-scrollbar-track {
+    background: rgb(15 23 42);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, rgba(102, 187, 242, 0.5) 0%, rgba(34, 47, 127, 0.6) 100%);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, rgba(102, 187, 242, 0.7) 0%, rgba(34, 47, 127, 0.8) 100%);
+}
+
+/* Dark Mode Page Heading */
+.dark .fi-header-heading {
+    background: linear-gradient(90deg, #66bbf2 0%, #4daceb 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Dark Mode Actions */
+.dark .fi-ac-action:hover {
+    background: rgba(102, 187, 242, 0.18);
+}
+
+/* Dark Mode Pagination */
+.dark .fi-pagination-item {
+    color: rgb(203 213 225);
+    border: 1px solid rgb(51 65 85);
+}
+
+.dark .fi-pagination-item:hover {
+    background: rgba(102, 187, 242, 0.15);
+    border-color: rgba(102, 187, 242, 0.4);
+}
+
+/* Dark Mode Search */
+.dark .fi-global-search-input {
+    background: rgb(15 23 42);
+    border-color: rgb(51 65 85);
+    color: rgb(226 232 240);
+}
+
+.dark .fi-global-search-input:focus {
+    background: rgb(30 41 59);
+    border-color: #66bbf2;
+    box-shadow: 0 0 0 4px rgba(102, 187, 242, 0.2);
+}
+
+/* Dark Mode Sidebar Header */
+.dark .fi-sidebar-header {
+    background: linear-gradient(135deg, rgba(102, 187, 242, 0.1), rgba(34, 47, 127, 0.15));
+    border-bottom: 1px solid rgba(102, 187, 242, 0.2);
+}
+
+/* Dark Mode Badge */
+.dark .fi-badge {
+    background: rgba(102, 187, 242, 0.2);
+    color: rgb(186 230 253);
+    border: 1px solid rgba(102, 187, 242, 0.3);
+}
+
+/* Dark Mode Chart Widget */
+.dark .fi-wi-chart {
+    background: rgb(30 41 59 / 0.8);
+    border: 1px solid rgb(51 65 85);
+}
+
+/* Dark Mode Loading Indicator */
+.dark .fi-loading-indicator {
+    color: #66bbf2;
+}
+
+/* Dark Mode Text Colors */
+.dark .fi-section-header-heading,
+.dark .fi-section-description {
+    color: rgb(226 232 240);
+}
+
+.dark .text-sm {
+    color: rgb(203 213 225);
+}
+
+/* Dark Mode Button Secondary */
+.dark .fi-btn-secondary {
+    background: rgb(51 65 85);
+    color: rgb(226 232 240);
+    border: 1px solid rgb(71 85 105);
+}
+
+.dark .fi-btn-secondary:hover {
+    background: rgb(71 85 105);
+    border-color: rgba(102, 187, 242, 0.4);
 }
 
 /* Custom Sidebar Styling */
@@ -187,4 +406,266 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
     font-weight: 800;
+}
+
+/* Enhanced Styling - Matching Frontend Design */
+
+/* Cards & Panels */
+.fi-section,
+.fi-card {
+    border-radius: 1rem;
+    border: 1px solid rgba(102, 187, 242, 0.15);
+    box-shadow: 0 2px 8px rgba(102, 187, 242, 0.05);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fi-section:hover,
+.fi-card:hover {
+    box-shadow: 0 8px 24px rgba(102, 187, 242, 0.12);
+    border-color: rgba(102, 187, 242, 0.25);
+    transform: translateY(-2px);
+}
+
+/* Navigation Groups */
+.fi-sidebar-group-label {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.5rem 1rem;
+    margin-top: 1rem;
+}
+
+/* Modal */
+.fi-modal {
+    border-radius: 1.5rem;
+    box-shadow: 0 25px 80px rgba(34, 47, 127, 0.15);
+    border: 1px solid rgba(102, 187, 242, 0.1);
+}
+
+.fi-modal-header {
+    background: linear-gradient(to right, rgba(102, 187, 242, 0.08), rgba(34, 47, 127, 0.05));
+    border-bottom: 1px solid rgba(102, 187, 242, 0.15);
+    border-radius: 1.5rem 1.5rem 0 0;
+}
+
+/* Dropdown */
+.fi-dropdown-panel {
+    border-radius: 1rem;
+    box-shadow: 0 10px 40px rgba(34, 47, 127, 0.12);
+    border: 1px solid rgba(102, 187, 242, 0.15);
+    backdrop-filter: blur(8px);
+}
+
+/* Tabs */
+.fi-tabs-item {
+    transition: all 0.3s ease;
+    border-radius: 0.75rem;
+    padding: 0.75rem 1.5rem;
+}
+
+.fi-tabs-item:hover {
+    background: rgba(102, 187, 242, 0.08);
+    transform: translateY(-1px);
+}
+
+.fi-tabs-item.fi-active {
+    background: linear-gradient(135deg, rgba(102, 187, 242, 0.15), rgba(102, 187, 242, 0.08));
+    color: #2d8acc;
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(102, 187, 242, 0.15);
+}
+
+/* Notifications */
+.fi-no {
+    border-radius: 1rem;
+    box-shadow: 0 10px 30px rgba(34, 47, 127, 0.15);
+    border: 1px solid rgba(102, 187, 242, 0.2);
+    backdrop-filter: blur(12px);
+}
+
+.fi-no-success {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(16, 185, 129, 0.02));
+    border-color: rgba(16, 185, 129, 0.3);
+}
+
+.fi-no-error {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.05), rgba(239, 68, 68, 0.02));
+    border-color: rgba(239, 68, 68, 0.3);
+}
+
+/* Actions */
+.fi-ac-action {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 0.75rem;
+}
+
+.fi-ac-action:hover {
+    background: rgba(102, 187, 242, 0.12);
+    transform: scale(1.08);
+    box-shadow: 0 4px 12px rgba(102, 187, 242, 0.2);
+}
+
+/* Pagination */
+.fi-pagination-item {
+    transition: all 0.3s ease;
+    border-radius: 0.75rem;
+    font-weight: 600;
+}
+
+.fi-pagination-item:hover {
+    background: rgba(102, 187, 242, 0.12);
+    transform: translateY(-2px);
+}
+
+.fi-pagination-item.fi-active {
+    background: linear-gradient(135deg, #66bbf2, #4daceb);
+    color: white;
+    box-shadow: 0 6px 16px rgba(102, 187, 242, 0.35);
+}
+
+/* Search */
+.fi-global-search-input {
+    border-radius: 1rem;
+    border: 1.5px solid rgba(102, 187, 242, 0.25);
+    transition: all 0.3s ease;
+    padding: 0.75rem 1rem;
+}
+
+.fi-global-search-input:focus {
+    border-color: #66bbf2;
+    box-shadow: 0 0 0 4px rgba(102, 187, 242, 0.12);
+    transform: scale(1.02);
+}
+
+/* Brand Logo Hover Effect */
+.fi-logo {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fi-logo:hover {
+    transform: scale(1.08) rotate(2deg);
+    filter: drop-shadow(0 8px 16px rgba(102, 187, 242, 0.4));
+}
+
+/* Page Transitions */
+.fi-main > * {
+    animation: pageSlideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes pageSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Floating Elements */
+@keyframes floatGentle {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-12px) rotate(2deg); }
+}
+
+.fi-wi-stats-overview-stat {
+    animation: floatGentle 6s ease-in-out infinite;
+}
+
+.fi-wi-stats-overview-stat:nth-child(2) {
+    animation-delay: 0.5s;
+}
+
+.fi-wi-stats-overview-stat:nth-child(3) {
+    animation-delay: 1s;
+}
+
+.fi-wi-stats-overview-stat:nth-child(4) {
+    animation-delay: 1.5s;
+}
+
+/* Gradient Background for Main Area */
+.fi-body {
+    background: linear-gradient(135deg, #fafbfc 0%, #f0f7fc 50%, #e6f5fd 100%);
+    background-size: 400% 400%;
+    animation: gradientShift 20s ease infinite;
+}
+
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+/* Form Field Animations */
+.fi-fo-field-wrp {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fi-fo-field-wrp:focus-within {
+    transform: scale(1.02);
+    box-shadow: 0 8px 24px rgba(102, 187, 242, 0.12);
+}
+
+/* Loading Indicator */
+.fi-loading-indicator {
+    color: #66bbf2;
+    animation: spin 1s linear infinite, pulse 2s ease-in-out infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(0.95); }
+}
+
+/* Success/Error States */
+.fi-input.fi-valid {
+    border-color: rgba(16, 185, 129, 0.5);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+.fi-input.fi-invalid {
+    border-color: rgba(239, 68, 68, 0.5);
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+/* Sidebar Brand */
+.fi-sidebar-header {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1.25rem 1rem;
+}
+
+/* User Menu */
+.fi-dropdown-list-item:hover {
+    background: linear-gradient(to right, rgba(102, 187, 242, 0.08), transparent);
+    transform: translateX(4px);
+}
+
+/* Stat Icons */
+.fi-wi-stats-overview-stat-icon {
+    transition: all 0.4s ease;
+}
+
+.fi-wi-stats-overview-stat:hover .fi-wi-stats-overview-stat-icon {
+    transform: scale(1.2) rotate(10deg);
+}
+
+/* Table Hover Effects */
+.fi-ta-row {
+    transition: all 0.2s ease;
+}
+
+.fi-ta-row:hover {
+    background: rgba(102, 187, 242, 0.06);
+    transform: scale(1.01);
+    box-shadow: 0 4px 12px rgba(102, 187, 242, 0.08);
 }

@@ -468,8 +468,8 @@
                     <!-- Card 1 -->
                     <a href="/activities" class="group relative overflow-hidden block">
                         <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 rounded-3xl transform group-hover:scale-105 transition-transform duration-500"></div>
-                        <div class="relative p-8 bg-white/80 backdrop-blur-sm rounded-3xl border border-cyan-200/50 hover:border-cyan-400/70 transition-all duration-500 hover:shadow-2xl hover:shadow-cyan-500/20 hover:-translate-y-2">
-                            <div class="relative mb-6">
+                        <div class="relative p-8 bg-white/80 backdrop-blur-sm rounded-3xl border border-cyan-200/50 hover:border-cyan-400/70 transition-all duration-500 hover:shadow-2xl hover:shadow-cyan-500/20 hover:-translate-y-2 text-center">
+                            <div class="relative mb-6 flex justify-center">
                                 <div class="absolute inset-0 bg-cyan-500/30 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                                 <div class="relative w-16 h-16 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-2xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
                                     <i data-feather="cpu" class="text-cyan-600" width="32" height="32"></i>
@@ -477,7 +477,7 @@
                             </div>
                             <h3 class="text-2xl font-bold text-foreground mb-4 group-hover:text-cyan-600 transition-colors">Student Practicum</h3>
                             <p class="text-muted-foreground leading-relaxed">Practicum related to network administration, router & switch configuration, and cyber security simulation using supporting software.</p>
-                            <div class="mt-6 flex items-center text-cyan-600 font-semibold opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all">
+                            <div class="mt-6 flex items-center justify-center text-cyan-600 font-semibold opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all">
                                 Learn more <span class="ml-2">→</span>
                             </div>
                         </div>
@@ -486,8 +486,8 @@
                     <!-- Card 2 -->
                     <a href="/research-documents" class="group relative overflow-hidden block">
                         <div class="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-indigo-500/10 rounded-3xl transform group-hover:scale-105 transition-transform duration-500"></div>
-                        <div class="relative p-8 bg-white/80 backdrop-blur-sm rounded-3xl border border-blue-200/50 hover:border-blue-400/70 transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/20 hover:-translate-y-2">
-                            <div class="relative mb-6">
+                        <div class="relative p-8 bg-white/80 backdrop-blur-sm rounded-3xl border border-blue-200/50 hover:border-blue-400/70 transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/20 hover:-translate-y-2 text-center">
+                            <div class="relative mb-6 flex justify-center">
                                 <div class="absolute inset-0 bg-blue-500/30 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                                 <div class="relative w-16 h-16 bg-gradient-to-br from-blue-500/20 to-indigo-500/20 rounded-2xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
                                     <i data-feather="search" class="text-blue-600" width="32" height="32"></i>
@@ -495,7 +495,7 @@
                             </div>
                             <h3 class="text-2xl font-bold text-foreground mb-4 group-hover:text-blue-600 transition-colors">Research</h3>
                             <p class="text-muted-foreground leading-relaxed">Faculty and student research in computer networks, information security, Internet of Things (IoT), and monitoring systems.</p>
-                            <div class="mt-6 flex items-center text-blue-600 font-semibold opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all">
+                            <div class="mt-6 flex items-center justify-center text-blue-600 font-semibold opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all">
                                 Learn more <span class="ml-2">→</span>
                             </div>
                         </div>
@@ -504,8 +504,8 @@
                     <!-- Card 3 -->
                     <a href="/activities" class="group relative overflow-hidden block">
                         <div class="absolute inset-0 bg-gradient-to-br from-indigo-500/10 to-purple-500/10 rounded-3xl transform group-hover:scale-105 transition-transform duration-500"></div>
-                        <div class="relative p-8 bg-white/80 backdrop-blur-sm rounded-3xl border border-indigo-200/50 hover:border-indigo-400/70 transition-all duration-500 hover:shadow-2xl hover:shadow-indigo-500/20 hover:-translate-y-2">
-                            <div class="relative mb-6">
+                        <div class="relative p-8 bg-white/80 backdrop-blur-sm rounded-3xl border border-indigo-200/50 hover:border-indigo-400/70 transition-all duration-500 hover:shadow-2xl hover:shadow-indigo-500/20 hover:-translate-y-2 text-center">
+                            <div class="relative mb-6 flex justify-center">
                                 <div class="absolute inset-0 bg-indigo-500/30 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                                 <div class="relative w-16 h-16 bg-gradient-to-br from-indigo-500/20 to-purple-500/20 rounded-2xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
                                     <i data-feather="users" class="text-indigo-600" width="32" height="32"></i>
@@ -513,7 +513,7 @@
                             </div>
                             <h3 class="text-2xl font-bold text-foreground mb-4 group-hover:text-indigo-600 transition-colors">Workshops & Seminars</h3>
                             <p class="text-muted-foreground leading-relaxed">Workshop activities, seminars, and internal training on network security, ethical hacking, and IT infrastructure monitoring.</p>
-                            <div class="mt-6 flex items-center text-indigo-600 font-semibold opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all">
+                            <div class="mt-6 flex items-center justify-center text-indigo-600 font-semibold opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all">
                                 Learn more <span class="ml-2">→</span>
                             </div>
                         </div>
@@ -1206,6 +1206,9 @@
 
         // Observe all sections
         document.addEventListener('DOMContentLoaded', () => {
+            // Initialize Feather Icons first
+            feather.replace();
+            
             const sections = document.querySelectorAll('section, .fade-in-section');
             sections.forEach((section, index) => {
                 section.style.opacity = '0';
@@ -1214,9 +1217,6 @@
                 observer.observe(section);
             });
         });
-
-        // Initialize Feather Icons
-        feather.replace();
     </script>
 
     <!-- Shared Scripts -->

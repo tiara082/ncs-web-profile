@@ -1,4 +1,4 @@
-<!-- Hero Section for Activities -->
+<!-- Hero Consulting -->
 <section class="relative pt-32 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
     <!-- Background Video/Image -->
     <div class="absolute inset-0 z-0">
@@ -12,10 +12,10 @@
     <div class="max-w-7xl mx-auto relative z-10 text-center">
         <div class="animate-fade-in-up">
             <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">
-                Our Activities
+                Consulting Services
             </h1>
             <p class="text-lg text-white/80 max-w-2xl mx-auto">
-                Documenting our journey in advancing cybersecurity education and research
+                Expert cybersecurity consulting and advisory services for your organization
             </p>
         </div>
     </div>

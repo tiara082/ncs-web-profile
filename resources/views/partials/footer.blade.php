@@ -1,5 +1,5 @@
 <!-- Footer Partial -->
-<footer class="relative bg-gradient-to-br from-slate-900 via-indigo-950 to-blue-950 text-white overflow-hidden">
+<footer id="footer" class="relative bg-gradient-to-br from-slate-900 via-indigo-950 to-blue-950 text-white overflow-hidden">
     <!-- Decorative Background -->
     <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-primary/20 to-secondary/20 rounded-full blur-3xl opacity-20 animate-float"></div>
     <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-tl from-accent/20 to-primary/20 rounded-full blur-3xl opacity-20 animate-float" style="animation-delay: 2s"></div>

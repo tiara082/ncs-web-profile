@@ -41,6 +41,236 @@ Route::get('/agenda', function () {
     return view('agenda');
 });
 
+// Infrastructure Route
+Route::get('/infrastructure', function () {
+    return view('infrastructure');
+});
+
+// Consulting Route
+Route::get('/consulting', function () {
+    return view('consulting');
+});
+
+// Community Service Route
+Route::get('/community-service', function () {
+    $events = [
+        [
+            'title' => 'Workshop Keamanan Siber untuk UMKM',
+            'description' => 'Pelatihan keamanan dasar bagi pelaku UMKM di Malang Raya untuk melindungi bisnis dari ancaman siber',
+            'date' => '2024-11-15',
+            'day' => '15',
+            'month' => '11',
+            'month_name' => 'Nov',
+            'year' => '2024',
+            'location' => 'Balai Kota Malang',
+            'participants' => 85,
+            'category' => 'workshop',
+            'category_color' => 'blue',
+            'status' => 'completed',
+            'image' => 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600&q=80',
+        ],
+        [
+            'title' => 'Seminar Literasi Digital untuk Pelajar',
+            'description' => 'Sosialisasi penggunaan internet aman dan etis untuk siswa SMA/SMK se-Kota Malang',
+            'date' => '2024-10-22',
+            'day' => '22',
+            'month' => '10',
+            'month_name' => 'Okt',
+            'year' => '2024',
+            'location' => 'SMAN 1 Malang',
+            'participants' => 250,
+            'category' => 'seminar',
+            'category_color' => 'purple',
+            'status' => 'completed',
+            'image' => 'https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=600&q=80',
+        ],
+        [
+            'title' => 'Pelatihan Incident Response untuk Instansi Pemerintah',
+            'description' => 'Training penanganan insiden keamanan siber bagi IT staff pemerintah daerah',
+            'date' => '2024-09-18',
+            'day' => '18',
+            'month' => '09',
+            'month_name' => 'Sep',
+            'year' => '2024',
+            'location' => 'Diskominfo Kota Malang',
+            'participants' => 45,
+            'category' => 'training',
+            'category_color' => 'green',
+            'status' => 'completed',
+            'image' => 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80',
+        ],
+        [
+            'title' => 'Webinar Keamanan Data Pribadi',
+            'description' => 'Edukasi perlindungan data pribadi sesuai UU PDP untuk masyarakat umum',
+            'date' => '2024-08-12',
+            'day' => '12',
+            'month' => '08',
+            'month_name' => 'Agt',
+            'year' => '2024',
+            'location' => 'Online via Zoom',
+            'participants' => 320,
+            'category' => 'webinar',
+            'category_color' => 'orange',
+            'status' => 'completed',
+            'image' => 'https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=600&q=80',
+        ],
+        [
+            'title' => 'Konsultasi Keamanan Jaringan untuk Sekolah',
+            'description' => 'Pendampingan implementasi sistem keamanan jaringan untuk sekolah-sekolah',
+            'date' => '2024-07-25',
+            'day' => '25',
+            'month' => '07',
+            'month_name' => 'Jul',
+            'year' => '2024',
+            'location' => 'SMK Negeri 4 Malang',
+            'participants' => 15,
+            'category' => 'consultation',
+            'category_color' => 'pink',
+            'status' => 'completed',
+            'image' => 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&q=80',
+        ],
+        [
+            'title' => 'Workshop Ethical Hacking untuk Mahasiswa',
+            'description' => 'Pelatihan dasar penetration testing dan ethical hacking bagi mahasiswa IT',
+            'date' => '2024-06-10',
+            'day' => '10',
+            'month' => '06',
+            'month_name' => 'Jun',
+            'year' => '2024',
+            'location' => 'Polinema',
+            'participants' => 120,
+            'category' => 'workshop',
+            'category_color' => 'blue',
+            'status' => 'completed',
+            'image' => 'https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=600&q=80',
+        ],
+        [
+            'title' => 'Seminar Teknologi Blockchain dan Keamanannya',
+            'description' => 'Edukasi tentang teknologi blockchain dan aspek keamanan untuk masyarakat umum',
+            'date' => '2024-05-15',
+            'day' => '15',
+            'month' => '05',
+            'month_name' => 'Mei',
+            'year' => '2024',
+            'location' => 'Malang Creative Center',
+            'participants' => 180,
+            'category' => 'seminar',
+            'category_color' => 'purple',
+            'status' => 'completed',
+            'image' => 'https://images.unsplash.com/photo-1639322537228-f710d846310a?w=600&q=80',
+        ],
+        [
+            'title' => 'Training Forensik Digital untuk Aparat',
+            'description' => 'Pelatihan digital forensics untuk aparat penegak hukum',
+            'date' => '2024-04-08',
+            'day' => '08',
+            'month' => '04',
+            'month_name' => 'Apr',
+            'year' => '2024',
+            'location' => 'Polda Jatim',
+            'participants' => 35,
+            'category' => 'training',
+            'category_color' => 'green',
+            'status' => 'completed',
+            'image' => 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&q=80',
+        ],
+        [
+            'title' => 'Webinar IoT Security untuk Smart Home',
+            'description' => 'Edukasi keamanan perangkat IoT dan smart home untuk rumah tangga',
+            'date' => '2024-03-20',
+            'day' => '20',
+            'month' => '03',
+            'month_name' => 'Mar',
+            'year' => '2024',
+            'location' => 'Online via YouTube Live',
+            'participants' => 450,
+            'category' => 'webinar',
+            'category_color' => 'orange',
+            'status' => 'completed',
+            'image' => 'https://images.unsplash.com/photo-1558002038-1055907df827?w=600&q=80',
+        ],
+    ];
+    
+    return view('community-service', compact('events'));
+});
+
+// Research Documents Route
+Route::get('/research-documents', function () {
+    // Collect all publications from all members
+    $members = [
+        'erfan-rohadi' => [
+            'name' => 'Erfan Rohadi, ST., M.Eng., Ph.D.',
+            'position' => 'Laboratory Head',
+            'photo' => 'https://i.pravatar.cc/300?img=12',
+            'research' => [
+                ['title' => 'Next-Generation Intrusion Detection Using Deep Learning', 'publication' => 'IEEE Transactions on Network and Service Management', 'year' => '2024', 'cover' => 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=400&q=80'],
+                ['title' => 'Quantum-Safe Cryptography for Critical Infrastructure', 'publication' => 'Nature Communications', 'year' => '2023', 'cover' => 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400&q=80'],
+                ['title' => 'Security Framework for Industrial IoT Systems', 'publication' => 'ACM Computing Surveys', 'year' => '2023', 'cover' => 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&q=80'],
+                ['title' => 'Behavioral Analytics for Insider Threat Detection', 'publication' => 'IEEE Security & Privacy', 'year' => '2022', 'cover' => 'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=400&q=80'],
+                ['title' => 'Zero Trust Architecture for Enterprise Networks', 'publication' => 'Journal of Network and Computer Applications', 'year' => '2021', 'cover' => 'https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=400&q=80'],
+            ],
+        ],
+        'ade-ismail' => [
+            'name' => 'Ade Ismail, S.Kom., M.TI',
+            'position' => 'Researcher',
+            'photo' => 'https://i.pravatar.cc/300?img=33',
+            'research' => [
+                ['title' => 'Advanced Threat Detection in IoT Networks', 'publication' => 'IEEE Security & Privacy', 'year' => '2023', 'cover' => 'https://images.unsplash.com/photo-1573164713988-8665fc963095?w=400&q=80'],
+                ['title' => 'Machine Learning Approaches for Intrusion Detection', 'publication' => 'Journal of Cybersecurity Research', 'year' => '2022', 'cover' => 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=400&q=80'],
+                ['title' => 'Blockchain-Based Security Framework for Smart Cities', 'publication' => 'International Conference on Cybersecurity', 'year' => '2021', 'cover' => 'https://images.unsplash.com/photo-1639322537228-f710d846310a?w=400&q=80'],
+            ],
+        ],
+        'vipkas-al-hadid-firdaus' => [
+            'name' => 'Vipkas Al Hadid Firdaus, ST., MT',
+            'position' => 'Researcher',
+            'photo' => 'https://i.pravatar.cc/300?img=15',
+            'research' => [
+                ['title' => 'Software-Defined Security for Data Centers', 'publication' => 'ACM Computing Surveys', 'year' => '2023', 'cover' => 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&q=80'],
+                ['title' => 'Zero Trust Architecture Implementation Guide', 'publication' => 'Network Security Journal', 'year' => '2022', 'cover' => 'https://images.unsplash.com/photo-1484807352052-23338990c6c6?w=400&q=80'],
+            ],
+        ],
+        'sofyan-noor-arief' => [
+            'name' => 'Sofyan Noor Arief, S.ST., M.Kom.',
+            'position' => 'Researcher',
+            'photo' => 'https://i.pravatar.cc/300?img=68',
+            'research' => [
+                ['title' => 'Automated Security Testing in CI/CD Pipelines', 'publication' => 'DevOps Conference', 'year' => '2023', 'cover' => 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&q=80'],
+            ],
+        ],
+        'meyti-eka-apriyani' => [
+            'name' => 'Meyti Eka Apriyani ST., MT.',
+            'position' => 'Researcher',
+            'photo' => 'https://i.pravatar.cc/300?img=47',
+            'research' => [
+                ['title' => 'Mobile Device Forensics in Criminal Investigations', 'publication' => 'Forensic Science International', 'year' => '2023', 'cover' => 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&q=80'],
+                ['title' => 'Memory Forensics for Malware Detection', 'publication' => 'Digital Investigation Journal', 'year' => '2022', 'cover' => 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&q=80'],
+            ],
+        ],
+    ];
+
+    $publications = [];
+    foreach ($members as $key => $member) {
+        foreach ($member['research'] as $research) {
+            $publications[] = [
+                'title' => $research['title'],
+                'publication' => $research['publication'],
+                'year' => $research['year'],
+                'cover' => $research['cover'],
+                'author_name' => $member['name'],
+                'author_position' => $member['position'],
+                'author_photo' => $member['photo'],
+            ];
+        }
+    }
+
+    // Sort by year descending
+    usort($publications, function($a, $b) {
+        return $b['year'] <=> $a['year'];
+    });
+
+    return view('research-documents', compact('publications'));
+});
+
 // Member Detail Route
 Route::get('/member/{slug}', function ($slug) {
     // Sample member data - this should come from database in production
