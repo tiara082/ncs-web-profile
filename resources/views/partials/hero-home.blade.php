@@ -12,7 +12,7 @@
         <div class="absolute inset-0 bg-[linear-gradient(90deg,transparent_1px,rgba(0,0,0,.05)_1px)] bg-[size:40px_auto]"></div>
         <div class="absolute inset-0 bg-[linear-gradient(0deg,transparent_1px,rgba(0,0,0,.05)_1px)] bg-[size:auto_40px]"></div>
     </div>
-    <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center z-10">
+    <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center z-0">
         <h1 class="text-6xl md:text-7xl lg:text-8xl font-bold mb-8 tracking-tighter animate-fade-in-up">
             <span class="block mb-2">
                 <span class="inline-block animate-float text-white drop-shadow-[0_0_30px_rgba(59,130,246,0.5)]" style="animation-delay:0s">N</span><span class="inline-block animate-float text-white drop-shadow-[0_0_30px_rgba(59,130,246,0.5)]" style="animation-delay:0.1s">e</span><span class="inline-block animate-float text-white drop-shadow-[0_0_30px_rgba(59,130,246,0.5)]" style="animation-delay:0.2s">t</span><span class="inline-block animate-float text-white drop-shadow-[0_0_30px_rgba(59,130,246,0.5)]" style="animation-delay:0.3s">w</span><span class="inline-block animate-float text-white drop-shadow-[0_0_30px_rgba(59,130,246,0.5)]" style="animation-delay:0.4s">o</span><span class="inline-block animate-float text-white drop-shadow-[0_0_30px_rgba(59,130,246,0.5)]" style="animation-delay:0.5s">r</span><span class="inline-block animate-float text-white drop-shadow-[0_0_30px_rgba(59,130,246,0.5)]" style="animation-delay:0.6s">k</span>

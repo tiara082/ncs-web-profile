@@ -27,8 +27,251 @@ Route::get('/profile', function () {
 Route::get('/login', function () {
     return view('login');
 });
+
+// Admin Login Routes
+Route::get('/admin/login', function () {
+    if (auth()->guard('web')->check()) {
+        return redirect()->route('admins.index');
+    }
+    return view('admin.login');
+})->name('login');
+
+Route::post('/admin/login', function (\Illuminate\Http\Request $request) {
+    $credentials = $request->validate([
+        'username' => 'required',
+        'password' => 'required',
+    ]);
+
+    $admin = \App\Models\Admin::where('username', $credentials['username'])->first();
+    
+    if ($admin && \Illuminate\Support\Facades\Hash::check($credentials['password'], $admin->password_hash)) {
+        auth()->guard('web')->login($admin);
+        $request->session()->regenerate();
+        return redirect()->intended(route('admins.index'));
+    }
+
+    return back()->withErrors([
+        'username' => 'Username atau password salah.',
+    ])->onlyInput('username');
+})->name('admin.login.post');
 Route::get('/logo', function () {
     return view('logo');
+});
+
+// Helper function to get all articles with full content
+function getAllArticles() {
+    return [
+        [
+            'slug' => 'understanding-network-segmentation',
+            'title' => 'Understanding Network Segmentation in Modern Infrastructure',
+            'excerpt' => 'Learn how network segmentation plays a crucial role in preventing lateral movement of threats across enterprise networks. This comprehensive guide covers implementation strategies, best practices, and real-world case studies.',
+            'image' => 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=800',
+            'category' => 'Best Practices',
+            'author' => 'Erfan Rohadi, Ph.D.',
+            'author_position' => 'Laboratory Head',
+            'author_photo' => asset('img/lab-member/erfan.png'),
+            'author_bio' => 'Dr. Erfan Rohadi is a distinguished academic and researcher leading the Network & Cyber Security Laboratory at Politeknik Negeri Malang.',
+            'date' => 'Nov 15, 2024',
+            'read_time' => '8 min read',
+            'tags' => ['Network Security', 'Best Practices', 'Infrastructure', 'Security Architecture'],
+            'content' => '
+                <p>Network segmentation is a fundamental security strategy that divides a computer network into smaller, isolated segments. This approach significantly reduces the attack surface and limits the potential damage from security breaches.</p>
+                
+                <h2>Why Network Segmentation Matters</h2>
+                <p>In modern enterprise environments, a flat network architecture poses significant security risks. When all systems can communicate freely, a single compromised device can provide attackers with access to your entire network infrastructure.</p>
+                
+                <blockquote>Network segmentation is not just about security—it\'s about building resilient infrastructure that can withstand and contain security incidents.</blockquote>
+                
+                <h2>Key Benefits of Network Segmentation</h2>
+                <ul>
+                    <li><strong>Reduced Attack Surface:</strong> Limiting communication paths between segments minimizes potential entry points for attackers</li>
+                    <li><strong>Containment:</strong> Security breaches are confined to specific segments, preventing lateral movement</li>
+                    <li><strong>Improved Performance:</strong> Reduced broadcast traffic and optimized routing enhance network efficiency</li>
+                    <li><strong>Compliance:</strong> Many regulations require network segmentation for sensitive data protection</li>
+                    <li><strong>Better Monitoring:</strong> Segmentation enables more focused security monitoring and anomaly detection</li>
+                </ul>
+                
+                <h2>Implementation Strategies</h2>
+                <h3>1. Physical Segmentation</h3>
+                <p>Physical segmentation involves using separate hardware devices like routers and switches to create distinct network segments. While highly secure, this approach can be costly and inflexible.</p>
+                
+                <h3>2. Virtual Segmentation (VLANs)</h3>
+                <p>Virtual LANs provide logical separation using existing network infrastructure. VLANs offer flexibility and cost-effectiveness while maintaining strong security boundaries.</p>
+                
+                <h3>3. Software-Defined Segmentation</h3>
+                <p>Modern SDN technologies enable dynamic, policy-based segmentation that can adapt to changing security requirements. This approach provides the most flexibility and granular control.</p>
+                
+                <h2>Best Practices for Network Segmentation</h2>
+                <p>When implementing network segmentation, consider these essential practices:</p>
+                <ol>
+                    <li>Start with a comprehensive network inventory and traffic analysis</li>
+                    <li>Define clear security zones based on data sensitivity and access requirements</li>
+                    <li>Implement zero-trust principles between segments</li>
+                    <li>Use next-generation firewalls for inter-segment communication</li>
+                    <li>Regularly audit and update segmentation policies</li>
+                    <li>Monitor cross-segment traffic for anomalies</li>
+                </ol>
+                
+                <h2>Common Challenges and Solutions</h2>
+                <p>Organizations often face challenges when implementing network segmentation:</p>
+                <ul>
+                    <li><strong>Legacy Applications:</strong> Older systems may require extensive communication across segments. Consider application modernization or implementing application-aware firewalls.</li>
+                    <li><strong>Performance Impact:</strong> Excessive inspection can slow network traffic. Use hardware acceleration and optimize firewall rules.</li>
+                    <li><strong>Complexity:</strong> Managing multiple segments increases operational overhead. Implement automation and centralized management tools.</li>
+                </ul>
+                
+                <h2>Conclusion</h2>
+                <p>Network segmentation remains one of the most effective security controls for protecting modern infrastructure. By implementing proper segmentation strategies and following best practices, organizations can significantly improve their security posture and resilience against cyber threats.</p>
+            ',
+        ],
+        [
+            'slug' => 'zero-trust-security-model',
+            'title' => 'Zero Trust Security Model: A Complete Guide',
+            'excerpt' => 'Discover the principles of zero trust security and how to implement it in your organization. From architecture design to policy enforcement, learn everything you need to know about this modern security paradigm.',
+            'image' => 'https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?q=80&w=800',
+            'category' => 'Strategy',
+            'author' => 'Vipkas Al Hadid Firdaus',
+            'author_position' => 'Researcher',
+            'author_photo' => asset('img/lab-member/vipkas.png'),
+            'author_bio' => 'Vipkas Al Hadid Firdaus specializes in network security and cloud infrastructure at Politeknik Negeri Malang.',
+            'date' => 'Oct 28, 2024',
+            'read_time' => '12 min read',
+            'tags' => ['Zero Trust', 'Security Strategy', 'Network Architecture', 'Access Control'],
+            'content' => '<p>Zero Trust is a security framework that requires all users, whether inside or outside the organization\'s network, to be authenticated, authorized, and continuously validated before being granted access to applications and data.</p><h2>Core Principles</h2><p>The Zero Trust model is built on several key principles that fundamentally change how we approach network security...</p>',
+        ],
+        [
+            'slug' => 'incident-response-planning-smes',
+            'title' => 'Incident Response Planning for SMEs',
+            'excerpt' => 'Essential steps for small and medium enterprises to prepare for and respond to security incidents. Learn how to build an effective incident response team and establish clear protocols.',
+            'image' => 'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?q=80&w=800',
+            'category' => 'Incident Response',
+            'author' => 'Meyti Eka Apriyani',
+            'author_position' => 'Researcher',
+            'author_photo' => asset('img/lab-member/meyti.png'),
+            'author_bio' => 'Meyti Eka Apriyani is an expert in digital forensics and incident response at Politeknik Negeri Malang.',
+            'date' => 'Sep 20, 2024',
+            'read_time' => '10 min read',
+            'tags' => ['Incident Response', 'SME Security', 'Best Practices', 'Crisis Management'],
+            'content' => '<p>Small and medium enterprises often lack the resources for dedicated security teams, but they still face significant cyber threats.</p>',
+        ],
+        [
+            'slug' => 'emerging-threats-2024',
+            'title' => 'Emerging Threats in 2024: What You Need to Know',
+            'excerpt' => 'An overview of the latest cybersecurity threats and trends that organizations should monitor. Stay ahead of attackers with insights into AI-powered attacks, supply chain vulnerabilities, and more.',
+            'image' => 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800',
+            'category' => 'Threats',
+            'author' => 'Ade Ismail',
+            'author_position' => 'Researcher',
+            'author_photo' => asset('img/lab-member/ade_ismail.png'),
+            'author_bio' => 'Ade Ismail is a cybersecurity researcher specializing in threat intelligence and penetration testing.',
+            'date' => 'Aug 12, 2024',
+            'read_time' => '15 min read',
+            'tags' => ['Threat Intelligence', 'Cyber Threats', 'Security Trends', 'AI Security'],
+            'content' => '<p>The threat landscape continues to evolve at a rapid pace. Understanding emerging threats is crucial for organizations.</p>',
+        ],
+        [
+            'slug' => 'building-secure-apis',
+            'title' => 'Building Secure APIs: Developer\'s Guide',
+            'excerpt' => 'A comprehensive guide to API security covering authentication, authorization, rate limiting, and common vulnerabilities. Essential reading for developers building modern applications.',
+            'image' => 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=800',
+            'category' => 'Best Practices',
+            'author' => 'Sofyan Noor Arief',
+            'author_position' => 'Researcher',
+            'author_photo' => asset('img/lab-member/sofyan.png'),
+            'author_bio' => 'Sofyan Noor Arief focuses on application security and secure software development practices.',
+            'date' => 'Jul 30, 2024',
+            'read_time' => '14 min read',
+            'tags' => ['API Security', 'Application Security', 'Development', 'Authentication'],
+            'content' => '<p>APIs are the backbone of modern applications, but they also represent significant security risks if not properly secured.</p>',
+        ],
+        [
+            'slug' => 'cloud-security-advanced',
+            'title' => 'Cloud Security: Beyond the Basics',
+            'excerpt' => 'Advanced cloud security strategies for protecting your infrastructure. Learn about identity management, data encryption, compliance requirements, and security monitoring in cloud environments.',
+            'image' => 'https://images.unsplash.com/photo-1639322537228-f710d846310a?q=80&w=800',
+            'category' => 'Strategy',
+            'author' => 'Erfan Rohadi, Ph.D.',
+            'author_position' => 'Laboratory Head',
+            'author_photo' => asset('img/lab-member/erfan.png'),
+            'author_bio' => 'Dr. Erfan Rohadi is a distinguished academic and researcher leading the Network & Cyber Security Laboratory at Politeknik Negeri Malang.',
+            'date' => 'Jun 18, 2024',
+            'read_time' => '11 min read',
+            'tags' => ['Cloud Security', 'Infrastructure', 'Compliance', 'Data Protection'],
+            'content' => '<p>Cloud computing offers tremendous benefits, but it also introduces new security challenges.</p>',
+        ],
+        [
+            'slug' => 'penetration-testing-methodologies',
+            'title' => 'Penetration Testing Methodologies Explained',
+            'excerpt' => 'Understanding different approaches to penetration testing from black box to white box testing. Learn when to use each methodology and what to expect from professional security assessments.',
+            'image' => 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800',
+            'category' => 'Security Tools',
+            'author' => 'Ade Ismail',
+            'author_position' => 'Researcher',
+            'author_photo' => asset('img/lab-member/ade_ismail.png'),
+            'author_bio' => 'Ade Ismail is a cybersecurity researcher specializing in threat intelligence and penetration testing.',
+            'date' => 'May 25, 2024',
+            'read_time' => '13 min read',
+            'tags' => ['Penetration Testing', 'Security Assessment', 'Testing', 'Ethical Hacking'],
+            'content' => '<p>Penetration testing is a critical component of a comprehensive security program.</p>',
+        ],
+        [
+            'slug' => 'securing-iot-devices',
+            'title' => 'Securing IoT Devices in Enterprise Networks',
+            'excerpt' => 'Best practices for managing and securing Internet of Things devices in corporate environments. From device discovery to network segmentation and monitoring strategies.',
+            'image' => 'https://images.unsplash.com/photo-1558002038-1055907df827?q=80&w=800',
+            'category' => 'Best Practices',
+            'author' => 'Vipkas Al Hadid Firdaus',
+            'author_position' => 'Researcher',
+            'author_photo' => asset('img/lab-member/vipkas.png'),
+            'author_bio' => 'Vipkas Al Hadid Firdaus specializes in network security and cloud infrastructure at Politeknik Negeri Malang.',
+            'date' => 'Apr 10, 2024',
+            'read_time' => '9 min read',
+            'tags' => ['IoT Security', 'Device Management', 'Network Security', 'Enterprise'],
+            'content' => '<p>The proliferation of IoT devices in enterprise environments creates new security challenges.</p>',
+        ],
+        [
+            'slug' => 'digital-forensics-cyber-crimes',
+            'title' => 'Digital Forensics: Investigating Modern Cyber Crimes',
+            'excerpt' => 'Techniques and tools for digital forensics investigations. Learn how cybersecurity professionals analyze digital evidence and track down threat actors.',
+            'image' => 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=800',
+            'category' => 'Incident Response',
+            'author' => 'Meyti Eka Apriyani',
+            'author_position' => 'Researcher',
+            'author_photo' => asset('img/lab-member/meyti.png'),
+            'author_bio' => 'Meyti Eka Apriyani is an expert in digital forensics and incident response at Politeknik Negeri Malang.',
+            'date' => 'Mar 15, 2024',
+            'read_time' => '16 min read',
+            'tags' => ['Digital Forensics', 'Investigation', 'Cyber Crime', 'Evidence Analysis'],
+            'content' => '<p>Digital forensics plays a crucial role in investigating cyber crimes and security incidents.</p>',
+        ],
+    ];
+}
+
+// Articles Route
+Route::get('/articles', function () {
+    $articles = getAllArticles();
+    return view('articles', compact('articles'));
+});
+
+// Article Detail Route
+Route::get('/article/{slug}', function ($slug) {
+    $allArticles = getAllArticles();
+    
+    // Find the article by slug
+    $article = collect($allArticles)->firstWhere('slug', $slug);
+    
+    if (!$article) {
+        abort(404);
+    }
+    
+    // Get related articles (same category, exclude current)
+    $relatedArticles = collect($allArticles)
+        ->where('category', $article['category'])
+        ->where('slug', '!=', $slug)
+        ->take(3)
+        ->toArray();
+    
+    return view('article-detail', compact('article', 'relatedArticles'));
 });
 
 // Past Activities Route
@@ -201,7 +444,7 @@ Route::get('/research-documents', function () {
         'erfan-rohadi' => [
             'name' => 'Erfan Rohadi, ST., M.Eng., Ph.D.',
             'position' => 'Laboratory Head',
-            'photo' => 'https://i.pravatar.cc/300?img=12',
+            'photo' => 'img/lab-member/erfan.png',
             'research' => [
                 ['title' => 'Next-Generation Intrusion Detection Using Deep Learning', 'publication' => 'IEEE Transactions on Network and Service Management', 'year' => '2024', 'cover' => 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=400&q=80'],
                 ['title' => 'Quantum-Safe Cryptography for Critical Infrastructure', 'publication' => 'Nature Communications', 'year' => '2023', 'cover' => 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400&q=80'],
@@ -213,7 +456,7 @@ Route::get('/research-documents', function () {
         'ade-ismail' => [
             'name' => 'Ade Ismail, S.Kom., M.TI',
             'position' => 'Researcher',
-            'photo' => 'https://i.pravatar.cc/300?img=33',
+            'photo' => 'img/lab-member/ade_ismail.png',
             'research' => [
                 ['title' => 'Advanced Threat Detection in IoT Networks', 'publication' => 'IEEE Security & Privacy', 'year' => '2023', 'cover' => 'https://images.unsplash.com/photo-1573164713988-8665fc963095?w=400&q=80'],
                 ['title' => 'Machine Learning Approaches for Intrusion Detection', 'publication' => 'Journal of Cybersecurity Research', 'year' => '2022', 'cover' => 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=400&q=80'],
@@ -223,7 +466,7 @@ Route::get('/research-documents', function () {
         'vipkas-al-hadid-firdaus' => [
             'name' => 'Vipkas Al Hadid Firdaus, ST., MT',
             'position' => 'Researcher',
-            'photo' => 'https://i.pravatar.cc/300?img=15',
+            'photo' => 'img/lab-member/vipkas.png',
             'research' => [
                 ['title' => 'Software-Defined Security for Data Centers', 'publication' => 'ACM Computing Surveys', 'year' => '2023', 'cover' => 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&q=80'],
                 ['title' => 'Zero Trust Architecture Implementation Guide', 'publication' => 'Network Security Journal', 'year' => '2022', 'cover' => 'https://images.unsplash.com/photo-1484807352052-23338990c6c6?w=400&q=80'],
@@ -232,7 +475,7 @@ Route::get('/research-documents', function () {
         'sofyan-noor-arief' => [
             'name' => 'Sofyan Noor Arief, S.ST., M.Kom.',
             'position' => 'Researcher',
-            'photo' => 'https://i.pravatar.cc/300?img=68',
+            'photo' => 'img/lab-member/sofyan.png',
             'research' => [
                 ['title' => 'Automated Security Testing in CI/CD Pipelines', 'publication' => 'DevOps Conference', 'year' => '2023', 'cover' => 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&q=80'],
             ],
@@ -240,7 +483,7 @@ Route::get('/research-documents', function () {
         'meyti-eka-apriyani' => [
             'name' => 'Meyti Eka Apriyani ST., MT.',
             'position' => 'Researcher',
-            'photo' => 'https://i.pravatar.cc/300?img=47',
+            'photo' => 'img/lab-member/meyti.png',
             'research' => [
                 ['title' => 'Mobile Device Forensics in Criminal Investigations', 'publication' => 'Forensic Science International', 'year' => '2023', 'cover' => 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&q=80'],
                 ['title' => 'Memory Forensics for Malware Detection', 'publication' => 'Digital Investigation Journal', 'year' => '2022', 'cover' => 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&q=80'],
@@ -258,7 +501,7 @@ Route::get('/research-documents', function () {
                 'cover' => $research['cover'],
                 'author_name' => $member['name'],
                 'author_position' => $member['position'],
-                'author_photo' => $member['photo'],
+                'author_photo' => asset($member['photo']),
             ];
         }
     }
@@ -279,7 +522,7 @@ Route::get('/member/{slug}', function ($slug) {
             'name' => 'Erfan Rohadi, ST., M.Eng., Ph.D.',
             'position' => 'Laboratory Head',
             'nim' => 'NIP. 19750615 200012 1 001',
-            'photo' => 'https://i.pravatar.cc/300?img=12',
+            'photo' => 'img/lab-member/erfan.png',
             'email' => 'erfan.rohadi@polinema.ac.id',
             'phone' => '+62 341 404424',
             'linkedin' => 'https://linkedin.com/in/erfanrohadi',
@@ -311,7 +554,7 @@ Route::get('/member/{slug}', function ($slug) {
             'name' => 'Ade Ismail, S.Kom., M.TI',
             'position' => 'Researcher',
             'nim' => 'NIP. 19850512 201203 1 003',
-            'photo' => 'https://i.pravatar.cc/300?img=33',
+            'photo' => 'img/lab-member/ade_ismail.png',
             'email' => 'ade.ismail@polinema.ac.id',
             'phone' => '+62 341 404424',
             'linkedin' => 'https://linkedin.com/in/adeismail',
@@ -338,7 +581,7 @@ Route::get('/member/{slug}', function ($slug) {
             'name' => 'Vipkas Al Hadid Firdaus, ST., MT',
             'position' => 'Researcher',
             'nim' => 'NIP. 19880724 201504 1 001',
-            'photo' => 'https://i.pravatar.cc/300?img=15',
+            'photo' => 'img/lab-member/vipkas.png',
             'email' => 'vipkas.firdaus@polinema.ac.id',
             'phone' => '+62 341 404424',
             'linkedin' => 'https://linkedin.com/in/vipkasfirdaus',
@@ -355,13 +598,13 @@ Route::get('/member/{slug}', function ($slug) {
             'projects' => [
                 ['name' => 'CloudGuard', 'description' => 'Multi-cloud security management platform', 'link' => '#'],
                 ['name' => 'NetDefender', 'description' => 'Real-time network threat prevention', 'link' => '#'],
-            ],
+            ]
         ],
         'sofyan-noor-arief' => [
             'name' => 'Sofyan Noor Arief, S.ST., M.Kom.',
             'position' => 'Researcher',
-            'nim' => 'NIP. 19900315 201509 1 002',
-            'photo' => 'https://i.pravatar.cc/300?img=68',
+            'nim' => 'NIP. 199003152015091002',
+            'photo' => 'img/lab-member/sofyan.png',
             'email' => 'sofyan.arief@polinema.ac.id',
             'phone' => '+62 341 404424',
             'skills' => ['Application Security', 'Secure Coding', 'Security Testing', 'DevSecOps', 'Code Review'],
@@ -381,7 +624,7 @@ Route::get('/member/{slug}', function ($slug) {
             'name' => 'Meyti Eka Apriyani ST., MT.',
             'position' => 'Researcher',
             'nim' => 'NIP. 19870822 201406 2 001',
-            'photo' => 'https://i.pravatar.cc/300?img=47',
+            'photo' => 'img/lab-member/meyti.png',
             'email' => 'meyti.apriyani@polinema.ac.id',
             'phone' => '+62 341 404424',
             'skills' => ['Digital Forensics', 'Incident Response', 'Malware Analysis', 'Threat Intelligence', 'Security Investigation'],
@@ -407,22 +650,39 @@ Route::get('/member/{slug}', function ($slug) {
     return view('member-detail', compact('member'));
 });
 
-// Filament Admin Auth Routes
-Route::post('/admin/logout', function () {
+// Logout Routes
+Route::post('/logout', function () {
     auth()->guard('web')->logout();
     request()->session()->invalidate();
     request()->session()->regenerateToken();
-    return redirect('/admin/login');
-})->name('filament.admin.auth.logout')->middleware('web');
+    return redirect()->route('login');
+})->name('logout')->middleware('auth');
 
-// API Routes for frontend (renamed to avoid conflict with Filament admin panel)
-Route::prefix('api')->group(function () {
-    Route::resource('administrators', AdminController::class);
+// Admin Panel Routes (with authentication middleware)
+Route::prefix('admin')->middleware(['auth'])->group(function () {
+    // Dashboard
+    Route::get('/', [AdminController::class, 'dashboard'])->name('admins.index');
+    
+    // Administrators Management
+    Route::resource('administrators', AdminController::class)->names([
+        'index' => 'administrators.index',
+        'create' => 'administrators.create',
+        'store' => 'administrators.store',
+        'show' => 'administrators.show',
+        'edit' => 'administrators.edit',
+        'update' => 'administrators.update',
+        'destroy' => 'administrators.destroy',
+    ]);
+    
+    // Other Resources
     Route::resource('galleries', GalleryController::class);
     Route::resource('archives', ArchivesController::class);
     Route::resource('contents', ContentController::class);
     Route::resource('categories', CategoriesController::class);
     Route::resource('members', MembersController::class);
-    Route::resource('admin_logs', Admin_LogsController::class);
     Route::resource('links', LinksController::class);
+    
+    // Admin Logs (read-only except delete)
+    Route::resource('admin_logs', Admin_LogsController::class)->except(['create', 'store', 'edit', 'update']);
+    Route::delete('admin_logs/destroy-all', [Admin_LogsController::class, 'destroyAll'])->name('admin_logs.destroyAll');
 });

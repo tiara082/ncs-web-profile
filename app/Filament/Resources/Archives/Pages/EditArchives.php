@@ -13,7 +13,13 @@ class EditArchives extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            DeleteAction::make(),
+            DeleteAction::make()
+                ->successRedirectUrl(route('archives.index')),
         ];
+    }
+
+    protected function getRedirectUrl(): string
+    {
+        return route('archives.index');
     }
 }

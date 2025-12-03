@@ -13,7 +13,13 @@ class EditMembers extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            DeleteAction::make(),
+            DeleteAction::make()
+                ->successRedirectUrl(route('members.index')),
         ];
+    }
+
+    protected function getRedirectUrl(): string
+    {
+        return route('members.index');
     }
 }

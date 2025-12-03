@@ -33,7 +33,7 @@ class ContentForm
                             ->native(false),
                         
                         Select::make('created_by')
-                            ->relationship('creator', 'name')
+                            ->relationship('creator', 'username')
                             ->label('Created By')
                             ->default(auth()->id())
                             ->required()
@@ -50,7 +50,8 @@ class ContentForm
                                 'underline',
                                 'strike',
                                 'link',
-                                'heading',
+                                'h2',
+                                'h3',
                                 'bulletList',
                                 'orderedList',
                                 'blockquote',

@@ -8,4 +8,9 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateArchives extends CreateRecord
 {
     protected static string $resource = ArchivesResource::class;
+
+    protected function getRedirectUrl(): string
+    {
+        return route('archives.index');
+    }
 }

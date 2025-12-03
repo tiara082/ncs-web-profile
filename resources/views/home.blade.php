@@ -190,48 +190,48 @@
 
 
         <!-- About Section -->
-        <section id="about" class="relative py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-background via-cyan-50/30 to-blue-50/20 overflow-hidden">
+        <section id="about" class="relative py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-background via-cyan-50/30 to-blue-50/20 overflow-hidden">
             <div class="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-float"></div>
             <div class="absolute bottom-0 left-0 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl animate-float" style="animation-delay: 2s"></div>
             <div class="max-w-6xl mx-auto relative z-10">
-                <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
                     <div class="animate-fade-in-up">
-                        <div class="inline-flex items-center gap-2 mb-6 text-primary font-bold">
+                        <div class="inline-flex items-center gap-2 mb-4 sm:mb-6 text-primary font-bold">
                             <div class="h-1 w-8 bg-primary rounded-full"></div>
-                            <span class="text-sm uppercase tracking-widest">About Us</span>
+                            <span class="text-xs sm:text-sm uppercase tracking-widest">About Us</span>
                         </div>
-                        <h2 class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent mb-6">Laboratory Profile</h2>
-                        <div class="space-y-5 text-muted-foreground leading-relaxed text-base">
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent mb-4 sm:mb-6">Laboratory Profile</h2>
+                        <div class="space-y-3 sm:space-y-5 text-muted-foreground leading-relaxed text-sm sm:text-base">
                             <p>An academic support unit within the Information Technology Department focused on developing competencies in computer networking and cybersecurity. This laboratory supports practicum activities, research, and development related to network administration, infrastructure security, data traffic monitoring, and the implementation of information security technologies to protect organizational digital assets.</p>
                             <p>Beyond serving as a learning facility for students, the Network & Cyber Security Laboratory also functions as a platform for research and innovation for both faculty and students in examining solutions in the fields of network security, system testing, as well as data and digital infrastructure protection.</p>
                             <p class="font-medium text-foreground">The role of this laboratory is expected to strengthen the quality of learning, deepen research in computer networking and information security, and support the creation of competent graduates in network administration and cybersecurity.</p>
                         </div>
-                        <div class="mt-10 grid grid-cols-3 gap-4">
-                            <div class="group relative overflow-hidden p-5 bg-white rounded-2xl border-2 border-primary/20 hover:border-primary transition-all duration-300 hover:shadow-xl hover:shadow-primary/20 hover:-translate-y-2 cursor-pointer">
+                        <div class="mt-6 sm:mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+                            <div class="group relative overflow-hidden p-4 sm:p-5 bg-white rounded-2xl border-2 border-primary/20 hover:border-primary transition-all duration-300 hover:shadow-xl hover:shadow-primary/20 hover:-translate-y-2 cursor-pointer">
                                 <div class="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-primary/10 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
                                 <div class="relative">
-                                    <div class="text-3xl font-bold text-primary mb-2 group-hover:scale-110 transition-transform">50+</div>
-                                    <div class="text-xs font-semibold text-muted-foreground uppercase tracking-wide">Active Students</div>
+                                    <div class="text-2xl sm:text-3xl font-bold text-primary mb-1 sm:mb-2 group-hover:scale-110 transition-transform">50+</div>
+                                    <div class="text-[10px] sm:text-xs font-semibold text-muted-foreground uppercase tracking-wide">Active Members</div>
                                 </div>
                             </div>
-                            <div class="group relative overflow-hidden p-5 bg-white rounded-2xl border-2 border-primary/20 hover:border-primary transition-all duration-300 hover:shadow-xl hover:shadow-primary/20 hover:-translate-y-2 cursor-pointer">
+                            <div class="group relative overflow-hidden p-4 sm:p-5 bg-white rounded-2xl border-2 border-primary/20 hover:border-primary transition-all duration-300 hover:shadow-xl hover:shadow-primary/20 hover:-translate-y-2 cursor-pointer">
                                 <div class="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-primary/10 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
                                 <div class="relative">
-                                    <div class="text-3xl font-bold text-primary mb-2 group-hover:scale-110 transition-transform">15+</div>
-                                    <div class="text-xs font-semibold text-muted-foreground uppercase tracking-wide">Research Projects</div>
+                                    <div class="text-2xl sm:text-3xl font-bold text-primary mb-1 sm:mb-2 group-hover:scale-110 transition-transform">15+</div>
+                                    <div class="text-[10px] sm:text-xs font-semibold text-muted-foreground uppercase tracking-wide">Lab Activities</div>
                                 </div>
                             </div>
-                            <div class="group relative overflow-hidden p-5 bg-white rounded-2xl border-2 border-primary/20 hover:border-primary transition-all duration-300 hover:shadow-xl hover:shadow-primary/20 hover:-translate-y-2 cursor-pointer">
+                            <div class="group relative overflow-hidden p-4 sm:p-5 bg-white rounded-2xl border-2 border-primary/20 hover:border-primary transition-all duration-300 hover:shadow-xl hover:shadow-primary/20 hover:-translate-y-2 cursor-pointer">
                                 <div class="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-primary/10 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
                                 <div class="relative">
-                                    <div class="text-3xl font-bold text-primary mb-2 group-hover:scale-110 transition-transform">25+</div>
-                                    <div class="text-xs font-semibold text-muted-foreground uppercase tracking-wide">Published Projects</div>
+                                    <div class="text-2xl sm:text-3xl font-bold text-primary mb-1 sm:mb-2 group-hover:scale-110 transition-transform">25+</div>
+                                    <div class="text-[10px] sm:text-xs font-semibold text-muted-foreground uppercase tracking-wide">Research Publications</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!-- Image Slider -->
-                    <div class="group/slider relative h-96 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-2xl overflow-hidden border border-border hover:border-primary/50 transition-all hover:shadow-2xl">
+                    <div class="group/slider relative h-64 sm:h-80 md:h-96 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-2xl overflow-hidden border border-border hover:border-primary/50 transition-all hover:shadow-2xl">
                         <!-- Slider Container -->
                         <div id="lab-slider" class="relative w-full h-full">
                             <!-- Slide 1 -->
@@ -293,7 +293,7 @@
         </section>
 
         <!-- Vision & Mission Section -->
-        <section id="mission" class="relative py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-900 via-blue-950 to-indigo-950 overflow-hidden">
+        <section id="mission" class="relative py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-900 via-blue-950 to-indigo-950 overflow-hidden">
             <!-- Animated Background Elements -->
             <div class="absolute top-0 left-0 w-full h-full overflow-hidden">
                 <div class="absolute top-20 left-20 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-float"></div>
@@ -305,43 +305,43 @@
             
             <div class="max-w-7xl mx-auto relative z-10">
                 <!-- Section Header -->
-                <div class="text-center mb-16 animate-fade-in-up">
-                    <h2 class="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-primary via-cyan-400 to-blue-400 bg-clip-text text-transparent">Vision & Mission</h2>
-                    <p class="text-lg text-white/70 max-w-2xl mx-auto">Guiding principles that drive our innovation and excellence in cybersecurity education</p>
+                <div class="text-center mb-8 sm:mb-12 md:mb-16 animate-fade-in-up">
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 sm:mb-4 bg-gradient-to-r from-primary via-cyan-400 to-blue-400 bg-clip-text text-transparent">Vision & Mission</h2>
+                    <p class="text-sm sm:text-base md:text-lg text-white/70 max-w-2xl mx-auto px-4">Guiding principles that drive our innovation and excellence in cybersecurity education</p>
                 </div>
 
                 <!-- Vision & Mission Side by Side -->
-                <div class="grid lg:grid-cols-2 gap-8 mb-12">
+                <div class="grid lg:grid-cols-2 gap-6 sm:gap-8 mb-8 sm:mb-12">
                     <!-- Vision Card -->
                     <div class="animate-fade-in-up" style="animation-delay: 0.2s">
-                        <div class="group relative p-8 bg-gradient-to-br from-primary/10 via-secondary/5 to-accent/10 backdrop-blur-sm rounded-3xl border border-white/10 hover:border-primary/40 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/20 overflow-hidden h-full">
+                        <div class="group relative p-5 sm:p-6 md:p-8 bg-gradient-to-br from-primary/10 via-secondary/5 to-accent/10 backdrop-blur-sm rounded-2xl sm:rounded-3xl border border-white/10 hover:border-primary/40 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/20 overflow-hidden h-full">
                             <!-- Glow Effect -->
                             <div class="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/5 to-accent/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                             
                             <div class="relative h-full flex flex-col">
                                 <!-- Icon & Title -->
-                                <div class="text-center mb-6">
-                                    <div class="relative inline-block mb-4">
+                                <div class="text-center mb-4 sm:mb-6">
+                                    <div class="relative inline-block mb-3 sm:mb-4">
                                         <div class="absolute inset-0 bg-primary/40 rounded-2xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity"></div>
-                                        <div class="relative w-20 h-20 bg-primary/20 rounded-2xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-xl border border-primary/30 mx-auto">
-                                            <i data-feather="eye" class="text-primary" width="40" height="40"></i>
+                                        <div class="relative w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 bg-primary/20 rounded-xl sm:rounded-2xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-xl border border-primary/30 mx-auto">
+                                            <i data-feather="eye" class="text-primary" width="32" height="32"></i>
                                         </div>
                                     </div>
-                                    <h3 class="text-3xl font-bold text-white mb-2">Vision</h3>
-                                    <div class="h-1 w-16 bg-primary/50 rounded-full mx-auto"></div>
+                                    <h3 class="text-2xl sm:text-3xl font-bold text-white mb-2">Vision</h3>
+                                    <div class="h-1 w-12 sm:w-16 bg-primary/50 rounded-full mx-auto"></div>
                                 </div>
                                 
                                 <!-- Content -->
-                                <div class="flex-1 space-y-6">
-                                    <p class="text-lg text-white/80 leading-loose text-center">
+                                <div class="flex-1 space-y-4 sm:space-y-6">
+                                    <p class="text-sm sm:text-base md:text-lg text-white/80 leading-relaxed sm:leading-loose text-center">
                                         To become a <span class="text-white font-semibold">leading laboratory</span> in the field of networking and cybersecurity that is <span class="text-white font-semibold">innovative, adaptive, and globally competitive</span>.
                                     </p>
-                                    <div class="h-px w-24 bg-primary/30 mx-auto"></div>
-                                    <p class="text-lg text-white/70 leading-loose text-center">
+                                    <div class="h-px w-20 sm:w-24 bg-primary/30 mx-auto"></div>
+                                    <p class="text-sm sm:text-base md:text-lg text-white/70 leading-relaxed sm:leading-loose text-center">
                                         While supporting the development of <span class="text-white font-semibold">education, research, and community service</span> in Information Technology.
                                     </p>
-                                    <div class="mt-8 pt-6 border-t border-white/10">
-                                        <p class="text-base text-white/60 italic text-center">
+                                    <div class="mt-4 sm:mt-6 md:mt-8 pt-4 sm:pt-6 border-t border-white/10">
+                                        <p class="text-xs sm:text-sm md:text-base text-white/60 italic text-center">
                                             Driving excellence through innovation, collaboration, and continuous advancement in cybersecurity education and research.
                                         </p>
                                     </div>
@@ -352,51 +352,51 @@
 
                     <!-- Mission Card -->
                     <div class="animate-fade-in-up" style="animation-delay: 0.4s">
-                        <div class="group relative p-8 bg-gradient-to-br from-secondary/10 via-primary/5 to-accent/10 backdrop-blur-sm rounded-3xl border border-white/10 hover:border-primary/40 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/20 overflow-hidden h-full">
+                        <div class="group relative p-5 sm:p-6 md:p-8 bg-gradient-to-br from-secondary/10 via-primary/5 to-accent/10 backdrop-blur-sm rounded-2xl sm:rounded-3xl border border-white/10 hover:border-primary/40 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/20 overflow-hidden h-full">
                             <!-- Glow Effect -->
                             <div class="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/5 to-accent/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                             
                             <div class="relative h-full flex flex-col">
                                 <!-- Icon & Title -->
-                                <div class="text-center mb-6">
-                                    <div class="relative inline-block mb-4">
+                                <div class="text-center mb-4 sm:mb-6">
+                                    <div class="relative inline-block mb-3 sm:mb-4">
                                         <div class="absolute inset-0 bg-primary/40 rounded-2xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity"></div>
-                                        <div class="relative w-20 h-20 bg-primary/20 rounded-2xl flex items-center justify-center group-hover:scale-110 group-hover:-rotate-6 transition-all duration-300 shadow-xl border border-primary/30 mx-auto">
-                                            <i data-feather="target" class="text-primary" width="40" height="40"></i>
+                                        <div class="relative w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 bg-primary/20 rounded-xl sm:rounded-2xl flex items-center justify-center group-hover:scale-110 group-hover:-rotate-6 transition-all duration-300 shadow-xl border border-primary/30 mx-auto">
+                                            <i data-feather="target" class="text-primary" width="32" height="32"></i>
                                         </div>
                                     </div>
-                                    <h3 class="text-3xl font-bold text-white mb-2">Mission</h3>
-                                    <div class="h-1 w-16 bg-primary/50 rounded-full mx-auto"></div>
+                                    <h3 class="text-2xl sm:text-3xl font-bold text-white mb-2">Mission</h3>
+                                    <div class="h-1 w-12 sm:w-16 bg-primary/50 rounded-full mx-auto"></div>
                                 </div>
                                 
                                 <!-- Mission Items -->
-                                <div class="flex-1 space-y-4">
-                                    <div class="flex items-start gap-4">
-                                        <div class="flex-shrink-0 w-8 h-8 bg-primary/20 rounded-lg flex items-center justify-center">
-                                            <span class="text-primary font-bold text-sm">1</span>
+                                <div class="flex-1 space-y-3 sm:space-y-4">
+                                    <div class="flex items-start gap-3 sm:gap-4">
+                                        <div class="flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 bg-primary/20 rounded-lg flex items-center justify-center">
+                                            <span class="text-primary font-bold text-xs sm:text-sm">1</span>
                                         </div>
-                                        <p class="text-white/80 text-base leading-relaxed">Conduct <span class="text-white font-semibold">high-quality practicum activities</span> to produce graduates with advanced competencies in computer networking and cybersecurity.</p>
+                                        <p class="text-white/80 text-xs sm:text-sm md:text-base leading-relaxed">Conduct <span class="text-white font-semibold">high-quality practicum activities</span> to produce graduates with advanced competencies in computer networking and cybersecurity.</p>
                                     </div>
                                     
-                                    <div class="flex items-start gap-4">
-                                        <div class="flex-shrink-0 w-8 h-8 bg-primary/20 rounded-lg flex items-center justify-center">
-                                            <span class="text-primary font-bold text-sm">2</span>
+                                    <div class="flex items-start gap-3 sm:gap-4">
+                                        <div class="flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 bg-primary/20 rounded-lg flex items-center justify-center">
+                                            <span class="text-primary font-bold text-xs sm:text-sm">2</span>
                                         </div>
-                                        <p class="text-white/80 text-base leading-relaxed">Develop <span class="text-white font-semibold">applied research</span> in networking, system security, IoT, and monitoring technologies relevant to industry needs.</p>
+                                        <p class="text-white/80 text-xs sm:text-sm md:text-base leading-relaxed">Develop <span class="text-white font-semibold">applied research</span> in networking, system security, IoT, and monitoring technologies relevant to industry needs.</p>
                                     </div>
                                     
-                                    <div class="flex items-start gap-4">
-                                        <div class="flex-shrink-0 w-8 h-8 bg-primary/20 rounded-lg flex items-center justify-center">
-                                            <span class="text-primary font-bold text-sm">3</span>
+                                    <div class="flex items-start gap-3 sm:gap-4">
+                                        <div class="flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 bg-primary/20 rounded-lg flex items-center justify-center">
+                                            <span class="text-primary font-bold text-xs sm:text-sm">3</span>
                                         </div>
-                                        <p class="text-white/80 text-base leading-relaxed">Provide <span class="text-white font-semibold">security testing services</span>, mentoring, and training through collaboration with industry, government, and institutions.</p>
+                                        <p class="text-white/80 text-xs sm:text-sm md:text-base leading-relaxed">Provide <span class="text-white font-semibold">security testing services</span>, mentoring, and training through collaboration with industry, government, and institutions.</p>
                                     </div>
                                     
-                                    <div class="flex items-start gap-4">
-                                        <div class="flex-shrink-0 w-8 h-8 bg-primary/20 rounded-lg flex items-center justify-center">
-                                            <span class="text-primary font-bold text-sm">4</span>
+                                    <div class="flex items-start gap-3 sm:gap-4">
+                                        <div class="flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 bg-primary/20 rounded-lg flex items-center justify-center">
+                                            <span class="text-primary font-bold text-xs sm:text-sm">4</span>
                                         </div>
-                                        <p class="text-white/80 text-base leading-relaxed">Enhance <span class="text-white font-semibold">capacity of staff</span> in mastering current technologies through training, certification, and professional participation.</p>
+                                        <p class="text-white/80 text-xs sm:text-sm md:text-base leading-relaxed">Enhance <span class="text-white font-semibold">capacity of staff</span> in mastering current technologies through training, certification, and professional participation.</p>
                                     </div>
                                     
                                     <div class="flex items-start gap-4">
@@ -412,12 +412,12 @@
                 </div>
                 
                 <!-- Research Focus Areas -->
-                <div class="mt-24">
-                    <div class="text-center mb-12">
-                        <h3 class="text-3xl md:text-4xl font-bold text-white mb-4">Research Focus</h3>
-                        <p class="text-white/60 text-base">Core domains of our cybersecurity research and development</p>
+                <div class="mt-12 sm:mt-16 md:mt-24">
+                    <div class="text-center mb-8 sm:mb-12">
+                        <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">Research Focus</h3>
+                        <p class="text-white/60 text-sm sm:text-base px-4">Core domains of our cybersecurity research and development</p>
                     </div>
-                    <div class="grid md:grid-cols-3 gap-6">
+                    <div class="grid md:grid-cols-3 gap-4 sm:gap-6">
                         <div class="group p-6 bg-gradient-to-br from-white/10 to-white/5 rounded-xl border border-white/20 hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:shadow-primary/20 hover:-translate-y-1">
                             <div class="flex items-center gap-4">
                                 <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
@@ -448,7 +448,7 @@
         </section>
 
         <!-- Activities & Projects Section -->
-        <section id="activities" class="relative py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-white via-cyan-50/20 to-blue-50/30 overflow-hidden">
+        <section id="activities" class="relative py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-white via-cyan-50/20 to-blue-50/30 overflow-hidden">
             <!-- Animated Background -->
             <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-br from-cyan-200/20 to-blue-200/20 rounded-full blur-3xl animate-float"></div>
             <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-tr from-blue-200/20 to-indigo-200/20 rounded-full blur-3xl animate-float" style="animation-delay: 2s"></div>
@@ -749,7 +749,7 @@
                                     <div class="font-semibold text-foreground">Erfan Rohadi</div>
                                     <div>Nov 2024</div>
                                 </div>
-                                <a href="#" class="text-primary font-semibold text-sm group-hover:translate-x-1 transition-transform inline-flex items-center">
+                                <a href="/article/understanding-network-segmentation" class="text-primary font-semibold text-sm group-hover:translate-x-1 transition-transform inline-flex items-center">
                                     Read →
                                 </a>
                             </div>
@@ -776,7 +776,7 @@
                                     <div class="font-semibold text-foreground">Dr. Siti Nurhaliza</div>
                                     <div>Oct 2024</div>
                                 </div>
-                                <a href="#" class="text-primary font-semibold text-sm group-hover:translate-x-1 transition-transform inline-flex items-center">
+                                <a href="/article/zero-trust-security-model" class="text-primary font-semibold text-sm group-hover:translate-x-1 transition-transform inline-flex items-center">
                                     Read →
                                 </a>
                             </div>
@@ -803,7 +803,7 @@
                                     <div class="font-semibold text-foreground">Budi Santoso</div>
                                     <div>Sep 2024</div>
                                 </div>
-                                <a href="#" class="text-primary font-semibold text-sm group-hover:translate-x-1 transition-transform inline-flex items-center">
+                                <a href="/article/incident-response-planning-smes" class="text-primary font-semibold text-sm group-hover:translate-x-1 transition-transform inline-flex items-center">
                                     Read →
                                 </a>
                             </div>
@@ -830,7 +830,7 @@
                                     <div class="font-semibold text-foreground">Ahmad Wijaya</div>
                                     <div>Aug 2024</div>
                                 </div>
-                                <a href="#" class="text-primary font-semibold text-sm group-hover:translate-x-1 transition-transform inline-flex items-center">
+                                <a href="/article/emerging-threats-2024" class="text-primary font-semibold text-sm group-hover:translate-x-1 transition-transform inline-flex items-center">
                                     →
                                 </a>
                             </div>
@@ -839,7 +839,7 @@
                 </div>
                 
                 <div class="text-center">
-                    <a href="/publications" class="group inline-flex items-center gap-3 px-8 py-4 bg-primary text-white font-bold rounded-xl hover:bg-secondary transition-all duration-300 hover:shadow-lg hover:shadow-primary/30 hover:scale-105">
+                    <a href="/articles" class="group inline-flex items-center gap-3 px-8 py-4 bg-primary text-white font-bold rounded-xl hover:bg-secondary transition-all duration-300 hover:shadow-lg hover:shadow-primary/30 hover:scale-105">
                         Explore All Articles 
                         <span class="group-hover:translate-x-1 transition-transform">→</span>
                     </a>
@@ -956,12 +956,12 @@
 
                 <!-- Lab Head - Featured Card -->
                 <div class="max-w-4xl mx-auto mb-16">
-                    <div class="group relative bg-gradient-to-br from-white to-blue-50/30 rounded-3xl border-2 border-primary/20 hover:border-primary transition-all duration-300 overflow-hidden hover:shadow-2xl hover:shadow-primary/20 hover:-translate-y-2">
+                    <a href="/member/erfan-rohadi" class="group relative block bg-gradient-to-br from-white to-blue-50/30 rounded-3xl border-2 border-primary/20 hover:border-primary transition-all duration-300 overflow-hidden hover:shadow-2xl hover:shadow-primary/20 hover:-translate-y-2">
                         <div class="absolute top-0 right-0 w-40 h-40 bg-gradient-to-bl from-primary/10 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
                         <div class="grid md:grid-cols-3 gap-8 items-center p-8">
                             <div class="md:col-span-1">
                                 <div class="aspect-square rounded-2xl overflow-hidden border-4 border-primary/20 group-hover:border-primary transition-colors">
-                                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80" alt="Erfan Rohadi" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy"/>
+                                    <img src="{{ asset('img/lab-member/erfan.png') }}" alt="Erfan Rohadi" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy"/>
                                 </div>
                             </div>
                             <div class="md:col-span-2 text-center md:text-left">
@@ -970,19 +970,19 @@
                                     <span>Laboratory Head</span>
                                 </div>
                                 <h3 class="text-3xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">Erfan Rohadi, ST., M.Eng., Ph.D.</h3>
-                                <p class="text-muted-foreground text-lg mb-4">Head of Laboratory & Principal Researcher</p>
+                                <p class="text-muted-foreground text-lg mb-4">Head of Laboratory</p>
                                 <p class="text-sm text-muted-foreground leading-relaxed">Leading cybersecurity research and education initiatives, specializing in network security and advanced threat detection systems.</p>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
 
                 <!-- Research Team - Grid Cards -->
                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                     <!-- Researcher 1 -->
-                    <div class="group bg-white rounded-2xl border-2 border-border hover:border-primary/50 transition-all duration-300 overflow-hidden hover:shadow-xl hover:-translate-y-2">
+                    <a href="/member/ade-ismail" class="group block bg-white rounded-2xl border-2 border-border hover:border-primary/50 transition-all duration-300 overflow-hidden hover:shadow-xl hover:-translate-y-2">
                         <div class="aspect-square bg-gradient-to-br from-slate-100 to-slate-50 overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80" alt="Ade Ismail" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy"/>
+                            <img src="{{ asset('img/lab-member/ade_ismail.png') }}" alt="Ade Ismail" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy"/>
                         </div>
                         <div class="p-6 text-center">
                             <div class="inline-flex items-center gap-1 px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full mb-3">
@@ -992,12 +992,12 @@
                             <h3 class="text-lg font-bold text-foreground mb-1 group-hover:text-primary transition-colors">Ade Ismail, S.Kom., M.TI</h3>
                             <p class="text-sm text-muted-foreground">Researcher</p>
                         </div>
-                    </div>
+                    </a>
 
                     <!-- Researcher 2 -->
-                    <div class="group bg-white rounded-2xl border-2 border-border hover:border-primary/50 transition-all duration-300 overflow-hidden hover:shadow-xl hover:-translate-y-2">
+                    <a href="/member/vipkas-al-hadid-firdaus" class="group block bg-white rounded-2xl border-2 border-border hover:border-primary/50 transition-all duration-300 overflow-hidden hover:shadow-xl hover:-translate-y-2">
                         <div class="aspect-square bg-gradient-to-br from-slate-100 to-slate-50 overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80" alt="Vipkas Al Hadid Firdaus" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy"/>
+                            <img src="{{ asset('img/lab-member/vipkas.png') }}" alt="Vipkas Al Hadid Firdaus" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy"/>
                         </div>
                         <div class="p-6 text-center">
                             <div class="inline-flex items-center gap-1 px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full mb-3">
@@ -1007,12 +1007,12 @@
                             <h3 class="text-lg font-bold text-foreground mb-1 group-hover:text-primary transition-colors">Vipkas Al Hadid Firdaus, ST., MT</h3>
                             <p class="text-sm text-muted-foreground">Researcher</p>
                         </div>
-                    </div>
+                    </a>
 
                     <!-- Researcher 3 -->
-                    <div class="group bg-white rounded-2xl border-2 border-border hover:border-primary/50 transition-all duration-300 overflow-hidden hover:shadow-xl hover:-translate-y-2">
+                    <a href="/member/sofyan-noor-arief" class="group block bg-white rounded-2xl border-2 border-border hover:border-primary/50 transition-all duration-300 overflow-hidden hover:shadow-xl hover:-translate-y-2">
                         <div class="aspect-square bg-gradient-to-br from-slate-100 to-slate-50 overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=400&q=80" alt="Sofyan Noor Arief" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy"/>
+                            <img src="{{ asset('img/lab-member/sofyan.png') }}" alt="Sofyan Noor Arief" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy"/>
                         </div>
                         <div class="p-6 text-center">
                             <div class="inline-flex items-center gap-1 px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full mb-3">
@@ -1022,12 +1022,12 @@
                             <h3 class="text-lg font-bold text-foreground mb-1 group-hover:text-primary transition-colors">Sofyan Noor Arief, S.ST., M.Kom.</h3>
                             <p class="text-sm text-muted-foreground">Researcher</p>
                         </div>
-                    </div>
+                    </a>
 
                     <!-- Researcher 4 -->
-                    <div class="group bg-white rounded-2xl border-2 border-border hover:border-primary/50 transition-all duration-300 overflow-hidden hover:shadow-xl hover:-translate-y-2">
+                    <a href="/member/meyti-eka-apriyani" class="group block bg-white rounded-2xl border-2 border-border hover:border-primary/50 transition-all duration-300 overflow-hidden hover:shadow-xl hover:-translate-y-2">
                         <div class="aspect-square bg-gradient-to-br from-slate-100 to-slate-50 overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80" alt="Meyti Eka Apriyani" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy"/>
+                            <img src="{{ asset('img/lab-member/meyti.png') }}" alt="Meyti Eka Apriyani" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy"/>
                         </div>
                         <div class="p-6 text-center">
                             <div class="inline-flex items-center gap-1 px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full mb-3">
@@ -1037,7 +1037,7 @@
                             <h3 class="text-lg font-bold text-foreground mb-1 group-hover:text-primary transition-colors">Meyti Eka Apriyani ST., MT.</h3>
                             <p class="text-sm text-muted-foreground">Researcher</p>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </section>
@@ -1054,24 +1054,24 @@
         // Back to Top handled by shared partial (partials/back-to-top.blade.php)
         // Mobile Menu Toggle handled by shared partial (partials/shared-scripts.blade.php)
 
-        // Intersection Observer for fade-in animations
-        const observerOptions = {
+        // Intersection Observer for fade-in animations (for hover/floating elements)
+        const hoverObserverOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -100px 0px'
         };
 
-        const observer = new IntersectionObserver((entries) => {
+        const hoverObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('animate-fade-in-up');
-                    observer.unobserve(entry.target);
+                    hoverObserver.unobserve(entry.target);
                 }
             });
-        }, observerOptions);
+        }, hoverObserverOptions);
 
-        // Observe all cards and sections
+        // Observe all hover/floating elements
         document.querySelectorAll('.hover-lift, .hover-glow').forEach(el => {
-            observer.observe(el);
+            hoverObserver.observe(el);
         });
 
         // Smooth scroll for anchor links
@@ -1190,31 +1190,37 @@
         }, 5000);
 
         // Scroll reveal animation for sections
-        const observerOptions = {
+        const sectionObserverOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
         };
 
-        const observer = new IntersectionObserver((entries) => {
+        const sectionObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.style.opacity = '1';
                     entry.target.style.transform = 'translateY(0)';
                 }
             });
-        }, observerOptions);
+        }, sectionObserverOptions);
 
-        // Observe all sections
+        // Observe all sections and initialize feather icons when DOM ready
         document.addEventListener('DOMContentLoaded', () => {
             // Initialize Feather Icons first
-            feather.replace();
-            
+            if (typeof feather !== 'undefined' && feather.replace) {
+                try {
+                    feather.replace();
+                } catch (e) {
+                    console.error('Feather icons initialization failed:', e);
+                }
+            }
+
             const sections = document.querySelectorAll('section, .fade-in-section');
             sections.forEach((section, index) => {
                 section.style.opacity = '0';
                 section.style.transform = 'translateY(30px)';
                 section.style.transition = `all 0.8s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.1}s`;
-                observer.observe(section);
+                sectionObserver.observe(section);
             });
         });
     </script>

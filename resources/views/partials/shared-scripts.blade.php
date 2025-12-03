@@ -1,37 +1,110 @@
 <script>
 // Mobile Menu Toggle Script
-(function() {
+document.addEventListener('DOMContentLoaded', () => {
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
     const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
     const mobileMenuClose = document.getElementById('mobile-menu-close');
     const menuIcon = document.getElementById('menu-icon');
     const closeIcon = document.getElementById('close-icon');
+    const focusableSelector = 'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
+    let previouslyFocusedElement = null;
+
+    function trapFocus(event) {
+        if (!mobileMenu || !mobileMenu.classList.contains('active')) {
+            return;
+        }
+
+        const focusableElements = mobileMenu.querySelectorAll(focusableSelector);
+        if (!focusableElements.length) {
+            return;
+        }
+
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+
+        if (event.shiftKey && document.activeElement === firstElement) {
+            event.preventDefault();
+            lastElement.focus();
+        } else if (!event.shiftKey && document.activeElement === lastElement) {
+            event.preventDefault();
+            firstElement.focus();
+        }
+    }
 
     function openMobileMenu() {
-        if (mobileMenu && mobileMenuOverlay) {
-            mobileMenu.classList.add('active');
-            mobileMenuOverlay.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Prevent body scroll
-            if (menuIcon) menuIcon.classList.add('hidden');
-            if (closeIcon) closeIcon.classList.remove('hidden');
+        if (!mobileMenu) {
+            return;
         }
+
+        previouslyFocusedElement = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+
+        mobileMenu.classList.add('active');
+        if (mobileMenuOverlay) {
+            mobileMenuOverlay.classList.add('active');
+        }
+        mobileMenu.setAttribute('aria-hidden', 'false');
+        if (mobileMenuBtn) {
+            mobileMenuBtn.setAttribute('aria-expanded', 'true');
+        }
+
+        if (menuIcon) {
+            menuIcon.classList.add('hidden');
+        }
+        if (closeIcon) {
+            closeIcon.classList.remove('hidden');
+        }
+
+        const focusTarget = mobileMenu.querySelector(focusableSelector);
+        if (focusTarget instanceof HTMLElement) {
+            focusTarget.focus({ preventScroll: true });
+        }
+
+        document.addEventListener('keydown', handleKeyDown, true);
     }
 
     function closeMobileMenu() {
-        if (mobileMenu && mobileMenuOverlay) {
-            mobileMenu.classList.remove('active');
+        if (!mobileMenu) {
+            return;
+        }
+
+        mobileMenu.classList.remove('active');
+        if (mobileMenuOverlay) {
             mobileMenuOverlay.classList.remove('active');
-            document.body.style.overflow = ''; // Restore body scroll
-            if (menuIcon) menuIcon.classList.remove('hidden');
-            if (closeIcon) closeIcon.classList.add('hidden');
+        }
+        mobileMenu.setAttribute('aria-hidden', 'true');
+        if (mobileMenuBtn) {
+            mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        }
+
+        if (menuIcon) {
+            menuIcon.classList.remove('hidden');
+        }
+        if (closeIcon) {
+            closeIcon.classList.add('hidden');
+        }
+
+        if (previouslyFocusedElement instanceof HTMLElement) {
+            previouslyFocusedElement.focus({ preventScroll: true });
+        }
+
+        document.removeEventListener('keydown', handleKeyDown, true);
+    }
+
+    function handleKeyDown(event) {
+        if (event.key === 'Escape') {
+            closeMobileMenu();
+        } else if (event.key === 'Tab') {
+            trapFocus(event);
         }
     }
 
-    // Open menu when clicking hamburger button
     if (mobileMenuBtn) {
-        mobileMenuBtn.addEventListener('click', () => {
-            if (mobileMenu.classList.contains('active')) {
+        mobileMenuBtn.setAttribute('aria-controls', 'mobile-menu');
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        mobileMenuBtn.addEventListener('click', (event) => {
+            event.preventDefault();
+            if (mobileMenu?.classList.contains('active')) {
                 closeMobileMenu();
             } else {
                 openMobileMenu();
@@ -39,31 +112,25 @@
         });
     }
 
-    // Close menu when clicking close button
     if (mobileMenuClose) {
-        mobileMenuClose.addEventListener('click', closeMobileMenu);
+        mobileMenuClose.addEventListener('click', (event) => {
+            event.preventDefault();
+            closeMobileMenu();
+        });
     }
 
-    // Close menu when clicking overlay
     if (mobileMenuOverlay) {
         mobileMenuOverlay.addEventListener('click', closeMobileMenu);
     }
 
-    // Close mobile menu when clicking on a link
     if (mobileMenu) {
+        mobileMenu.setAttribute('aria-hidden', 'true');
         const mobileLinks = mobileMenu.querySelectorAll('a');
-        mobileLinks.forEach(link => {
+        mobileLinks.forEach((link) => {
             link.addEventListener('click', closeMobileMenu);
         });
     }
-
-    // Close menu when pressing ESC key
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && mobileMenu && mobileMenu.classList.contains('active')) {
-            closeMobileMenu();
-        }
-    });
-})();
+});
 
 // Navbar Scroll Effect - Solid at top, semi-transparent when scrolled
 (function() {

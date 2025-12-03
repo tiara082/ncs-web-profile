@@ -13,7 +13,13 @@ class EditLinks extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            DeleteAction::make(),
+            DeleteAction::make()
+                ->successRedirectUrl(route('links.index')),
         ];
+    }
+
+    protected function getRedirectUrl(): string
+    {
+        return route('links.index');
     }
 }

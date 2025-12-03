@@ -31,7 +31,7 @@ class ContentsTable
                     })
                     ->sortable(),
                 
-                TextColumn::make('creator.name')
+                TextColumn::make('creator.username')
                     ->label('Created By')
                     ->sortable()
                     ->searchable(),

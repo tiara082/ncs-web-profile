@@ -13,7 +13,13 @@ class EditContent extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            DeleteAction::make(),
+            DeleteAction::make()
+                ->successRedirectUrl(route('contents.index')),
         ];
+    }
+
+    protected function getRedirectUrl(): string
+    {
+        return route('contents.index');
     }
 }

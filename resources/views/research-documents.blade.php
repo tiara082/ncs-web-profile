@@ -291,10 +291,6 @@
                                                 <i data-feather="eye" width="16" height="16"></i>
                                                 View Paper
                                             </a>
-                                            <button class="inline-flex items-center gap-2 px-3 py-2 bg-slate-100 text-slate-700 rounded-lg text-sm font-medium hover:bg-slate-200 transition-all" title="Save to library">
-                                                <i data-feather="bookmark" width="16" height="16"></i>
-                                                Save
-                                            </button>
                                             <button class="inline-flex items-center gap-2 px-3 py-2 bg-slate-100 text-slate-700 rounded-lg text-sm font-medium hover:bg-slate-200 transition-all" title="Download PDF">
                                                 <i data-feather="download" width="16" height="16"></i>
                                                 Download

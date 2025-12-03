@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('file_path');
             $table->string('gallery_type')->default('image');
-            $table->foreignId('uploaded_by')->nullable()->constrained('users')->onDelete('set null');
+            $table->foreignId('uploaded_by')->nullable()->constrained('admins')->onDelete('set null');
             $table->timestamps();
         });
     }

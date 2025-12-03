@@ -13,7 +13,13 @@ class EditCategories extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            DeleteAction::make(),
+            DeleteAction::make()
+                ->successRedirectUrl(route('categories.index')),
         ];
+    }
+
+    protected function getRedirectUrl(): string
+    {
+        return route('categories.index');
     }
 }

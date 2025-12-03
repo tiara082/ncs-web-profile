@@ -283,7 +283,7 @@
                     <div class="flex justify-center mb-16">
                         <a href="/member/erfan-rohadi" class="org-card-head cursor-pointer">
                             <div class="org-avatar-container">
-                                <img src="https://i.pravatar.cc/150?img=12" alt="Erfan Rohadi" class="org-avatar-img">
+                                <img src="{{ asset('img/lab-member/erfan.png') }}" alt="Erfan Rohadi" class="org-avatar-img">
                                 <div class="org-avatar-badge">
                                     <i data-feather="award" class="w-4 h-4 text-primary"></i>
                                 </div>
@@ -318,7 +318,7 @@
                         <!-- Researcher 1 -->
                         <a href="/member/ade-ismail" class="org-card-researcher cursor-pointer">
                             <div class="org-avatar-container-small">
-                                <img src="https://i.pravatar.cc/150?img=33" alt="Ade Ismail" class="org-avatar-img-small">
+                                <img src="{{ asset('img/lab-member/ade_ismail.png') }}" alt="Ade Ismail" class="org-avatar-img-small">
                             </div>
                             <div class="org-badge-researcher">Researcher</div>
                             <div class="org-name-researcher">Ade Ismail, S.Kom., M.TI</div>
@@ -328,7 +328,7 @@
                         <!-- Researcher 2 -->
                         <a href="/member/vipkas-al-hadid-firdaus" class="org-card-researcher cursor-pointer">
                             <div class="org-avatar-container-small">
-                                <img src="https://i.pravatar.cc/150?img=15" alt="Vipkas Al Hadid Firdaus" class="org-avatar-img-small">
+                                <img src="{{ asset('img/lab-member/vipkas.png') }}" alt="Vipkas Al Hadid Firdaus" class="org-avatar-img-small">
                             </div>
                             <div class="org-badge-researcher">Researcher</div>
                             <div class="org-name-researcher">Vipkas Al Hadid Firdaus, ST., MT</div>
@@ -338,7 +338,7 @@
                         <!-- Researcher 3 -->
                         <a href="/member/sofyan-noor-arief" class="org-card-researcher cursor-pointer">
                             <div class="org-avatar-container-small">
-                                <img src="https://i.pravatar.cc/150?img=68" alt="Sofyan Noor Arief" class="org-avatar-img-small">
+                                <img src="{{ asset('img/lab-member/sofyan.png') }}" alt="Sofyan Noor Arief" class="org-avatar-img-small">
                             </div>
                             <div class="org-badge-researcher">Researcher</div>
                             <div class="org-name-researcher">Sofyan Noor Arief, S.ST., M.Kom.</div>
@@ -348,7 +348,7 @@
                         <!-- Researcher 4 -->
                         <a href="/member/meyti-eka-apriyani" class="org-card-researcher cursor-pointer">
                             <div class="org-avatar-container-small">
-                                <img src="https://i.pravatar.cc/150?img=47" alt="Meyti Eka Apriyani" class="org-avatar-img-small">
+                                <img src="{{ asset('img/lab-member/meyti.png') }}" alt="Meyti Eka Apriyani" class="org-avatar-img-small">
                             </div>
                             <div class="org-badge-researcher">Researcher</div>
                             <div class="org-name-researcher">Meyti Eka Apriyani ST., MT.</div>

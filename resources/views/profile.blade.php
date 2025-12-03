@@ -173,7 +173,7 @@
                             <i data-feather="users" class="text-primary" width="24" height="24"></i>
                         </div>
                         <div class="text-3xl font-bold text-primary mb-2">50+</div>
-                        <div class="text-sm font-semibold text-foreground uppercase tracking-wide mb-1">Active Students</div>
+                        <div class="text-sm font-semibold text-foreground uppercase tracking-wide mb-1">Active Members</div>
                         <p class="text-xs text-muted-foreground">Enrolled in practicum programs</p>
                     </div>
                 </div>
@@ -184,8 +184,8 @@
                             <i data-feather="search" class="text-primary" width="24" height="24"></i>
                         </div>
                         <div class="text-3xl font-bold text-primary mb-2">15+</div>
-                        <div class="text-sm font-semibold text-foreground uppercase tracking-wide mb-1">Research Projects</div>
-                        <p class="text-xs text-muted-foreground">Ongoing cybersecurity research</p>
+                        <div class="text-sm font-semibold text-foreground uppercase tracking-wide mb-1">Lab Activities</div>
+                        <p class="text-xs text-muted-foreground">Hands-on and collaborative sessions</p>
                     </div>
                 </div>
                 <div class="group relative bg-white rounded-2xl border-2 border-border p-6 shadow-lg hover-lift hover:border-primary/50 transition-all duration-300">
@@ -195,7 +195,7 @@
                             <i data-feather="award" class="text-primary" width="24" height="24"></i>
                         </div>
                         <div class="text-3xl font-bold text-primary mb-2">25+</div>
-                        <div class="text-sm font-semibold text-foreground uppercase tracking-wide mb-1">Published Projects</div>
+                        <div class="text-sm font-semibold text-foreground uppercase tracking-wide mb-1">Research Publications</div>
                         <p class="text-xs text-muted-foreground">Academic & industry publications</p>
                     </div>
                 </div>

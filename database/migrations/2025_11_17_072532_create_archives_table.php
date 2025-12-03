@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('archives', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->text('description')->nullable();
+            $table->string('file_path');
+            $table->string('category');
+            $table->foreignId('uploaded_by')->nullable()->constrained('admins')->onDelete('set null');
             $table->timestamps();
         });
     }
