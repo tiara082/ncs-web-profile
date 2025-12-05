@@ -71,149 +71,26 @@
             
             <!-- Gallery Grid -->
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
-                <!-- Activity 1 -->
+                @forelse($activities as $activity)
+                <!-- Activity -->
                 <div class="group relative overflow-hidden rounded-2xl border-2 border-gray-200 hover:border-primary/50 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/20 hover-lift bg-white">
                     <div class="aspect-video bg-gradient-to-br from-slate-100 to-slate-50">
-                        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80" alt="Cybersecurity Workshop 2024" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy"/>
+                        <img src="{{ asset('storage/' . $activity->file_path) }}" alt="{{ $activity->title }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy"/>
                     </div>
                     <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-start justify-end p-6">
-                        <span class="text-primary text-xs font-bold mb-2">January 2024</span>
-                        <h3 class="text-white font-bold text-lg mb-1">Cybersecurity Workshop 2024</h3>
-                        <p class="text-white/80 text-sm">Advanced penetration testing techniques</p>
+                        @if($activity->event_date)
+                        <span class="text-primary text-xs font-bold mb-2">{{ $activity->event_date->format('F Y') }}</span>
+                        @endif
+                        <h3 class="text-white font-bold text-lg mb-1">{{ $activity->title }}</h3>
+                        <p class="text-white/80 text-sm">{{ Str::limit($activity->description, 60) }}</p>
                     </div>
                 </div>
-
-                <!-- Activity 2 -->
-                <div class="group relative overflow-hidden rounded-2xl border-2 border-gray-200 hover:border-primary/50 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/20 hover-lift bg-white">
-                    <div class="aspect-video bg-gradient-to-br from-slate-100 to-slate-50">
-                        <img src="https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=800&q=80" alt="CTF Competition 2024" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy"/>
-                    </div>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-start justify-end p-6">
-                        <span class="text-primary text-xs font-bold mb-2">February 2024</span>
-                        <h3 class="text-white font-bold text-lg mb-1">CTF Competition 2024</h3>
-                        <p class="text-white/80 text-sm">Regional capture the flag championship</p>
-                    </div>
+                @empty
+                <div class="col-span-full text-center py-12">
+                    <i data-feather="image" class="w-16 h-16 mx-auto text-gray-300 mb-4"></i>
+                    <p class="text-gray-500 text-lg">No past activities to display</p>
                 </div>
-
-                <!-- Activity 3 -->
-                <div class="group relative overflow-hidden rounded-2xl border-2 border-gray-200 hover:border-primary/50 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/20 hover-lift bg-white">
-                    <div class="aspect-video bg-gradient-to-br from-slate-100 to-slate-50">
-                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80" alt="Network Security Seminar" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy"/>
-                    </div>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-start justify-end p-6">
-                        <span class="text-primary text-xs font-bold mb-2">March 2024</span>
-                        <h3 class="text-white font-bold text-lg mb-1">Network Security Seminar</h3>
-                        <p class="text-white/80 text-sm">Industry experts sharing latest insights</p>
-                    </div>
-                </div>
-
-                <!-- Activity 4 -->
-                <div class="group relative overflow-hidden rounded-2xl border-2 border-gray-200 hover:border-primary/50 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/20 hover-lift bg-white">
-                    <div class="aspect-video bg-gradient-to-br from-slate-100 to-slate-50">
-                        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&q=80" alt="Ethical Hacking Training" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy"/>
-                    </div>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-start justify-end p-6">
-                        <span class="text-primary text-xs font-bold mb-2">April 2024</span>
-                        <h3 class="text-white font-bold text-lg mb-1">Ethical Hacking Training</h3>
-                        <p class="text-white/80 text-sm">Hands-on ethical hacking certification prep</p>
-                    </div>
-                </div>
-
-                <!-- Activity 5 -->
-                <div class="group relative overflow-hidden rounded-2xl border-2 border-gray-200 hover:border-primary/50 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/20 hover-lift bg-white">
-                    <div class="aspect-video bg-gradient-to-br from-slate-100 to-slate-50">
-                        <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&q=80" alt="Industry Collaboration" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy"/>
-                    </div>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-start justify-end p-6">
-                        <span class="text-primary text-xs font-bold mb-2">May 2024</span>
-                        <h3 class="text-white font-bold text-lg mb-1">Industry Collaboration</h3>
-                        <p class="text-white/80 text-sm">Partnership with leading tech companies</p>
-                    </div>
-                </div>
-
-                <!-- Activity 6 -->
-                <div class="group relative overflow-hidden rounded-2xl border-2 border-gray-200 hover:border-primary/50 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/20 hover-lift bg-white">
-                    <div class="aspect-video bg-gradient-to-br from-slate-100 to-slate-50">
-                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80" alt="Student Hackathon" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy"/>
-                    </div>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-start justify-end p-6">
-                        <span class="text-primary text-xs font-bold mb-2">June 2024</span>
-                        <h3 class="text-white font-bold text-lg mb-1">Student Hackathon</h3>
-                        <p class="text-white/80 text-sm">24-hour coding competition</p>
-                    </div>
-                </div>
-
-                <!-- Activity 7 -->
-                <div class="group relative overflow-hidden rounded-2xl border-2 border-gray-200 hover:border-primary/50 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/20 hover-lift bg-white">
-                    <div class="aspect-video bg-gradient-to-br from-slate-100 to-slate-50">
-                        <img src="https://images.unsplash.com/photo-1560439514-4e9645039924?w=800&q=80" alt="IoT Security Workshop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy"/>
-                    </div>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-start justify-end p-6">
-                        <span class="text-primary text-xs font-bold mb-2">July 2024</span>
-                        <h3 class="text-white font-bold text-lg mb-1">IoT Security Workshop</h3>
-                        <p class="text-white/80 text-sm">Securing Internet of Things devices</p>
-                    </div>
-                </div>
-
-                <!-- Activity 8 -->
-                <div class="group relative overflow-hidden rounded-2xl border-2 border-gray-200 hover:border-primary/50 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/20 hover-lift bg-white">
-                    <div class="aspect-video bg-gradient-to-br from-slate-100 to-slate-50">
-                        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80" alt="Lab Equipment Upgrade" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy"/>
-                    </div>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-start justify-end p-6">
-                        <span class="text-primary text-xs font-bold mb-2">August 2024</span>
-                        <h3 class="text-white font-bold text-lg mb-1">Lab Equipment Upgrade</h3>
-                        <p class="text-white/80 text-sm">New state-of-the-art security infrastructure</p>
-                    </div>
-                </div>
-
-                <!-- Activity 9 -->
-                <div class="group relative overflow-hidden rounded-2xl border-2 border-gray-200 hover:border-primary/50 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/20 hover-lift bg-white">
-                    <div class="aspect-video bg-gradient-to-br from-slate-100 to-slate-50">
-                        <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&q=80" alt="Alumni Gathering" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy"/>
-                    </div>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-start justify-end p-6">
-                        <span class="text-primary text-xs font-bold mb-2">September 2024</span>
-                        <h3 class="text-white font-bold text-lg mb-1">Alumni Gathering</h3>
-                        <p class="text-white/80 text-sm">Networking with cybersecurity professionals</p>
-                    </div>
-                </div>
-
-                <!-- Activity 10 -->
-                <div class="group relative overflow-hidden rounded-2xl border-2 border-gray-200 hover:border-primary/50 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/20 hover-lift bg-white">
-                    <div class="aspect-video bg-gradient-to-br from-slate-100 to-slate-50">
-                        <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?w=800&q=80" alt="Research Presentation" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy"/>
-                    </div>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-start justify-end p-6">
-                        <span class="text-primary text-xs font-bold mb-2">October 2024</span>
-                        <h3 class="text-white font-bold text-lg mb-1">Research Presentation</h3>
-                        <p class="text-white/80 text-sm">Students presenting latest research findings</p>
-                    </div>
-                </div>
-
-                <!-- Activity 11 -->
-                <div class="group relative overflow-hidden rounded-2xl border-2 border-gray-200 hover:border-primary/50 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/20 hover-lift bg-white">
-                    <div class="aspect-video bg-gradient-to-br from-slate-100 to-slate-50">
-                        <img src="https://images.unsplash.com/photo-1531497865144-0464ef8fb9a9?w=800&q=80" alt="Cloud Security Training" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy"/>
-                    </div>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-start justify-end p-6">
-                        <span class="text-primary text-xs font-bold mb-2">November 2024</span>
-                        <h3 class="text-white font-bold text-lg mb-1">Cloud Security Training</h3>
-                        <p class="text-white/80 text-sm">AWS and Azure security best practices</p>
-                    </div>
-                </div>
-
-                <!-- Activity 12 -->
-                <div class="group relative overflow-hidden rounded-2xl border-2 border-gray-200 hover:border-primary/50 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/20 hover-lift bg-white">
-                    <div class="aspect-video bg-gradient-to-br from-slate-100 to-slate-50">
-                        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&q=80" alt="Year End Ceremony" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy"/>
-                    </div>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-start justify-end p-6">
-                        <span class="text-primary text-xs font-bold mb-2">December 2024</span>
-                        <h3 class="text-white font-bold text-lg mb-1">Year End Ceremony</h3>
-                        <p class="text-white/80 text-sm">Celebrating achievements and milestones</p>
-                    </div>
-                </div>
+                @endforelse
             </div>
         </div>
     </section>

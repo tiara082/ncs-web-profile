@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Content;
 use App\Models\Categories;
+use App\Traits\LogsActivity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ContentController extends Controller
 {
+    use LogsActivity;
     /**
      * Display a listing of the resource.
      */
@@ -46,6 +48,8 @@ class ContentController extends Controller
         if (isset($validated['categories'])) {
             $content->categories()->sync($validated['categories']);
         }
+        
+        $this->logActivity('create', 'contents', $content->id, "Created content: {$content->title}");
 
         return redirect()->route('contents.index')
             ->with('success', 'Content berhasil ditambahkan.');
@@ -54,8 +58,9 @@ class ContentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Content $content)
+    public function show($id)
     {
+        $content = Content::findOrFail($id);
         $content->load('creator', 'categories');
         return view('admin.contents.show', compact('content'));
     }
@@ -63,8 +68,9 @@ class ContentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Content $content)
+    public function edit($id)
     {
+        $content = Content::findOrFail($id);
         $categories = Categories::all();
         $content->load('categories');
         return view('admin.contents.edit', compact('content', 'categories'));
@@ -73,8 +79,9 @@ class ContentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Content $content)
+    public function update(Request $request, $id)
     {
+        $content = Content::findOrFail($id);
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'body' => 'required|string',
@@ -90,6 +97,8 @@ class ContentController extends Controller
         } else {
             $content->categories()->detach();
         }
+        
+        $this->logActivity('update', 'contents', $content->id, "Updated content: {$content->title}");
 
         return redirect()->route('contents.index')
             ->with('success', 'Content berhasil diupdate.');
@@ -98,10 +107,14 @@ class ContentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Content $content)
+    public function destroy($id)
     {
+        $content = Content::findOrFail($id);
+        $title = $content->title;
         $content->categories()->detach();
         $content->delete();
+        
+        $this->logActivity('delete', 'contents', null, "Deleted content: {$title}");
 
         return redirect()->route('contents.index')
             ->with('success', 'Content berhasil dihapus.');

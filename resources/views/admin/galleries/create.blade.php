@@ -1,72 +1,100 @@
 @extends('admin.layout')
 
-@section('title', 'Upload Media')
+@section('title', 'Tambah ' . (request('type') == 'past_activity' ? 'Past Activity' : 'Agenda'))
 
 @section('content')
 <div class="page-header">
-    <h1 class="page-title">Upload Media</h1>
-    <p class="page-subtitle">Upload gambar atau video ke gallery</p>
+    <h1 class="page-title">Tambah {{ request('type') == 'past_activity' ? 'Past Activity' : 'Agenda' }}</h1>
 </div>
 
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-10">
         <div class="card">
-            <div class="card-header">
-                <h5 class="mb-0">Form Upload Media</h5>
-            </div>
             <div class="card-body">
                 <form action="{{ route('galleries.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     
+                    <input type="hidden" name="gallery_type" value="{{ request('type', 'agenda') }}">
+                    
                     <div class="mb-3">
-                        <label for="title" class="form-label">Judul <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control @error('title') is-invalid @enderror" 
-                               id="title" name="title" value="{{ old('title') }}" required>
-                        @error('title')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
+                        <label for="title" class="form-label">Title <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="title" name="title" value="{{ old('title') }}" required>
                     </div>
 
                     <div class="mb-3">
-                        <label for="description" class="form-label">Deskripsi</label>
-                        <textarea class="form-control @error('description') is-invalid @enderror" 
-                                  id="description" name="description" rows="3">{{ old('description') }}</textarea>
-                        @error('description')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
+                        <label for="description" class="form-label">Description</label>
+                        <textarea class="form-control" id="description" name="description" rows="4">{{ old('description') }}</textarea>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="gallery_type" class="form-label">Tipe Gallery <span class="text-danger">*</span></label>
-                        <select class="form-select @error('gallery_type') is-invalid @enderror" 
-                                id="gallery_type" name="gallery_type" required>
-                            <option value="">Pilih Tipe</option>
-                            <option value="image" {{ old('gallery_type') == 'image' ? 'selected' : '' }}>Image</option>
-                            <option value="video" {{ old('gallery_type') == 'video' ? 'selected' : '' }}>Video</option>
-                            <option value="document" {{ old('gallery_type') == 'document' ? 'selected' : '' }}>Document</option>
-                        </select>
-                        @error('gallery_type')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
+                    @if(request('type') == 'agenda')
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="event_date" class="form-label">Event Date <span class="text-danger">*</span></label>
+                                <input type="date" class="form-control" id="event_date" name="event_date" value="{{ old('event_date') }}" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="event_time" class="form-label">Event Time</label>
+                                <input type="time" class="form-control" id="event_time" name="event_time" value="{{ old('event_time') }}">
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="event_mode" class="form-label">Event Mode <span class="text-danger">*</span></label>
+                            <select class="form-select" id="event_mode" name="event_mode" required>
+                                <option value="">Select Mode</option>
+                                <option value="online" {{ old('event_mode') == 'online' ? 'selected' : '' }}>Online</option>
+                                <option value="offline" {{ old('event_mode') == 'offline' ? 'selected' : '' }}>Offline</option>
+                                <option value="hybrid" {{ old('event_mode') == 'hybrid' ? 'selected' : '' }}>Hybrid</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="location" class="form-label">Location</label>
+                            <input type="text" class="form-control" id="location" name="location" value="{{ old('location') }}" placeholder="e.g., NCS Lab, Politeknik Negeri Malang">
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="event_category" class="form-label">Category</label>
+                                <select class="form-select" id="event_category" name="event_category">
+                                    <option value="">Select Category</option>
+                                    <option value="workshop" {{ old('event_category') == 'workshop' ? 'selected' : '' }}>Workshop</option>
+                                    <option value="competition" {{ old('event_category') == 'competition' ? 'selected' : '' }}>Competition</option>
+                                    <option value="seminar" {{ old('event_category') == 'seminar' ? 'selected' : '' }}>Seminar</option>
+                                    <option value="training" {{ old('event_category') == 'training' ? 'selected' : '' }}>Training</option>
+                                    <option value="webinar" {{ old('event_category') == 'webinar' ? 'selected' : '' }}>Webinar</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="max_slots" class="form-label">Max Participants</label>
+                                <input type="number" class="form-control" id="max_slots" name="max_slots" value="{{ old('max_slots') }}" min="0" placeholder="Leave empty for unlimited">
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="event_status" class="form-label">Status</label>
+                            <select class="form-select" id="event_status" name="event_status">
+                                <option value="upcoming" {{ old('event_status', 'upcoming') == 'upcoming' ? 'selected' : '' }}>Upcoming</option>
+                                <option value="ongoing" {{ old('event_status') == 'ongoing' ? 'selected' : '' }}>Ongoing</option>
+                                <option value="completed" {{ old('event_status') == 'completed' ? 'selected' : '' }}>Completed</option>
+                            </select>
+                        </div>
+                    @else
+                        <div class="mb-3">
+                            <label for="event_date" class="form-label">Activity Date</label>
+                            <input type="date" class="form-control" id="event_date" name="event_date" value="{{ old('event_date') }}">
+                        </div>
+                    @endif
 
                     <div class="mb-3">
-                        <label for="file" class="form-label">File <span class="text-danger">*</span></label>
-                        <input type="file" class="form-control @error('file') is-invalid @enderror" 
-                               id="file" name="file" required accept="image/*,video/*">
-                        <small class="text-muted">Max: 20MB. Format: JPG, PNG, GIF, MP4, MOV, AVI</small>
-                        @error('file')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
+                        <label for="file" class="form-label">Image <span class="text-danger">*</span></label>
+                        <input type="file" class="form-control" id="file" name="file" required accept="image/*">
+                        <small class="text-muted">Max: 20MB. Format: JPG, PNG, GIF</small>
                     </div>
 
                     <div class="d-flex gap-2">
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-upload"></i> Upload
-                        </button>
-                        <a href="{{ route('galleries.index') }}" class="btn btn-secondary">
-                            <i class="fas fa-arrow-left"></i> Kembali
-                        </a>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan</button>
+                        <a href="{{ route('galleries.index') }}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Kembali</a>
                     </div>
                 </form>
             </div>

@@ -634,81 +634,38 @@
                 </div>
                 
                 <div class="grid md:grid-cols-2 gap-6 mb-10">
-                    <!-- Publication Card 1 -->
+                    @forelse($featuredPublications as $publication)
+                    <!-- Publication Card -->
                     <div class="group relative overflow-hidden h-full">
                         <div class="relative p-6 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 hover:border-primary/40 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/20 h-full flex flex-col">
                             <div class="flex items-start justify-between mb-4">
-                                <span class="px-3 py-1.5 bg-primary/20 text-primary text-xs font-bold rounded-full">Journal</span>
-                                <span class="text-sm text-white/40 font-semibold">2024</span>
+                                <span class="px-3 py-1.5 bg-primary/20 text-primary text-xs font-bold rounded-full">{{ $publication['type'] }}</span>
+                                <span class="text-sm text-white/40 font-semibold">{{ $publication['year'] }}</span>
                             </div>
-                            <h3 class="text-xl font-bold text-white mb-3 group-hover:text-primary transition-colors leading-tight">Advanced Cryptographic Protocols in Modern Networks</h3>
-                            <p class="text-sm text-white/60 mb-4 flex-grow">Erfan Rohadi, Dr. Budi Santoso</p>
+                            <h3 class="text-xl font-bold text-white mb-3 group-hover:text-primary transition-colors leading-tight">{{ $publication['title'] }}</h3>
+                            <p class="text-sm text-white/60 mb-4 flex-grow">{{ $publication['author_name'] }}</p>
                             <div class="flex items-center justify-between mt-auto">
-                                <span class="px-3 py-1 bg-white/10 text-white/70 text-xs font-semibold rounded">CRYPTOGRAPHY</span>
-                                <a href="#" class="text-primary font-semibold text-sm hover:translate-x-2 transition-all inline-flex items-center gap-2 group/link">
+                                <span class="px-3 py-1 bg-white/10 text-white/70 text-xs font-semibold rounded uppercase">{{ Str::limit($publication['category'], 20) }}</span>
+                                @if($publication['file_path'])
+                                <a href="{{ $publication['file_path'] }}" target="_blank" class="text-primary font-semibold text-sm hover:translate-x-2 transition-all inline-flex items-center gap-2 group/link">
                                     Read <span class="group-hover/link:translate-x-1 transition-transform">→</span>
                                 </a>
+                                @else
+                                <span class="text-white/40 text-sm italic">No file</span>
+                                @endif
                             </div>
                         </div>
                     </div>
-
-                    <!-- Publication Card 2 -->
-                    <div class="group relative overflow-hidden h-full">
-                        <div class="relative p-6 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 hover:border-primary/40 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/20 h-full flex flex-col">
-                            <div class="flex items-start justify-between mb-4">
-                                <span class="px-3 py-1.5 bg-primary/20 text-primary text-xs font-bold rounded-full">Conference</span>
-                                <span class="text-sm text-white/40 font-semibold">2024</span>
-                            </div>
-                            <h3 class="text-xl font-bold text-white mb-3 group-hover:text-primary transition-colors leading-tight">Machine Learning Applications in Cybersecurity Threat Detection</h3>
-                            <p class="text-sm text-white/60 mb-4 flex-grow">Erfan Rohadi, Dr. Siti Nurhaliza</p>
-                            <div class="flex items-center justify-between mt-auto">
-                                <span class="px-3 py-1 bg-white/10 text-white/70 text-xs font-semibold rounded">THREAT DETECTION</span>
-                                <a href="#" class="text-primary font-semibold text-sm hover:translate-x-2 transition-all inline-flex items-center gap-2 group/link">
-                                    Read <span class="group-hover/link:translate-x-1 transition-transform">→</span>
-                                </a>
-                            </div>
-                        </div>
+                    @empty
+                    <!-- No Publications Message -->
+                    <div class="col-span-2 text-center py-12">
+                        <p class="text-white/60 text-lg">No publications available yet.</p>
                     </div>
-
-                    <!-- Publication Card 3 -->
-                    <div class="group relative overflow-hidden h-full">
-                        <div class="relative p-6 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 hover:border-primary/40 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/20 h-full flex flex-col">
-                            <div class="flex items-start justify-between mb-4">
-                                <span class="px-3 py-1.5 bg-primary/20 text-primary text-xs font-bold rounded-full">Journal</span>
-                                <span class="text-sm text-white/40 font-semibold">2023</span>
-                            </div>
-                            <h3 class="text-xl font-bold text-white mb-3 group-hover:text-primary transition-colors leading-tight">Zero Trust Architecture Implementation in Enterprise Networks</h3>
-                            <p class="text-sm text-white/60 mb-4 flex-grow">Dr. Budi Santoso, Erfan Rohadi</p>
-                            <div class="flex items-center justify-between mt-auto">
-                                <span class="px-3 py-1 bg-white/10 text-white/70 text-xs font-semibold rounded">ARCHITECTURE</span>
-                                <a href="#" class="text-primary font-semibold text-sm hover:translate-x-2 transition-all inline-flex items-center gap-2 group/link">
-                                    Read <span class="group-hover/link:translate-x-1 transition-transform">→</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Publication Card 4 -->
-                    <div class="group relative overflow-hidden h-full">
-                        <div class="relative p-6 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 hover:border-primary/40 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/20 h-full flex flex-col">
-                            <div class="flex items-start justify-between mb-4">
-                                <span class="px-3 py-1.5 bg-primary/20 text-primary text-xs font-bold rounded-full">Conference</span>
-                                <span class="text-sm text-white/40 font-semibold">2023</span>
-                            </div>
-                            <h3 class="text-xl font-bold text-white mb-3 group-hover:text-primary transition-colors leading-tight">Quantum Computing Impact on Current Encryption Standards</h3>
-                            <p class="text-sm text-white/60 mb-4 flex-grow">Erfan Rohadi, Dr. Ahmad Wijaya</p>
-                            <div class="flex items-center justify-between mt-auto">
-                                <span class="px-3 py-1 bg-white/10 text-white/70 text-xs font-semibold rounded">QUANTUM SECURITY</span>
-                                <a href="#" class="text-primary font-semibold text-sm hover:translate-x-2 transition-all inline-flex items-center gap-2 group/link">
-                                    Read <span class="group-hover/link:translate-x-1 transition-transform">→</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                    @endforelse
                 </div>
                 
                 <div class="text-center">
-                    <a href="/publications" class="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 hover:from-cyan-500/30 hover:to-blue-500/30 text-cyan-300 font-bold rounded-xl border border-cyan-400/30 hover:border-cyan-400/60 transition-all duration-300 hover:shadow-xl hover:shadow-cyan-500/30 hover:scale-105">
+                    <a href="/research-documents" class="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 hover:from-cyan-500/30 hover:to-blue-500/30 text-cyan-300 font-bold rounded-xl border border-cyan-400/30 hover:border-cyan-400/60 transition-all duration-300 hover:shadow-xl hover:shadow-cyan-500/30 hover:scale-105">
                         View All Publications 
                         <span class="group-hover:translate-x-1 transition-transform">→</span>
                     </a>

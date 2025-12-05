@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Traits\LogsActivity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
+    use LogsActivity;
     /**
      * Display dashboard.
      */
@@ -75,42 +77,48 @@ class AdminController extends Controller
             'username' => 'required|string|max:255|unique:admins',
             'email' => 'required|email|max:255|unique:admins',
             'password' => 'required|string|min:8|confirmed',
+            'role' => 'required|string|in:admin,super_admin,editor,moderator',
+            'member_id' => 'nullable|exists:members,id',
         ]);
 
         $validated['password_hash'] = Hash::make($validated['password']);
         unset($validated['password']);
 
-        Admin::create($validated);
+        $admin = Admin::create($validated);
+        
+        $this->logActivity('create', 'admins', $admin->id, "Created admin: {$admin->username}");
 
-        return redirect()->route('admins.index')
+        return redirect()->route('administrators.index')
             ->with('success', 'Admin berhasil ditambahkan.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Admin $admin)
+    public function show(Admin $administrator)
     {
-        return view('admin.admins.show', compact('admin'));
+        return view('admin.admins.show', ['admin' => $administrator]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Admin $admin)
+    public function edit(Admin $administrator)
     {
-        return view('admin.admins.edit', compact('admin'));
+        return view('admin.admins.edit', ['admin' => $administrator]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Admin $admin)
+    public function update(Request $request, Admin $administrator)
     {
         $validated = $request->validate([
-            'username' => 'required|string|max:255|unique:admins,username,' . $admin->id,
-            'email' => 'required|email|max:255|unique:admins,email,' . $admin->id,
+            'username' => 'required|string|max:255|unique:admins,username,' . $administrator->id,
+            'email' => 'required|email|max:255|unique:admins,email,' . $administrator->id,
             'password' => 'nullable|string|min:8|confirmed',
+            'role' => 'required|string|in:admin,super_admin,editor,moderator',
+            'member_id' => 'nullable|exists:members,id',
         ]);
 
         if (!empty($validated['password'])) {
@@ -118,20 +126,25 @@ class AdminController extends Controller
         }
         unset($validated['password']);
 
-        $admin->update($validated);
+        $administrator->update($validated);
+        
+        $this->logActivity('update', 'admins', $administrator->id, "Updated admin: {$administrator->username}");
 
-        return redirect()->route('admins.index')
+        return redirect()->route('administrators.index')
             ->with('success', 'Admin berhasil diupdate.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Admin $admin)
+    public function destroy(Admin $administrator)
     {
-        $admin->delete();
+        $username = $administrator->username;
+        $administrator->delete();
+        
+        $this->logActivity('delete', 'admins', null, "Deleted admin: {$username}");
 
-        return redirect()->route('admins.index')
+        return redirect()->route('administrators.index')
             ->with('success', 'Admin berhasil dihapus.');
     }
 }

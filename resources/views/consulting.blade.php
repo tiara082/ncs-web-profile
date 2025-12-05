@@ -315,44 +315,64 @@
                                 <p class="text-slate-600">Let's discuss how we can help secure your organization</p>
                             </div>
                             
-                            <form class="space-y-6">
+                            @if(session('success'))
+                            <div class="mb-6 p-4 bg-green-50 border border-green-200 rounded-xl text-green-700">
+                                <i data-feather="check-circle" class="inline-block mr-2" width="20" height="20"></i>
+                                {{ session('success') }}
+                            </div>
+                            @endif
+
+                            @if($errors->any())
+                            <div class="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl text-red-700">
+                                <ul class="list-disc list-inside">
+                                    @foreach($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            @endif
+
+                            <form action="{{ route('consultation.submit') }}" method="POST" class="space-y-6">
+                                @csrf
                                 <div class="grid md:grid-cols-2 gap-6">
                                     <div>
-                                        <label class="block text-sm font-semibold text-slate-700 mb-2">Full Name</label>
-                                        <input type="text" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all" placeholder="John Doe">
+                                        <label class="block text-sm font-semibold text-slate-700 mb-2">Full Name <span class="text-red-500">*</span></label>
+                                        <input type="text" name="name" value="{{ old('name') }}" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all" placeholder="John Doe">
                                     </div>
                                     <div>
-                                        <label class="block text-sm font-semibold text-slate-700 mb-2">Email Address</label>
-                                        <input type="email" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all" placeholder="john@example.com">
+                                        <label class="block text-sm font-semibold text-slate-700 mb-2">Email Address <span class="text-red-500">*</span></label>
+                                        <input type="email" name="email" value="{{ old('email') }}" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all" placeholder="john@example.com">
                                     </div>
                                 </div>
                                 
                                 <div class="grid md:grid-cols-2 gap-6">
                                     <div>
                                         <label class="block text-sm font-semibold text-slate-700 mb-2">Company</label>
-                                        <input type="text" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all" placeholder="Your Company">
+                                        <input type="text" name="company" value="{{ old('company') }}" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all" placeholder="Your Company">
                                     </div>
                                     <div>
                                         <label class="block text-sm font-semibold text-slate-700 mb-2">Phone Number</label>
-                                        <input type="tel" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all" placeholder="+62 xxx xxxx xxxx">
+                                        <input type="tel" name="phone" value="{{ old('phone') }}" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all" placeholder="+62 xxx xxxx xxxx">
                                     </div>
                                 </div>
                                 
                                 <div>
-                                    <label class="block text-sm font-semibold text-slate-700 mb-2">Service Interested In</label>
-                                    <select class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all">
-                                        <option>Security Assessment</option>
-                                        <option>Penetration Testing</option>
-                                        <option>Security Architecture</option>
-                                        <option>Incident Response</option>
-                                        <option>Compliance & Governance</option>
-                                        <option>Security Training</option>
+                                    <label class="block text-sm font-semibold text-slate-700 mb-2">Service Interested In <span class="text-red-500">*</span></label>
+                                    <select name="subject" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all">
+                                        <option value="">Select a service</option>
+                                        <option value="Security Assessment" {{ old('subject') == 'Security Assessment' ? 'selected' : '' }}>Security Assessment</option>
+                                        <option value="Penetration Testing" {{ old('subject') == 'Penetration Testing' ? 'selected' : '' }}>Penetration Testing</option>
+                                        <option value="Security Architecture" {{ old('subject') == 'Security Architecture' ? 'selected' : '' }}>Security Architecture</option>
+                                        <option value="Incident Response" {{ old('subject') == 'Incident Response' ? 'selected' : '' }}>Incident Response</option>
+                                        <option value="Compliance & Governance" {{ old('subject') == 'Compliance & Governance' ? 'selected' : '' }}>Compliance & Governance</option>
+                                        <option value="Security Training" {{ old('subject') == 'Security Training' ? 'selected' : '' }}>Security Training</option>
+                                        <option value="Other" {{ old('subject') == 'Other' ? 'selected' : '' }}>Other</option>
                                     </select>
                                 </div>
                                 
                                 <div>
-                                    <label class="block text-sm font-semibold text-slate-700 mb-2">Message</label>
-                                    <textarea rows="5" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all resize-none" placeholder="Tell us about your security needs..."></textarea>
+                                    <label class="block text-sm font-semibold text-slate-700 mb-2">Message <span class="text-red-500">*</span></label>
+                                    <textarea name="message" rows="5" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all resize-none" placeholder="Tell us about your security needs...">{{ old('message') }}</textarea>
                                 </div>
                                 
                                 <button type="submit" class="w-full py-4 bg-gradient-to-r from-primary to-secondary text-white font-bold rounded-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2">

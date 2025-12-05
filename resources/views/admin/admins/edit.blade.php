@@ -25,6 +25,29 @@
                         <input type="email" class="form-control" id="email" name="email" value="{{ old('email', $admin->email) }}" required>
                     </div>
 
+                    <div class="mb-3">
+                        <label for="role" class="form-label">Role <span class="text-danger">*</span></label>
+                        <select class="form-control" id="role" name="role" required>
+                            <option value="admin" {{ old('role', $admin->role) == 'admin' ? 'selected' : '' }}>Admin</option>
+                            <option value="super_admin" {{ old('role', $admin->role) == 'super_admin' ? 'selected' : '' }}>Super Admin</option>
+                            <option value="editor" {{ old('role', $admin->role) == 'editor' ? 'selected' : '' }}>Editor</option>
+                            <option value="moderator" {{ old('role', $admin->role) == 'moderator' ? 'selected' : '' }}>Moderator</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="member_id" class="form-label">Linked Member (Optional)</label>
+                        <select class="form-control" id="member_id" name="member_id">
+                            <option value="">None</option>
+                            @foreach(\App\Models\Members::all() as $member)
+                                <option value="{{ $member->id }}" {{ old('member_id', $admin->member_id) == $member->id ? 'selected' : '' }}>
+                                    {{ $member->member_name }} - {{ $member->member_role }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <small class="text-muted">Link this admin to a lab member for automatic author attribution</small>
+                    </div>
+
                     <hr class="my-4">
                     <p class="text-muted">Kosongkan password jika tidak ingin mengubahnya</p>
 

@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Members;
+use App\Traits\LogsActivity;
 use Illuminate\Http\Request;
 
 class MembersController extends Controller
 {
+    use LogsActivity;
     /**
      * Display a listing of the resource.
      */
@@ -37,7 +39,9 @@ class MembersController extends Controller
             'member_address' => 'nullable|string',
         ]);
 
-        Members::create($validated);
+        $member = Members::create($validated);
+        
+        $this->logActivity('create', 'members', $member->id, "Created member: {$member->member_name}");
 
         return redirect()->route('members.index')
             ->with('success', 'Member berhasil ditambahkan.');
@@ -46,24 +50,27 @@ class MembersController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Members $member)
+    public function show($id)
     {
+        $member = Members::findOrFail($id);
         return view('admin.members.show', compact('member'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Members $member)
+    public function edit($id)
     {
+        $member = Members::findOrFail($id);
         return view('admin.members.edit', compact('member'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Members $member)
+    public function update(Request $request, $id)
     {
+        $member = Members::findOrFail($id);
         $validated = $request->validate([
             'member_name' => 'required|string|max:255',
             'member_role' => 'required|string|max:255',
@@ -73,6 +80,8 @@ class MembersController extends Controller
         ]);
 
         $member->update($validated);
+        
+        $this->logActivity('update', 'members', $member->id, "Updated member: {$member->member_name}");
 
         return redirect()->route('members.index')
             ->with('success', 'Member berhasil diupdate.');
@@ -81,9 +90,13 @@ class MembersController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Members $member)
+    public function destroy($id)
     {
+        $member = Members::findOrFail($id);
+        $name = $member->member_name;
         $member->delete();
+        
+        $this->logActivity('delete', 'members', null, "Deleted member: {$name}");
 
         return redirect()->route('members.index')
             ->with('success', 'Member berhasil dihapus.');

@@ -25,6 +25,10 @@
                         <td>{{ $admin->email }}</td>
                     </tr>
                     <tr>
+                        <td><strong>Role</strong></td>
+                        <td><span class="badge bg-primary">{{ ucfirst(str_replace('_', ' ', $admin->role)) }}</span></td>
+                    </tr>
+                    <tr>
                         <td><strong>Ditambahkan</strong></td>
                         <td>{{ $admin->created_at->format('d M Y H:i') }}</td>
                     </tr>

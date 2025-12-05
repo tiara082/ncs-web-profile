@@ -86,7 +86,7 @@
         }
 
         body.dark-mode .table tbody td {
-            color: #f1f5f9 !important;
+            color: #000000ff !important;
             border-bottom-color: rgba(102, 187, 242, 0.15);
         }
 
@@ -96,7 +96,7 @@
         }
 
         body.dark-mode .table a {
-            color: #66bbf2 !important;
+            color: #ffffffff !important;
             font-weight: 500;
         }
 
@@ -785,6 +785,10 @@
                 <a href="{{ route('administrators.index') }}" class="nav-link {{ request()->routeIs('administrators.*') ? 'active' : '' }}">
                     <i class="fas fa-user-shield"></i>
                     <span>Administrators</span>
+                </a>
+                <a href="{{ route('consultations.index') }}" class="nav-link {{ request()->routeIs('consultations.*') ? 'active' : '' }}">
+                    <i class="fas fa-comments"></i>
+                    <span>Consultations</span>
                 </a>
                 <a href="{{ route('admin_logs.index') }}" class="nav-link {{ request()->routeIs('admin_logs.*') ? 'active' : '' }}">
                     <i class="fas fa-clipboard-list"></i>

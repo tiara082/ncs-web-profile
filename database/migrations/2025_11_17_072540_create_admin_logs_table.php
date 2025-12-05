@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('action');
             $table->string('table_name')->nullable();
             $table->unsignedBigInteger('record_id')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

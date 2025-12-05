@@ -72,6 +72,16 @@
                 </tbody>
             </table>
         </div>
+        
+        <!-- Pagination -->
+        <div class="d-flex justify-content-between align-items-center mt-3 px-3">
+            <div class="text-muted small">
+                Showing {{ $contents->firstItem() ?? 0 }} to {{ $contents->lastItem() ?? 0 }} of {{ $contents->total() }} entries
+            </div>
+            <div>
+                {{ $contents->links('pagination::bootstrap-4') }}
+            </div>
+        </div>
     </div>
 </div>
 @endsection

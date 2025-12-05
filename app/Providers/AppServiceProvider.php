@@ -19,6 +19,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // Register View Composer for footer links
+        view()->composer('partials.footer', \App\View\Composers\FooterComposer::class);
     }
 }

@@ -21,6 +21,15 @@
                     </div>
 
                     <div class="mb-3">
+                        <label for="type" class="form-label">Type <span class="text-danger">*</span></label>
+                        <select class="form-select" id="type" name="type" required>
+                            <option value="document" {{ old('type', $archive->type) == 'document' ? 'selected' : '' }}>Document</option>
+                            <option value="research" {{ old('type', $archive->type) == 'research' ? 'selected' : '' }}>Research</option>
+                            <option value="publication" {{ old('type', $archive->type) == 'publication' ? 'selected' : '' }}>Publication</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
                         <label for="category" class="form-label">Category <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="category" name="category" value="{{ old('category', $archive->category) }}" required>
                     </div>
@@ -28,6 +37,40 @@
                     <div class="mb-3">
                         <label for="description" class="form-label">Deskripsi</label>
                         <textarea class="form-control" id="description" name="description" rows="3">{{ old('description', $archive->description) }}</textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="publication" class="form-label">Publication/Journal</label>
+                        <input type="text" class="form-control" id="publication" name="publication" value="{{ old('publication', $archive->publication) }}" placeholder="e.g., IEEE Transactions">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="year" class="form-label">Year</label>
+                        <input type="text" class="form-control" id="year" name="year" value="{{ old('year', $archive->year) }}" placeholder="e.g., 2024" maxlength="4">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="author_id" class="form-label">Author (Member)</label>
+                        <select class="form-select" id="author_id" name="author_id">
+                            <option value="">Select Author</option>
+                            @foreach(\App\Models\Members::all() as $member)
+                                <option value="{{ $member->id }}" {{ old('author_id', $archive->author_id) == $member->id ? 'selected' : '' }}>
+                                    {{ $member->member_name }} - {{ $member->member_role }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Cover Image Saat Ini</label>
+                        @if($archive->cover_image)
+                            <div class="mb-2">
+                                <img src="{{ asset('storage/' . $archive->cover_image) }}" alt="Cover" style="max-width: 200px; border-radius: 8px;">
+                            </div>
+                        @endif
+                        <label for="cover_image" class="form-label">Upload Cover Image Baru (Opsional)</label>
+                        <input type="file" class="form-control" id="cover_image" name="cover_image" accept="image/*">
+                        <small class="text-muted">Max: 2MB (JPG, PNG)</small>
                     </div>
 
                     <div class="mb-3">

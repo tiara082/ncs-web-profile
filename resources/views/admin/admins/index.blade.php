@@ -24,6 +24,7 @@
                         <th>#</th>
                         <th>Username</th>
                         <th>Email</th>
+                        <th>Role</th>
                         <th>Tanggal Dibuat</th>
                         <th>Aksi</th>
                     </tr>
@@ -34,6 +35,7 @@
                             <td>{{ $loop->iteration + ($admins->currentPage() - 1) * $admins->perPage() }}</td>
                             <td><strong>{{ $admin->username }}</strong></td>
                             <td>{{ $admin->email }}</td>
+                            <td><span class="badge bg-primary">{{ ucfirst(str_replace('_', ' ', $admin->role)) }}</span></td>
                             <td>{{ $admin->created_at->format('d M Y') }}</td>
                             <td>
                                 <div class="btn-group btn-group-sm" role="group">
@@ -49,7 +51,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="5" class="text-center py-4 text-muted">
+                            <td colspan="6" class="text-center py-4 text-muted">
                                 <i class="fas fa-inbox fa-3x mb-3 d-block"></i>
                                 Belum ada admin
                             </td>

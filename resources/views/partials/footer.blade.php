@@ -73,30 +73,16 @@
             <div class="lg:col-span-3">
                 <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Related Links</h4>
                 <ul class="space-y-2.5">
+                    @forelse($footerLinks ?? [] as $link)
                     <li>
-                        <a href="https://www.polinema.ac.id" target="_blank" class="group flex items-center gap-2 text-white/60 hover:text-primary transition-colors text-sm">
+                        <a href="{{ $link->url }}" target="_blank" class="group flex items-center gap-2 text-white/60 hover:text-primary transition-colors text-sm">
                             <i data-feather="external-link" width="12" height="12" class="text-primary/60"></i>
-                            Polinema
+                            {{ $link->name }}
                         </a>
                     </li>
-                    <li>
-                        <a href="https://jti.polinema.ac.id" target="_blank" class="group flex items-center gap-2 text-white/60 hover:text-primary transition-colors text-sm">
-                            <i data-feather="external-link" width="12" height="12" class="text-primary/60"></i>
-                            JTI Polinema
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://simta.polinema.ac.id" target="_blank" class="group flex items-center gap-2 text-white/60 hover:text-primary transition-colors text-sm">
-                            <i data-feather="external-link" width="12" height="12" class="text-primary/60"></i>
-                            SIMTA
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://sinta.kemdiktisaintek.go.id/journals/profile/5102" target="_blank" class="group flex items-center gap-2 text-white/60 hover:text-primary transition-colors text-sm">
-                            <i data-feather="external-link" width="12" height="12" class="text-primary/60"></i>
-                            SINTA
-                        </a>
-                    </li>
+                    @empty
+                    <li class="text-white/40 text-sm italic">No links available</li>
+                    @endforelse
                 </ul>
             </div>
         </div>

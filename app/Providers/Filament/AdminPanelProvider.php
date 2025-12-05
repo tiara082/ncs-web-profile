@@ -28,7 +28,7 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->default()
             ->id('admin')
-            ->path('admin')
+            ->path('filament')
             ->login()
             ->brandName('NCS Lab Admin')
             ->brandLogo(asset('img/logo.png'))

@@ -13,7 +13,46 @@ use App\Http\Controllers\Admin_LogsController;
 
 
 Route::get('/', function () {
-    return view('home');
+    // Fetch featured publications (latest 4 research documents - only research and publication types)
+    $featuredPublications = \App\Models\Archives::with('author')
+        ->whereIn('type', ['research', 'publication'])
+        ->orderBy('year', 'desc')
+        ->orderBy('created_at', 'desc')
+        ->take(4)
+        ->get()
+        ->map(function($archive) {
+            // Map member names to their photo filenames
+            $photoMap = [
+                'Erfan Rohadi' => 'erfan.png',
+                'Ade Ismail' => 'ade_ismail.png',
+                'Vipkas' => 'vipkas.png',
+                'Sofyan' => 'sofyan.png',
+                'Meyti' => 'meyti.png',
+            ];
+            
+            $photoFile = 'default-avatar.png';
+            if ($archive->author) {
+                foreach ($photoMap as $namePattern => $file) {
+                    if (stripos($archive->author->member_name, $namePattern) !== false) {
+                        $photoFile = $file;
+                        break;
+                    }
+                }
+            }
+            
+            return [
+                'id' => $archive->id,
+                'title' => $archive->title,
+                'publication' => $archive->publication ?? 'Research Publication',
+                'year' => $archive->year ?? date('Y'),
+                'type' => $archive->type === 'research' ? 'Journal' : 'Conference',
+                'category' => $archive->category ?? 'Research',
+                'author_name' => $archive->author ? $archive->author->member_name : 'Admin',
+                'file_path' => $archive->file_path ? asset('storage/' . $archive->file_path) : null,
+            ];
+        });
+    
+    return view('home', compact('featuredPublications'));
 });
 Route::get('/organization', function () {
     return view('organization');
@@ -276,12 +315,19 @@ Route::get('/article/{slug}', function ($slug) {
 
 // Past Activities Route
 Route::get('/activities', function () {
-    return view('past-activities');
+    $activities = \App\Models\Gallery::where('gallery_type', 'past_activity')
+        ->orderBy('event_date', 'desc')
+        ->get();
+    return view('past-activities', compact('activities'));
 });
 
 // Agenda Route
 Route::get('/agenda', function () {
-    return view('agenda');
+    $agendas = \App\Models\Gallery::where('gallery_type', 'agenda')
+        ->where('event_status', '!=', 'completed')
+        ->orderBy('event_date', 'asc')
+        ->get();
+    return view('agenda', compact('agendas'));
 });
 
 // Infrastructure Route
@@ -439,77 +485,45 @@ Route::get('/community-service', function () {
 
 // Research Documents Route
 Route::get('/research-documents', function () {
-    // Collect all publications from all members
-    $members = [
-        'erfan-rohadi' => [
-            'name' => 'Erfan Rohadi, ST., M.Eng., Ph.D.',
-            'position' => 'Laboratory Head',
-            'photo' => 'img/lab-member/erfan.png',
-            'research' => [
-                ['title' => 'Next-Generation Intrusion Detection Using Deep Learning', 'publication' => 'IEEE Transactions on Network and Service Management', 'year' => '2024', 'cover' => 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=400&q=80'],
-                ['title' => 'Quantum-Safe Cryptography for Critical Infrastructure', 'publication' => 'Nature Communications', 'year' => '2023', 'cover' => 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400&q=80'],
-                ['title' => 'Security Framework for Industrial IoT Systems', 'publication' => 'ACM Computing Surveys', 'year' => '2023', 'cover' => 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&q=80'],
-                ['title' => 'Behavioral Analytics for Insider Threat Detection', 'publication' => 'IEEE Security & Privacy', 'year' => '2022', 'cover' => 'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=400&q=80'],
-                ['title' => 'Zero Trust Architecture for Enterprise Networks', 'publication' => 'Journal of Network and Computer Applications', 'year' => '2021', 'cover' => 'https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=400&q=80'],
-            ],
-        ],
-        'ade-ismail' => [
-            'name' => 'Ade Ismail, S.Kom., M.TI',
-            'position' => 'Researcher',
-            'photo' => 'img/lab-member/ade_ismail.png',
-            'research' => [
-                ['title' => 'Advanced Threat Detection in IoT Networks', 'publication' => 'IEEE Security & Privacy', 'year' => '2023', 'cover' => 'https://images.unsplash.com/photo-1573164713988-8665fc963095?w=400&q=80'],
-                ['title' => 'Machine Learning Approaches for Intrusion Detection', 'publication' => 'Journal of Cybersecurity Research', 'year' => '2022', 'cover' => 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=400&q=80'],
-                ['title' => 'Blockchain-Based Security Framework for Smart Cities', 'publication' => 'International Conference on Cybersecurity', 'year' => '2021', 'cover' => 'https://images.unsplash.com/photo-1639322537228-f710d846310a?w=400&q=80'],
-            ],
-        ],
-        'vipkas-al-hadid-firdaus' => [
-            'name' => 'Vipkas Al Hadid Firdaus, ST., MT',
-            'position' => 'Researcher',
-            'photo' => 'img/lab-member/vipkas.png',
-            'research' => [
-                ['title' => 'Software-Defined Security for Data Centers', 'publication' => 'ACM Computing Surveys', 'year' => '2023', 'cover' => 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&q=80'],
-                ['title' => 'Zero Trust Architecture Implementation Guide', 'publication' => 'Network Security Journal', 'year' => '2022', 'cover' => 'https://images.unsplash.com/photo-1484807352052-23338990c6c6?w=400&q=80'],
-            ],
-        ],
-        'sofyan-noor-arief' => [
-            'name' => 'Sofyan Noor Arief, S.ST., M.Kom.',
-            'position' => 'Researcher',
-            'photo' => 'img/lab-member/sofyan.png',
-            'research' => [
-                ['title' => 'Automated Security Testing in CI/CD Pipelines', 'publication' => 'DevOps Conference', 'year' => '2023', 'cover' => 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&q=80'],
-            ],
-        ],
-        'meyti-eka-apriyani' => [
-            'name' => 'Meyti Eka Apriyani ST., MT.',
-            'position' => 'Researcher',
-            'photo' => 'img/lab-member/meyti.png',
-            'research' => [
-                ['title' => 'Mobile Device Forensics in Criminal Investigations', 'publication' => 'Forensic Science International', 'year' => '2023', 'cover' => 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&q=80'],
-                ['title' => 'Memory Forensics for Malware Detection', 'publication' => 'Digital Investigation Journal', 'year' => '2022', 'cover' => 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&q=80'],
-            ],
-        ],
-    ];
+    // Fetch all archives (research, publication, and documents)
+    $archives = \App\Models\Archives::with('author')
+        ->orderBy('year', 'desc')
+        ->get();
 
-    $publications = [];
-    foreach ($members as $key => $member) {
-        foreach ($member['research'] as $research) {
-            $publications[] = [
-                'title' => $research['title'],
-                'publication' => $research['publication'],
-                'year' => $research['year'],
-                'cover' => $research['cover'],
-                'author_name' => $member['name'],
-                'author_position' => $member['position'],
-                'author_photo' => asset($member['photo']),
-            ];
+    $publications = $archives->map(function($archive) {
+        // Map member names to their photo filenames
+        $photoMap = [
+            'Erfan Rohadi' => 'erfan.png',
+            'Ade Ismail' => 'ade_ismail.png',
+            'Vipkas' => 'vipkas.png',
+            'Sofyan' => 'sofyan.png',
+            'Meyti' => 'meyti.png',
+        ];
+        
+        // Determine author photo
+        $authorPhoto = 'https://ui-avatars.com/api/?name=Admin&background=66bbf2&color=fff&size=200&bold=true';
+        
+        if ($archive->author) {
+            foreach ($photoMap as $namePattern => $file) {
+                if (stripos($archive->author->member_name, $namePattern) !== false) {
+                    $authorPhoto = asset('img/lab-member/' . $file);
+                    break;
+                }
+            }
         }
-    }
-
-    // Sort by year descending
-    usort($publications, function($a, $b) {
-        return $b['year'] <=> $a['year'];
-    });
+        
+        return [
+            'id' => $archive->id,
+            'title' => $archive->title,
+            'publication' => $archive->publication ?? 'Research Publication',
+            'year' => $archive->year ?? date('Y'),
+            'cover' => $archive->cover_image ? asset('storage/' . $archive->cover_image) : 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=400&q=80',
+            'author_name' => $archive->author ? $archive->author->member_name : 'Admin',
+            'author_position' => $archive->author ? $archive->author->member_role : 'Administrator',
+            'author_photo' => $authorPhoto,
+            'file_path' => $archive->file_path ? asset('storage/' . $archive->file_path) : null,
+        ];
+    })->toArray();
 
     return view('research-documents', compact('publications'));
 });
@@ -685,4 +699,10 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     // Admin Logs (read-only except delete)
     Route::resource('admin_logs', Admin_LogsController::class)->except(['create', 'store', 'edit', 'update']);
     Route::delete('admin_logs/destroy-all', [Admin_LogsController::class, 'destroyAll'])->name('admin_logs.destroyAll');
+    
+    // Consultations Management
+    Route::resource('consultations', \App\Http\Controllers\ConsultationController::class)->except(['create', 'edit']);
 });
+
+// Public Consultation Submission
+Route::post('/consultation/submit', [\App\Http\Controllers\ConsultationController::class, 'store'])->name('consultation.submit');

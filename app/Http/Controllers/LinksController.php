@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Links;
+use App\Traits\LogsActivity;
 use Illuminate\Http\Request;
 
 class LinksController extends Controller
 {
+    use LogsActivity;
     /**
      * Display a listing of the resource.
      */
@@ -35,7 +37,9 @@ class LinksController extends Controller
             'description' => 'nullable|string',
         ]);
 
-        Links::create($validated);
+        $link = Links::create($validated);
+        
+        $this->logActivity('create', 'links', $link->id, "Created link: {$link->name}");
 
         return redirect()->route('links.index')
             ->with('success', 'Link berhasil ditambahkan.');
@@ -44,24 +48,27 @@ class LinksController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Links $link)
+    public function show($id)
     {
+        $link = Links::findOrFail($id);
         return view('admin.links.show', compact('link'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Links $link)
+    public function edit($id)
     {
+        $link = Links::findOrFail($id);
         return view('admin.links.edit', compact('link'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Links $link)
+    public function update(Request $request, $id)
     {
+        $link = Links::findOrFail($id);
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'url' => 'required|url|max:255',
@@ -69,6 +76,8 @@ class LinksController extends Controller
         ]);
 
         $link->update($validated);
+        
+        $this->logActivity('update', 'links', $link->id, "Updated link: {$link->name}");
 
         return redirect()->route('links.index')
             ->with('success', 'Link berhasil diupdate.');
@@ -77,9 +86,13 @@ class LinksController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Links $link)
+    public function destroy($id)
     {
+        $link = Links::findOrFail($id);
+        $name = $link->name;
         $link->delete();
+        
+        $this->logActivity('delete', 'links', null, "Deleted link: {$name}");
 
         return redirect()->route('links.index')
             ->with('success', 'Link berhasil dihapus.');

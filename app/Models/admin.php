@@ -6,13 +6,18 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Admin extends Authenticatable
 {
-    protected $fillable = ['username', 'password_hash', 'email'];
+    protected $fillable = ['username', 'password_hash', 'email', 'role', 'member_id'];
 
     protected $hidden = ['password_hash'];
 
     public function getAuthPassword()
     {
         return $this->password_hash;
+    }
+
+    public function member()
+    {
+        return $this->belongsTo(Members::class, 'member_id');
     }
 
     public function galleries()
