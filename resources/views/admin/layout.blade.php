@@ -750,10 +750,11 @@
 
             <div class="nav-section">
                 <div class="nav-section-title">Manajemen Konten</div>
-                <a href="{{ route('contents.index') }}" class="nav-link {{ request()->routeIs('contents.*') ? 'active' : '' }}">
+                {{-- Contents section hidden but logic kept --}}
+                {{-- <a href="{{ route('contents.index') }}" class="nav-link {{ request()->routeIs('contents.*') ? 'active' : '' }}">
                     <i class="fas fa-file-alt"></i>
                     <span>Contents</span>
-                </a>
+                </a> --}}
                 <a href="{{ route('categories.index') }}" class="nav-link {{ request()->routeIs('categories.*') ? 'active' : '' }}">
                     <i class="fas fa-tags"></i>
                     <span>Categories</span>

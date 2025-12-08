@@ -25,7 +25,8 @@
         </div>
     </div>
     
-    <div class="col-md-3">
+    {{-- Contents stat card hidden but logic kept --}}
+    {{-- <div class="col-md-3">
         <div class="card stat-card">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
@@ -39,7 +40,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     
     <div class="col-md-3">
         <div class="card stat-card">
@@ -147,7 +148,8 @@
 </div>
 
 <div class="row g-4">
-    <div class="col-md-6">
+    {{-- Recent Contents section hidden but logic kept --}}
+    {{-- <div class="col-md-6">
         <div class="card">
             <div class="card-header">
                 <h5 class="mb-0"><i class="fas fa-newspaper"></i> Content Terbaru</h5>
@@ -172,7 +174,7 @@
                 <a href="{{ route('contents.index') }}" class="btn btn-sm btn-link">Lihat Semua Content →</a>
             </div>
         </div>
-    </div>
+    </div> --}}
     
     <div class="col-md-6">
         <div class="card">

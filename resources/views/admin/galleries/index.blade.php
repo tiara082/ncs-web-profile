@@ -20,7 +20,7 @@
     </div>
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-hover">
+            <table class="table table-hover data-table" id="agendaTable">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -110,9 +110,14 @@
         </a>
     </div>
     <div class="card-body">
-        <div class="row">
+        <!-- Search Box for Past Activities -->
+        <div class="mb-3">
+            <input type="text" id="pastActivitySearch" class="form-control" placeholder="Search past activities...">
+        </div>
+        
+        <div class="row" id="pastActivitiesContainer">
             @forelse($pastActivities as $activity)
-                <div class="col-md-4 mb-4">
+                <div class="col-md-4 mb-4 past-activity-item" data-title="{{ strtolower($activity->title) }}" data-description="{{ strtolower($activity->description) }}">
                     <div class="card h-100">
                         <img src="{{ asset('storage/' . $activity->file_path) }}" class="card-img-top" alt="{{ $activity->title }}" style="height: 200px; object-fit: cover;">
                         <div class="card-body">
@@ -136,7 +141,7 @@
                     </div>
                 </div>
             @empty
-                <div class="col-12 text-center py-4 text-muted">
+                <div class="col-12 text-center py-4 text-muted" id="noPastActivities">
                     <i class="fas fa-images fa-3x mb-3 d-block"></i>
                     Belum ada past activities
                 </div>
@@ -145,4 +150,33 @@
         {{ $pastActivities->links() }}
     </div>
 </div>
+
+@push('scripts')
+<script>
+    // Past Activities Search
+    document.getElementById('pastActivitySearch').addEventListener('keyup', function() {
+        const searchTerm = this.value.toLowerCase();
+        const items = document.querySelectorAll('.past-activity-item');
+        let visibleCount = 0;
+        
+        items.forEach(item => {
+            const title = item.getAttribute('data-title');
+            const description = item.getAttribute('data-description');
+            
+            if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                item.style.display = '';
+                visibleCount++;
+            } else {
+                item.style.display = 'none';
+            }
+        });
+        
+        // Show/hide "no results" message
+        const noResults = document.getElementById('noPastActivities');
+        if (noResults) {
+            noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+    });
+</script>
+@endpush
 @endsection
