@@ -16,7 +16,7 @@ class ArchivesController extends Controller
      */
     public function index()
     {
-        $archives = Archives::with('admin')->latest()->paginate(10);
+        $archives = Archives::with('admin', 'categories')->latest()->paginate(10);
         return view('admin.archives.index', compact('archives'));
     }
 
@@ -25,7 +25,8 @@ class ArchivesController extends Controller
      */
     public function create()
     {
-        return view('admin.archives.create');
+        $categories = \App\Models\Categories::all();
+        return view('admin.archives.create', compact('categories'));
     }
 
     /**
@@ -36,13 +37,14 @@ class ArchivesController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'category' => 'required|string|max:100',
             'type' => 'required|string|in:document,research,publication',
             'publication' => 'nullable|string|max:255',
             'year' => 'nullable|string|max:4',
             'author_id' => 'nullable|exists:members,id',
             'file' => 'required|file|mimes:pdf,doc,docx,xls,xlsx,zip,rar|max:51200',
             'cover_image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'categories' => 'required|array|min:1',
+            'categories.*' => 'exists:categories,id',
         ]);
 
         if ($request->hasFile('file')) {
@@ -66,6 +68,11 @@ class ArchivesController extends Controller
         
         $archive = Archives::create($validated);
         
+        // Sync categories
+        if (isset($validated['categories'])) {
+            $archive->categories()->sync($validated['categories']);
+        }
+        
         $this->logActivity('create', 'archives', $archive->id, "Created archive: {$archive->title}");
 
         return redirect()->route('archives.index')
@@ -78,7 +85,7 @@ class ArchivesController extends Controller
     public function show($id)
     {
         $archive = Archives::findOrFail($id);
-        $archive->load('admin');
+        $archive->load('admin', 'categories');
         return view('admin.archives.show', compact('archive'));
     }
 
@@ -88,7 +95,9 @@ class ArchivesController extends Controller
     public function edit($id)
     {
         $archive = Archives::findOrFail($id);
-        return view('admin.archives.edit', compact('archive'));
+        $categories = \App\Models\Categories::all();
+        $archive->load('categories');
+        return view('admin.archives.edit', compact('archive', 'categories'));
     }
 
     /**
@@ -100,13 +109,14 @@ class ArchivesController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'category' => 'required|string|max:100',
             'type' => 'required|string|in:document,research,publication',
             'publication' => 'nullable|string|max:255',
             'year' => 'nullable|string|max:4',
             'author_id' => 'nullable|exists:members,id',
             'file' => 'nullable|file|mimes:pdf,doc,docx,xls,xlsx,zip,rar|max:51200',
             'cover_image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'categories' => 'required|array|min:1',
+            'categories.*' => 'exists:categories,id',
         ]);
 
         if ($request->hasFile('file')) {
@@ -133,6 +143,13 @@ class ArchivesController extends Controller
 
         $archive->update($validated);
         
+        // Sync categories
+        if (isset($validated['categories'])) {
+            $archive->categories()->sync($validated['categories']);
+        } else {
+            $archive->categories()->detach();
+        }
+        
         $this->logActivity('update', 'archives', $archive->id, "Updated archive: {$archive->title}");
 
         return redirect()->route('archives.index')
@@ -150,6 +167,8 @@ class ArchivesController extends Controller
             Storage::disk('public')->delete($archive->file_path);
         }
         
+        // Detach categories before deleting
+        $archive->categories()->detach();
         $archive->delete();
         
         $this->logActivity('delete', 'archives', null, "Deleted archive: {$title}");

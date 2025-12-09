@@ -12,4 +12,9 @@ class Categories extends Model
     {
         return $this->belongsToMany(Content::class, 'content_categories');
     }
+
+    public function archives()
+    {
+        return $this->belongsToMany(Archives::class, 'archive_categories', 'category_id', 'archive_id');
+    }
 }

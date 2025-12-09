@@ -30,8 +30,19 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="category" class="form-label">Category <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="category" name="category" value="{{ old('category', $archive->category) }}" required>
+                        <label for="categories" class="form-label">Categories <span class="text-danger">*</span></label>
+                        <select class="form-select @error('categories') is-invalid @enderror" id="categories" name="categories[]" multiple size="5" required>
+                            @foreach($categories as $cat)
+                                <option value="{{ $cat->id }}" 
+                                    {{ in_array($cat->id, old('categories', $archive->categories->pluck('id')->toArray())) ? 'selected' : '' }}>
+                                    {{ $cat->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <small class="text-muted">Hold Ctrl/Cmd to select multiple categories. <a href="{{ route('categories.index') }}" target="_blank">Manage categories</a></small>
+                        @error('categories')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="mb-3">

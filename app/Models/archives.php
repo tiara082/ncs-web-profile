@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Archives extends Model
 {
     protected $fillable = [
-        'title', 'description', 'file_path', 'category', 'uploaded_by',
+        'title', 'description', 'file_path', 'uploaded_by',
         'publication', 'year', 'cover_image', 'author_id', 'type'
     ];
 
@@ -19,5 +19,10 @@ class Archives extends Model
     public function author()
     {
         return $this->belongsTo(Members::class, 'author_id');
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Categories::class, 'archive_categories', 'archive_id', 'category_id');
     }
 }

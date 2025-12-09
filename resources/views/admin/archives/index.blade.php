@@ -23,7 +23,7 @@
                     <tr>
                         <th>#</th>
                         <th>Judul</th>
-                        <th>Category</th>
+                        <th>Categories</th>
                         <th>File</th>
                         <th>Uploaded By</th>
                         <th>Tanggal</th>
@@ -35,7 +35,13 @@
                         <tr>
                             <td>{{ $loop->iteration + ($archives->currentPage() - 1) * $archives->perPage() }}</td>
                             <td><strong>{{ Str::limit($archive->title, 40) }}</strong></td>
-                            <td><span class="badge bg-secondary">{{ $archive->category }}</span></td>
+                            <td>
+                                @forelse($archive->categories as $cat)
+                                    <span class="badge bg-info">{{ $cat->name }}</span>
+                                @empty
+                                    <span class="text-muted">-</span>
+                                @endforelse
+                            </td>
                             <td><a href="{{ asset('storage/' . $archive->file_path) }}" target="_blank"><i class="fas fa-download"></i></a></td>
                             <td>{{ $archive->admin->username ?? '-' }}</td>
                             <td>{{ $archive->created_at->format('d M Y') }}</td>
