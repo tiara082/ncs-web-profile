@@ -16,7 +16,11 @@ return new class extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->string('file_path');
-            $table->string('category');
+            $table->string('type')->default('document'); // document, research, publication
+            $table->string('publication')->nullable();
+            $table->string('year', 4)->nullable();
+            $table->string('cover_image')->nullable();
+            $table->foreignId('author_id')->nullable()->constrained('members')->onDelete('set null');
             $table->foreignId('uploaded_by')->nullable()->constrained('admins')->onDelete('set null');
             $table->timestamps();
         });

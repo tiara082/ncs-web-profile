@@ -6,14 +6,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Admin extends Authenticatable
 {
-    protected $fillable = ['username', 'password_hash', 'email', 'role', 'member_id'];
+    protected $fillable = ['username', 'password', 'name', 'email', 'member_id'];
 
-    protected $hidden = ['password_hash'];
-
-    public function getAuthPassword()
-    {
-        return $this->password_hash;
-    }
+    protected $hidden = ['password', 'remember_token'];
 
     public function member()
     {

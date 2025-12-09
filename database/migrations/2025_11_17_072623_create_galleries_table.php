@@ -16,7 +16,19 @@ return new class extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->string('file_path');
-            $table->string('gallery_type')->default('image');
+            $table->string('gallery_type')->default('image'); // image, video, event, agenda, past_activity
+            
+            // Event-specific fields
+            $table->date('event_date')->nullable();
+            $table->time('event_time')->nullable();
+            $table->string('event_location')->nullable(); // Alias for location
+            $table->string('location')->nullable(); // For backward compatibility
+            $table->integer('max_slots')->nullable();
+            $table->integer('registered_count')->default(0);
+            $table->string('event_status')->nullable(); // upcoming, ongoing, completed, cancelled
+            $table->string('event_mode')->nullable(); // online, offline, hybrid
+            $table->string('event_category')->nullable(); // workshop, seminar, competition, training
+            
             $table->foreignId('uploaded_by')->nullable()->constrained('admins')->onDelete('set null');
             $table->timestamps();
         });

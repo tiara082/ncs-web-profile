@@ -21,8 +21,8 @@ class AdminSeeder extends Seeder
         Admin::create([
             'username' => 'admin',
             'email' => 'admin@example.com',
-            'password_hash' => Hash::make('password'),
-            'role' => 'super_admin',
+            'password' => Hash::make('password'),
+            'name' => 'Super Admin',
             'member_id' => null,
         ]);
 
@@ -30,40 +30,40 @@ class AdminSeeder extends Seeder
         Admin::create([
             'username' => 'erfan123',
             'email' => 'erfan.rohadi@polinema.ac.id',
-            'password_hash' => Hash::make('erfan1234'),
-            'role' => 'admin',
+            'password' => Hash::make('erfan1234'),
+            'name' => $erfan ? $erfan->member_name : 'Erfan Rohadi',
             'member_id' => $erfan ? $erfan->id : null,
         ]);
 
         Admin::create([
             'username' => 'ade123',
             'email' => 'ade.ismail@polinema.ac.id',
-            'password_hash' => Hash::make('ade1234'),
-            'role' => 'admin',
+            'password' => Hash::make('ade1234'),
+            'name' => $ade ? $ade->member_name : 'Ade Ismail',
             'member_id' => $ade ? $ade->id : null,
         ]);
 
         Admin::create([
             'username' => 'vipkas123',
             'email' => 'vipkas.firdaus@polinema.ac.id',
-            'password_hash' => Hash::make('vipkas1234'),
-            'role' => 'admin',
+            'password' => Hash::make('vipkas1234'),
+            'name' => $vipkas ? $vipkas->member_name : 'Vipkas Firdaus',
             'member_id' => $vipkas ? $vipkas->id : null,
         ]);
 
         Admin::create([
             'username' => 'sofyan123',
             'email' => 'sofyan.arief@polinema.ac.id',
-            'password_hash' => Hash::make('sofyan1234'),
-            'role' => 'admin',
+            'password' => Hash::make('sofyan1234'),
+            'name' => $sofyan ? $sofyan->member_name : 'Sofyan Arief',
             'member_id' => $sofyan ? $sofyan->id : null,
         ]);
 
         Admin::create([
             'username' => 'meyti123',
             'email' => 'meyti.apriyani@polinema.ac.id',
-            'password_hash' => Hash::make('meyti1234'),
-            'role' => 'admin',
+            'password' => Hash::make('meyti1234'),
+            'name' => $meyti ? $meyti->member_name : 'Meyti Apriyani',
             'member_id' => $meyti ? $meyti->id : null,
         ]);
     }

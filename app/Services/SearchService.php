@@ -64,7 +64,7 @@ class SearchService
                 title,
                 description,
                 file_path,
-                category,
+                type,
                 created_at,
                 ts_rank(search_vector, plainto_tsquery('english', ?)) as rank
             ", [$query])

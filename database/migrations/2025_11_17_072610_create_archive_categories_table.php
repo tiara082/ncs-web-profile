@@ -16,6 +16,9 @@ return new class extends Migration
             $table->foreignId('archive_id')->constrained('archives')->onDelete('cascade');
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
             $table->timestamps();
+            
+            // Prevent duplicate entries
+            $table->unique(['archive_id', 'category_id']);
         });
     }
 
