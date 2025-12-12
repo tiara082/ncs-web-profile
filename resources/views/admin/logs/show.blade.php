@@ -42,17 +42,17 @@
                         <td>{{ $admin_log->record_id }}</td>
                     </tr>
                     <tr>
-                        <td><strong>Waktu</strong></td>
+                        <td><strong>Time</strong></td>
                         <td>{{ $admin_log->created_at->format('d M Y H:i:s') }}</td>
                     </tr>
                 </table>
 
                 <div class="mt-4">
-                    <a href="{{ route('admin_logs.index') }}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Kembali</a>
+                    <a href="{{ route('admin_logs.index') }}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back</a>
                     <form action="{{ route('admin_logs.destroy', $admin_log) }}" method="POST" class="d-inline" onsubmit="return confirmDelete(event)">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> Hapus</button>
+                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> Delete</button>
                     </form>
                 </div>
             </div>

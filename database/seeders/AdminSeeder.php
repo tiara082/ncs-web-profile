@@ -17,22 +17,24 @@ class AdminSeeder extends Seeder
         $sofyan = \App\Models\Members::where('member_name', 'like', '%Sofyan%')->first();
         $meyti = \App\Models\Members::where('member_name', 'like', '%Meyti%')->first();
 
-        // Super admin (not linked to member)
+        // Super admin (not linked to member) - Full access to all content and resources
         Admin::create([
             'username' => 'admin',
             'email' => 'admin@example.com',
             'password' => Hash::make('password'),
             'name' => 'Super Admin',
             'member_id' => null,
+            'role' => 'super_admin',
         ]);
 
-        // Member admins
+        // Content admins - Can only see their own published content
         Admin::create([
             'username' => 'erfan123',
             'email' => 'erfan.rohadi@polinema.ac.id',
             'password' => Hash::make('erfan1234'),
             'name' => $erfan ? $erfan->member_name : 'Erfan Rohadi',
             'member_id' => $erfan ? $erfan->id : null,
+            'role' => 'content_admin',
         ]);
 
         Admin::create([
@@ -41,6 +43,7 @@ class AdminSeeder extends Seeder
             'password' => Hash::make('ade1234'),
             'name' => $ade ? $ade->member_name : 'Ade Ismail',
             'member_id' => $ade ? $ade->id : null,
+            'role' => 'content_admin',
         ]);
 
         Admin::create([
@@ -49,6 +52,7 @@ class AdminSeeder extends Seeder
             'password' => Hash::make('vipkas1234'),
             'name' => $vipkas ? $vipkas->member_name : 'Vipkas Firdaus',
             'member_id' => $vipkas ? $vipkas->id : null,
+            'role' => 'content_admin',
         ]);
 
         Admin::create([
@@ -57,6 +61,7 @@ class AdminSeeder extends Seeder
             'password' => Hash::make('sofyan1234'),
             'name' => $sofyan ? $sofyan->member_name : 'Sofyan Arief',
             'member_id' => $sofyan ? $sofyan->id : null,
+            'role' => 'content_admin',
         ]);
 
         Admin::create([
@@ -65,6 +70,7 @@ class AdminSeeder extends Seeder
             'password' => Hash::make('meyti1234'),
             'name' => $meyti ? $meyti->member_name : 'Meyti Apriyani',
             'member_id' => $meyti ? $meyti->id : null,
+            'role' => 'content_admin',
         ]);
     }
 }

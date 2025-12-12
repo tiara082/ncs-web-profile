@@ -16,7 +16,7 @@ class ContentController extends Controller
      */
     public function index()
     {
-        $contents = Content::with('creator', 'categories')->latest()->paginate(10);
+        $contents = Content::accessibleBy()->with('creator', 'categories')->latest()->paginate(10);
         return view('admin.contents.index', compact('contents'));
     }
 
@@ -60,7 +60,7 @@ class ContentController extends Controller
      */
     public function show($id)
     {
-        $content = Content::findOrFail($id);
+        $content = Content::accessibleBy()->findOrFail($id);
         $content->load('creator', 'categories');
         return view('admin.contents.show', compact('content'));
     }
@@ -70,7 +70,7 @@ class ContentController extends Controller
      */
     public function edit($id)
     {
-        $content = Content::findOrFail($id);
+        $content = Content::accessibleBy()->findOrFail($id);
         $categories = Categories::all();
         $content->load('categories');
         return view('admin.contents.edit', compact('content', 'categories'));
@@ -81,7 +81,7 @@ class ContentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $content = Content::findOrFail($id);
+        $content = Content::accessibleBy()->findOrFail($id);
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'body' => 'required|string',
@@ -109,7 +109,7 @@ class ContentController extends Controller
      */
     public function destroy($id)
     {
-        $content = Content::findOrFail($id);
+        $content = Content::accessibleBy()->findOrFail($id);
         $title = $content->title;
         $content->categories()->detach();
         $content->delete();

@@ -27,10 +27,9 @@
                     <div class="mb-3">
                         <label for="role" class="form-label">Role <span class="text-danger">*</span></label>
                         <select class="form-control" id="role" name="role" required>
-                            <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
-                            <option value="super_admin" {{ old('role') == 'super_admin' ? 'selected' : '' }}>Super Admin</option>
-                            <option value="editor" {{ old('role') == 'editor' ? 'selected' : '' }}>Editor</option>
-                            <option value="moderator" {{ old('role') == 'moderator' ? 'selected' : '' }}>Moderator</option>
+                            <option value="">Select Role</option>
+                            <option value="super_admin" {{ old('role') == 'super_admin' ? 'selected' : '' }}>Super Admin (Full Access)</option>
+                            <option value="content_admin" {{ old('role') == 'content_admin' ? 'selected' : '' }}>Content Admin (Own Content Only)</option>
                         </select>
                     </div>
 

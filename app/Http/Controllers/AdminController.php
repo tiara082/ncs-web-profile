@@ -15,32 +15,61 @@ class AdminController extends Controller
      */
     public function dashboard()
     {
-        $stats = [
-            'admins' => \App\Models\Admin::count(),
-            'contents' => \App\Models\Content::count(),
-            'categories' => \App\Models\Categories::count(),
-            'members' => \App\Models\Members::count(),
-            'galleries' => \App\Models\Gallery::count(),
-            'archives' => \App\Models\Archives::count(),
-            'links' => \App\Models\Links::count(),
-        ];
+        $admin = auth()->guard('web')->user();
         
-        $recentContents = \App\Models\Content::with('creator')->latest()->take(5)->get();
-        $recentLogs = \App\Models\Admin_Logs::with('admin')->latest()->take(10)->get();
+        if ($admin->role === 'super_admin') {
+            // Super Admin sees all stats
+            $stats = [
+                'admins' => \App\Models\Admin::count(),
+                'contents' => \App\Models\Content::count(),
+                'categories' => \App\Models\Categories::count(),
+                'members' => \App\Models\Members::count(),
+                'galleries' => \App\Models\Gallery::count(),
+                'archives' => \App\Models\Archives::count(),
+                'links' => \App\Models\Links::count(),
+            ];
+            
+            $recentContents = \App\Models\Content::with('creator')->latest()->take(5)->get();
+            $recentLogs = \App\Models\Admin_Logs::with('admin')->latest()->take(10)->get();
+        } else {
+            // Content Admin sees only their own stats
+            $stats = [
+                'contents' => \App\Models\Content::where('created_by', $admin->id)->count(),
+                'categories' => \App\Models\Categories::count(),
+                'galleries' => \App\Models\Gallery::where('uploaded_by', $admin->id)->count(),
+                'archives' => \App\Models\Archives::where('uploaded_by', $admin->id)->count(),
+                'links' => \App\Models\Links::count(), // Links are shared resources
+            ];
+            
+            $recentContents = \App\Models\Content::with('creator')
+                ->where('created_by', $admin->id)
+                ->latest()
+                ->take(5)
+                ->get();
+            $recentLogs = []; // Content admins don't see logs
+        }
         
-        // Content by type for chart
-        $contentsByType = \App\Models\Content::selectRaw('content_type, COUNT(*) as count')
-            ->groupBy('content_type')
-            ->pluck('count', 'content_type')
-            ->toArray();
+        // Content by type for chart (filtered for content admin)
+        $contentsByTypeQuery = \App\Models\Content::selectRaw('content_type, COUNT(*) as count')
+            ->groupBy('content_type');
+            
+        if ($admin->role !== 'super_admin') {
+            $contentsByTypeQuery->where('created_by', $admin->id);
+        }
         
-        // Monthly content creation (PostgreSQL compatible)
-        $monthlyContents = \App\Models\Content::selectRaw('EXTRACT(MONTH FROM created_at) as month, COUNT(*) as count')
+        $contentsByType = $contentsByTypeQuery->pluck('count', 'content_type')->toArray();
+        
+        // Monthly content creation (PostgreSQL compatible, filtered for content admin)
+        $monthlyContentsQuery = \App\Models\Content::selectRaw('EXTRACT(MONTH FROM created_at) as month, COUNT(*) as count')
             ->whereRaw('EXTRACT(YEAR FROM created_at) = ?', [date('Y')])
             ->groupBy('month')
-            ->orderBy('month')
-            ->pluck('count', 'month')
-            ->toArray();
+            ->orderBy('month');
+            
+        if ($admin->role !== 'super_admin') {
+            $monthlyContentsQuery->where('created_by', $admin->id);
+        }
+        
+        $monthlyContents = $monthlyContentsQuery->pluck('count', 'month')->toArray();
         
         // Fill missing months with 0
         $monthlyData = [];
@@ -77,7 +106,7 @@ class AdminController extends Controller
             'username' => 'required|string|max:255|unique:admins',
             'email' => 'required|email|max:255|unique:admins',
             'password' => 'required|string|min:8|confirmed',
-            'role' => 'required|string|in:admin,super_admin,editor,moderator',
+            'role' => 'required|string|in:super_admin,content_admin',
             'member_id' => 'nullable|exists:members,id',
         ]);
 
@@ -89,7 +118,7 @@ class AdminController extends Controller
         $this->logActivity('create', 'admins', $admin->id, "Created admin: {$admin->username}");
 
         return redirect()->route('administrators.index')
-            ->with('success', 'Admin berhasil ditambahkan.');
+            ->with('success', 'Admin successfully added.');
     }
 
     /**
@@ -117,7 +146,7 @@ class AdminController extends Controller
             'username' => 'required|string|max:255|unique:admins,username,' . $administrator->id,
             'email' => 'required|email|max:255|unique:admins,email,' . $administrator->id,
             'password' => 'nullable|string|min:8|confirmed',
-            'role' => 'required|string|in:admin,super_admin,editor,moderator',
+            'role' => 'required|string|in:super_admin,content_admin',
             'member_id' => 'nullable|exists:members,id',
         ]);
 
@@ -131,7 +160,7 @@ class AdminController extends Controller
         $this->logActivity('update', 'admins', $administrator->id, "Updated admin: {$administrator->username}");
 
         return redirect()->route('administrators.index')
-            ->with('success', 'Admin berhasil diupdate.');
+            ->with('success', 'Admin successfully updated.');
     }
 
     /**
@@ -145,6 +174,6 @@ class AdminController extends Controller
         $this->logActivity('delete', 'admins', null, "Deleted admin: {$username}");
 
         return redirect()->route('administrators.index')
-            ->with('success', 'Admin berhasil dihapus.');
+            ->with('success', 'Admin successfully deleted.');
     }
 }

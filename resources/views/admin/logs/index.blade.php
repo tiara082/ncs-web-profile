@@ -6,14 +6,14 @@
 <div class="page-header d-flex justify-content-between align-items-center">
     <div>
         <h1 class="page-title">Activity Logs</h1>
-        <p class="page-subtitle">Riwayat aktivitas administrator</p>
+        <p class="page-subtitle">Administrator activity history</p>
     </div>
     <div>
-        <form action="{{ route('admin_logs.destroyAll') }}" method="POST" class="d-inline" onsubmit="return confirm('Hapus semua log?')">
+        <form action="{{ route('admin_logs.destroyAll') }}" method="POST" class="d-inline" onsubmit="return confirm('Delete all logs?')">
             @csrf
             @method('DELETE')
             <button type="submit" class="btn btn-danger">
-                <i class="fas fa-trash"></i> Hapus Semua Log
+                <i class="fas fa-trash"></i> Delete All Logs
             </button>
         </form>
     </div>
@@ -68,7 +68,7 @@
                         <tr>
                             <td colspan="7" class="text-center py-4 text-muted">
                                 <i class="fas fa-inbox fa-3x mb-3 d-block"></i>
-                                Belum ada log aktivitas
+                                No activity logs yet
                             </td>
                         </tr>
                     @endforelse

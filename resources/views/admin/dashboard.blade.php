@@ -5,17 +5,22 @@
 @section('content')
 <div class="page-header">
     <h1 class="page-title">Dashboard</h1>
-    <p class="page-subtitle">Selamat datang di Admin Panel NCS Lab</p>
+    @if(Auth::user()->role === 'super_admin')
+        <p class="page-subtitle">Welcome to NCS Lab Admin Panel</p>
+    @else
+        <p class="page-subtitle">Welcome, {{ Auth::user()->name }} - Your Content Dashboard</p>
+    @endif
 </div>
 
 <div class="row g-4 mb-4">
+    @if(Auth::user()->role === 'super_admin')
     <div class="col-md-3">
         <div class="card stat-card">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
                         <p class="text-muted mb-1">Total Admins</p>
-                        <h3 class="mb-0">{{ $stats['admins'] }}</h3>
+                        <h3 class="mb-0">{{ $stats['admins'] ?? 0 }}</h3>
                     </div>
                     <div class="stat-icon bg-primary">
                         <i class="fas fa-user-shield"></i>
@@ -24,15 +29,15 @@
             </div>
         </div>
     </div>
+    @endif
     
-    {{-- Contents stat card hidden but logic kept --}}
-    {{-- <div class="col-md-3">
+    <div class="col-md-3">
         <div class="card stat-card">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
-                        <p class="text-muted mb-1">Total Contents</p>
-                        <h3 class="mb-0">{{ $stats['contents'] }}</h3>
+                        <p class="text-muted mb-1">Your Contents</p>
+                        <h3 class="mb-0">{{ $stats['contents'] ?? 0 }}</h3>
                     </div>
                     <div class="stat-icon bg-success">
                         <i class="fas fa-file-alt"></i>
@@ -40,7 +45,25 @@
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
+    
+    @if(Auth::user()->role === 'super_admin' && isset($stats['members']))
+    <div class="col-md-3">
+        <div class="card stat-card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <p class="text-muted mb-1">Total Members</p>
+                        <h3 class="mb-0">{{ $stats['members'] ?? 0 }}</h3>
+                    </div>
+                    <div class="stat-icon bg-info">
+                        <i class="fas fa-user-users"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
     
     <div class="col-md-3">
         <div class="card stat-card">
@@ -48,7 +71,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
                         <p class="text-muted mb-1">Total Categories</p>
-                        <h3 class="mb-0">{{ $stats['categories'] }}</h3>
+                        <h3 class="mb-0">{{ $stats['categories'] ?? 0 }}</h3>
                     </div>
                     <div class="stat-icon bg-warning">
                         <i class="fas fa-tags"></i>
@@ -63,24 +86,8 @@
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
-                        <p class="text-muted mb-1">Total Members</p>
-                        <h3 class="mb-0">{{ $stats['members'] }}</h3>
-                    </div>
-                    <div class="stat-icon bg-info">
-                        <i class="fas fa-users"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="col-md-3">
-        <div class="card stat-card">
-            <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div>
                         <p class="text-muted mb-1">Total Galleries</p>
-                        <h3 class="mb-0">{{ $stats['galleries'] }}</h3>
+                        <h3 class="mb-0">{{ $stats['galleries'] ?? 0 }}</h3>
                     </div>
                     <div class="stat-icon bg-purple">
                         <i class="fas fa-images"></i>
@@ -96,7 +103,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
                         <p class="text-muted mb-1">Total Archives</p>
-                        <h3 class="mb-0">{{ $stats['archives'] }}</h3>
+                        <h3 class="mb-0">{{ $stats['archives'] ?? 0 }}</h3>
                     </div>
                     <div class="stat-icon bg-danger">
                         <i class="fas fa-archive"></i>
@@ -112,7 +119,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
                         <p class="text-muted mb-1">Total Links</p>
-                        <h3 class="mb-0">{{ $stats['links'] }}</h3>
+                        <h3 class="mb-0">{{ $stats['links'] ?? 0 }}</h3>
                     </div>
                     <div class="stat-icon bg-secondary">
                         <i class="fas fa-link"></i>
@@ -148,17 +155,22 @@
 </div>
 
 <div class="row g-4">
-    {{-- Recent Contents section hidden but logic kept --}}
-    {{-- <div class="col-md-6">
+    <div class="col-md-6">
         <div class="card">
             <div class="card-header">
-                <h5 class="mb-0"><i class="fas fa-newspaper"></i> Content Terbaru</h5>
+                <h5 class="mb-0"><i class="fas fa-newspaper"></i> 
+                    @if(Auth::user()->isSuperAdmin())
+                        Latest Content
+                    @else
+                        Your Latest Content
+                    @endif
+                </h5>
             </div>
             <div class="card-body">
                 @forelse($recentContents as $content)
                     <div class="d-flex justify-content-between align-items-center mb-3 pb-3 border-bottom">
                         <div>
-                            <h6 class="mb-1">{{ Str::limit($content->title, 50) }}</h6>
+                            <h6 class="mb-1">{{ \Illuminate\Support\Str::limit($content->title, 50) }}</h6>
                             <small class="text-muted">
                                 <i class="fas fa-user"></i> {{ $content->creator->username ?? 'Unknown' }}
                                 | <i class="fas fa-clock"></i> {{ $content->created_at->diffForHumans() }}
@@ -169,17 +181,18 @@
                         </a>
                     </div>
                 @empty
-                    <p class="text-muted text-center py-3">Belum ada content</p>
+                    <p class="text-muted text-center py-3">No content yet</p>
                 @endforelse
-                <a href="{{ route('contents.index') }}" class="btn btn-sm btn-link">Lihat Semua Content →</a>
+                <a href="{{ route('contents.index') }}" class="btn btn-sm btn-link">View All Content →</a>
             </div>
         </div>
-    </div> --}}
+    </div>
     
+    @if(Auth::user()->role === 'super_admin')
     <div class="col-md-6">
         <div class="card">
             <div class="card-header">
-                <h5 class="mb-0"><i class="fas fa-history"></i> Log Aktivitas Terbaru</h5>
+                <h5 class="mb-0"><i class="fas fa-history"></i> Latest Activity Logs</h5>
             </div>
             <div class="card-body" style="max-height: 400px; overflow-y: auto;">
                 @forelse($recentLogs as $log)
@@ -195,12 +208,13 @@
                         </div>
                     </div>
                 @empty
-                    <p class="text-muted text-center py-3">Belum ada log aktivitas</p>
+                    <p class="text-muted text-center py-3">No activity logs yet</p>
                 @endforelse
-                <a href="{{ route('admin_logs.index') }}" class="btn btn-sm btn-link">Lihat Semua Log →</a>
+                <a href="{{ route('admin_logs.index') }}" class="btn btn-sm btn-link">View All Logs →</a>
             </div>
         </div>
     </div>
+    @endif
 </div>
 
 <style>

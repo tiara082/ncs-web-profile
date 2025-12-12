@@ -765,8 +765,9 @@
                 </a>
             </div>
 
+            @if(Auth::user()->isSuperAdmin())
             <div class="nav-section">
-                <div class="nav-section-title">Manajemen Data</div>
+                <div class="nav-section-title">Data Management</div>
                 <a href="{{ route('members.index') }}" class="nav-link {{ request()->routeIs('members.*') ? 'active' : '' }}">
                     <i class="fas fa-users"></i>
                     <span>Members</span>
@@ -780,9 +781,23 @@
                     <span>Links</span>
                 </a>
             </div>
-
+            @else
             <div class="nav-section">
-                <div class="nav-section-title">Sistem</div>
+                <div class="nav-section-title">Data Management</div>
+                <a href="{{ route('archives.index') }}" class="nav-link {{ request()->routeIs('archives.*') ? 'active' : '' }}">
+                    <i class="fas fa-archive"></i>
+                    <span>Archives</span>
+                </a>
+                <a href="{{ route('links.index') }}" class="nav-link {{ request()->routeIs('links.*') ? 'active' : '' }}">
+                    <i class="fas fa-link"></i>
+                    <span>Links</span>
+                </a>
+            </div>
+            @endif
+
+            @if(Auth::user()->isSuperAdmin())
+            <div class="nav-section">
+                <div class="nav-section-title">System</div>
                 <a href="{{ route('administrators.index') }}" class="nav-link {{ request()->routeIs('administrators.*') ? 'active' : '' }}">
                     <i class="fas fa-user-shield"></i>
                     <span>Administrators</span>
@@ -796,6 +811,7 @@
                     <span>Activity Logs</span>
                 </a>
             </div>
+            @endif
         </nav>
     </div>
 
@@ -899,12 +915,12 @@
         // Logout confirmation
         function confirmLogout() {
             Swal.fire({
-                title: 'Konfirmasi Logout',
-                text: 'Apakah Anda yakin ingin keluar?',
+                title: 'Confirm Logout',
+                text: 'Are you sure you want to logout?',
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonText: 'Ya, Logout',
-                cancelButtonText: 'Batal',
+                confirmButtonText: 'Yes, Logout',
+                cancelButtonText: 'Cancel',
                 ...getSwalTheme()
             }).then((result) => {
                 if (result.isConfirmed) {
@@ -919,12 +935,12 @@
             const form = event.target;
             
             Swal.fire({
-                title: 'Konfirmasi Hapus',
-                text: 'Data yang dihapus tidak dapat dikembalikan!',
+                title: 'Confirm Delete',
+                text: 'Deleted data cannot be recovered!',
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonText: 'Ya, Hapus',
-                cancelButtonText: 'Batal',
+                confirmButtonText: 'Yes, Delete',
+                cancelButtonText: 'Cancel',
                 ...getSwalTheme()
             }).then((result) => {
                 if (result.isConfirmed) {
@@ -939,7 +955,7 @@
         @if(session('success'))
             Swal.fire({
                 icon: 'success',
-                title: 'Berhasil!',
+                title: 'Success!',
                 text: '{{ session("success") }}',
                 timer: 3000,
                 showConfirmButton: false,

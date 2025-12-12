@@ -125,9 +125,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (mobileMenu) {
         mobileMenu.setAttribute('aria-hidden', 'true');
+        // Mobile menu tidak auto-close saat klik link internal
+        // Hanya close ketika user klik tombol X atau overlay
         const mobileLinks = mobileMenu.querySelectorAll('a');
         mobileLinks.forEach((link) => {
-            link.addEventListener('click', closeMobileMenu);
+            // Hanya close menu jika link ke halaman berbeda
+            link.addEventListener('click', (e) => {
+                const href = link.getAttribute('href');
+                // Close jika navigasi ke halaman berbeda (bukan anchor/hash)
+                if (href && !href.startsWith('#')) {
+                    // Biarkan menu tetap terbuka sementara navigasi
+                    // Menu akan tertutup otomatis saat halaman baru dimuat
+                }
+            });
         });
     }
 });
