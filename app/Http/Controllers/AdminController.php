@@ -22,51 +22,99 @@ class AdminController extends Controller
             // Superadmin sees all statistics
             $stats = [
                 'admins' => \App\Models\Admin::count(),
-                // 'contents' => \App\Models\Content::count(), // Hidden - not used
                 'categories' => \App\Models\Categories::count(),
                 'members' => \App\Models\Members::count(),
                 'galleries' => \App\Models\Gallery::count(),
                 'archives' => \App\Models\Archives::count(),
                 'links' => \App\Models\Links::count(),
+                'community_services' => \App\Models\CommunityService::count(),
             ];
             
-            // $recentContents = \App\Models\Content::with('creator')->latest()->take(5)->get(); // Hidden - not used
-            $recentContents = collect(); // Empty collection for now
+            // Recent content from all tables
+            $recentArchives = \App\Models\Archives::with(['uploader' => function($query) {
+                $query->select('id', 'username');
+            }])->latest()->take(3)->get()->map(function($item) {
+                $item->content_type = 'Research';
+                return $item;
+            });
+            
+            $recentGalleries = \App\Models\Gallery::with(['uploader' => function($query) {
+                $query->select('id', 'username');
+            }])->latest()->take(2)->get()->map(function($item) {
+                $item->content_type = 'Gallery';
+                return $item;
+            });
+            
+            $recentContents = $recentArchives->concat($recentGalleries)->sortByDesc('created_at')->take(5);
             $recentLogs = \App\Models\Admin_Logs::with('admin')->latest()->take(10)->get();
             
-            // Content by type for chart (Hidden - not used)
-            // $contentsByType = \App\Models\Content::selectRaw('content_type, COUNT(*) as count')
-            //     ->groupBy('content_type')
-            //     ->pluck('count', 'content_type')
-            //     ->toArray();
-            $contentsByType = []; // Empty array for now
+            // Content by type for chart
+            $contentsByType = [
+                'Research' => \App\Models\Archives::count(),
+                'Galleries' => \App\Models\Gallery::count(),
+                'Community Services' => \App\Models\CommunityService::count(),
+                'Members' => \App\Models\Members::count(),
+                'Links' => \App\Models\Links::count(),
+            ];
             
-            // Monthly content creation (Hidden - not used)
-            // $monthlyContents = \App\Models\Content::selectRaw('EXTRACT(MONTH FROM created_at) as month, COUNT(*) as count')
-            //     ->whereRaw('EXTRACT(YEAR FROM created_at) = ?', [date('Y')])
-            //     ->groupBy('month')
-            //     ->orderBy('month')
-            //     ->pluck('count', 'month')
-            //     ->toArray();
+            // Remove empty categories
+            $contentsByType = array_filter($contentsByType, function($count) {
+                return $count > 0;
+            });
+            
+            // Monthly content creation (combining all content types)
+            $monthlyArchives = \App\Models\Archives::selectRaw('EXTRACT(MONTH FROM created_at) as month, COUNT(*) as count')
+                ->whereRaw('EXTRACT(YEAR FROM created_at) = ?', [date('Y')])
+                ->groupBy('month')
+                ->pluck('count', 'month')
+                ->toArray();
+                
+            $monthlyGalleries = \App\Models\Gallery::selectRaw('EXTRACT(MONTH FROM created_at) as month, COUNT(*) as count')
+                ->whereRaw('EXTRACT(YEAR FROM created_at) = ?', [date('Y')])
+                ->groupBy('month')
+                ->pluck('count', 'month')
+                ->toArray();
+                
+            $monthlyCommunityServices = \App\Models\CommunityService::selectRaw('EXTRACT(MONTH FROM created_at) as month, COUNT(*) as count')
+                ->whereRaw('EXTRACT(YEAR FROM created_at) = ?', [date('Y')])
+                ->groupBy('month')
+                ->pluck('count', 'month')
+                ->toArray();
+            
+            // Combine monthly data
             $monthlyContents = [];
+            for ($i = 1; $i <= 12; $i++) {
+                $monthlyContents[$i] = ($monthlyArchives[$i] ?? 0) + 
+                                     ($monthlyGalleries[$i] ?? 0) + 
+                                     ($monthlyCommunityServices[$i] ?? 0);
+            }
         } else {
             // Regular admin sees only their own statistics
             $stats = [
                 'my_galleries' => \App\Models\Gallery::where('uploaded_by', $user->id)->count(),
                 'my_archives' => \App\Models\Archives::where('uploaded_by', $user->id)->count(),
-                // 'my_contents' => \App\Models\Content::where('created_by', $user->id)->count(), // Hidden - not used
+                'my_community_services' => \App\Models\CommunityService::where('uploaded_by', $user->id)->count(),
                 'total_galleries' => \App\Models\Gallery::count(),
                 'total_archives' => \App\Models\Archives::count(),
-                // 'total_contents' => \App\Models\Content::count(), // Hidden - not used
                 'total_members' => \App\Models\Members::count(),
             ];
             
-            // $recentContents = \App\Models\Content::with('creator')
-            //     ->where('created_by', $user->id)
-            //     ->latest()
-            //     ->take(5)
-            //     ->get(); // Hidden - not used
-            $recentContents = collect(); // Empty collection for now
+            // Recent content from user's uploads
+            $recentArchives = \App\Models\Archives::with(['uploader' => function($query) {
+                $query->select('id', 'username');
+            }])->where('uploaded_by', $user->id)->latest()->take(3)->get()->map(function($item) {
+                $item->content_type = 'Research';
+                return $item;
+            });
+            
+            $recentGalleries = \App\Models\Gallery::with(['uploader' => function($query) {
+                $query->select('id', 'username');
+            }])->where('uploaded_by', $user->id)->latest()->take(2)->get()->map(function($item) {
+                $item->content_type = 'Gallery';
+                return $item;
+            });
+            
+            $recentContents = $recentArchives->concat($recentGalleries)->sortByDesc('created_at')->take(5);
             
             $recentLogs = \App\Models\Admin_Logs::with('admin')
                 ->where('admin_id', $user->id)
@@ -74,23 +122,47 @@ class AdminController extends Controller
                 ->take(10)
                 ->get();
             
-            // Content by type for chart (Hidden - not used)
-            // $contentsByType = \App\Models\Content::selectRaw('content_type, COUNT(*) as count')
-            //     ->where('created_by', $user->id)
-            //     ->groupBy('content_type')
-            //     ->pluck('count', 'content_type')
-            //     ->toArray();
-            $contentsByType = []; // Empty array for now
+            // Content by type for chart (user's content only)
+            $contentsByType = [
+                'Research' => \App\Models\Archives::where('uploaded_by', $user->id)->count(),
+                'Galleries' => \App\Models\Gallery::where('uploaded_by', $user->id)->count(),
+                'Community Services' => \App\Models\CommunityService::where('uploaded_by', $user->id)->count(),
+            ];
             
-            // Monthly content creation (Hidden - not used)
-            // $monthlyContents = \App\Models\Content::selectRaw('EXTRACT(MONTH FROM created_at) as month, COUNT(*) as count')
-            //     ->where('created_by', $user->id)
-            //     ->whereRaw('EXTRACT(YEAR FROM created_at) = ?', [date('Y')])
-            //     ->groupBy('month')
-            //     ->orderBy('month')
-            //     ->pluck('count', 'month')
-            //     ->toArray();
+            // Remove empty categories
+            $contentsByType = array_filter($contentsByType, function($count) {
+                return $count > 0;
+            });
+            
+            // Monthly content creation (user's content only)
+            $monthlyArchives = \App\Models\Archives::selectRaw('EXTRACT(MONTH FROM created_at) as month, COUNT(*) as count')
+                ->where('uploaded_by', $user->id)
+                ->whereRaw('EXTRACT(YEAR FROM created_at) = ?', [date('Y')])
+                ->groupBy('month')
+                ->pluck('count', 'month')
+                ->toArray();
+                
+            $monthlyGalleries = \App\Models\Gallery::selectRaw('EXTRACT(MONTH FROM created_at) as month, COUNT(*) as count')
+                ->where('uploaded_by', $user->id)
+                ->whereRaw('EXTRACT(YEAR FROM created_at) = ?', [date('Y')])
+                ->groupBy('month')
+                ->pluck('count', 'month')
+                ->toArray();
+                
+            $monthlyCommunityServices = \App\Models\CommunityService::selectRaw('EXTRACT(MONTH FROM created_at) as month, COUNT(*) as count')
+                ->where('uploaded_by', $user->id)
+                ->whereRaw('EXTRACT(YEAR FROM created_at) = ?', [date('Y')])
+                ->groupBy('month')
+                ->pluck('count', 'month')
+                ->toArray();
+            
+            // Combine monthly data
             $monthlyContents = [];
+            for ($i = 1; $i <= 12; $i++) {
+                $monthlyContents[$i] = ($monthlyArchives[$i] ?? 0) + 
+                                     ($monthlyGalleries[$i] ?? 0) + 
+                                     ($monthlyCommunityServices[$i] ?? 0);
+            }
         }
         
         // Fill missing months with 0

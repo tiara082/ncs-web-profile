@@ -24,7 +24,7 @@ class ArchiveSeeder extends Seeder
                 'file_path' => 'archives/annual-report-2024.pdf',
                 'category' => 'Reports',
                 'type' => 'document',
-                'cover_image' => 'covers/poltek.png',
+                'cover_image' => 'poltek.png',
                 'uploaded_by' => $admin->id,
             ],
             [
@@ -33,7 +33,7 @@ class ArchiveSeeder extends Seeder
                 'file_path' => 'archives/financial-q4-2024.pdf',
                 'category' => 'Financial',
                 'type' => 'document',
-                'cover_image' => 'covers/poltek.png',
+                'cover_image' => 'poltek.png',
                 'uploaded_by' => $admin->id,
             ],
             [
@@ -42,7 +42,7 @@ class ArchiveSeeder extends Seeder
                 'file_path' => 'archives/minutes-nov-2024.pdf',
                 'category' => 'Minutes',
                 'type' => 'document',
-                'cover_image' => 'covers/poltek.png',
+                'cover_image' => 'poltek.png',
                 'uploaded_by' => $admin->id,
             ],
             [
@@ -51,7 +51,7 @@ class ArchiveSeeder extends Seeder
                 'file_path' => 'archives/policy-2025.pdf',
                 'category' => 'Policies',
                 'type' => 'document',
-                'cover_image' => 'covers/poltek.png',
+                'cover_image' => 'poltek.png',
                 'uploaded_by' => $admin->id,
             ],
             [
@@ -60,7 +60,7 @@ class ArchiveSeeder extends Seeder
                 'file_path' => 'archives/research-climate-2024.pdf',
                 'category' => 'Research',
                 'type' => 'research',
-                'cover_image' => 'covers/poltek.png',
+                'cover_image' => 'poltek.png',
                 'uploaded_by' => $admin->id,
             ],
         ];

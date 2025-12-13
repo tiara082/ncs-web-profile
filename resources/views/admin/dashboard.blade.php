@@ -130,6 +130,22 @@
             </div>
         </div>
     </div>
+    
+    <div class="col-md-3">
+        <div class="card stat-card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <p class="text-muted mb-1">Community Services</p>
+                        <h3 class="mb-0">{{ $stats['community_services'] ?? 0 }}</h3>
+                    </div>
+                    <div class="stat-icon bg-success">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 @else
 <!-- Regular Admin Statistics -->
@@ -168,24 +184,22 @@
         </div>
     </div>
     
-    {{-- Hidden - Contents not used
     <div class="col-md-4">
         <div class="card stat-card">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
-                        <p class="text-muted mb-1">Contents</p>
-                        <h3 class="mb-0">{{ $stats['my_contents'] }}</h3>
-                        <small class="text-info">of {{ $stats['total_contents'] }} total</small>
+                        <p class="text-muted mb-1">Community Services</p>
+                        <h3 class="mb-0">{{ $stats['my_community_services'] }}</h3>
+                        <small class="text-info">Total created</small>
                     </div>
                     <div class="stat-icon bg-success">
-                        <i class="fas fa-file-alt"></i>
+                        <i class="fas fa-hands-helping"></i>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    --}}
 </div>
 
 <!-- Quick Actions for Regular Admin -->
@@ -207,13 +221,11 @@
                             <i class="fas fa-upload me-2"></i>Upload Research
                         </a>
                     </div>
-                    {{-- Hidden - Contents not used
                     <div class="col-md-3">
-                        <a href="{{ route('contents.create') }}" class="btn btn-info w-100">
-                            <i class="fas fa-edit me-2"></i>Create Content
+                        <a href="{{ route('community-services.create') }}" class="btn btn-info w-100">
+                            <i class="fas fa-hands-helping me-2"></i>Add Service
                         </a>
                     </div>
-                    --}}
                     <div class="col-md-3">
                         <a href="{{ route('admin.profile') }}" class="btn btn-warning w-100">
                             <i class="fas fa-user-edit me-2"></i>Edit Profile
@@ -289,29 +301,31 @@
                         <div>
                             <h6 class="mb-1">{{ Str::limit($content->title, 50) }}</h6>
                             <small class="text-muted">
+                                <span class="badge bg-info me-2">{{ $content->content_type }}</span>
                                 @if(Auth::user()->role === 'superadmin')
-                                    <i class="fas fa-user"></i> {{ $content->creator->username ?? 'Unknown' }}
+                                    <i class="fas fa-user"></i> {{ $content->uploader->username ?? 'Unknown' }}
                                     | 
                                 @endif
                                 <i class="fas fa-clock"></i> {{ $content->created_at->diffForHumans() }}
                             </small>
                         </div>
-                        {{-- Hidden - Contents not used
-                        <a href="{{ route('contents.show', $content) }}" class="btn btn-sm btn-outline-primary">
-                            <i class="fas fa-eye"></i>
-                        </a>
-                        --}}
+                        <div class="btn-group">
+                            @if($content->content_type === 'Research')
+                                <a href="{{ route('archives.show', $content) }}" class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                            @elseif($content->content_type === 'Gallery')
+                                <a href="{{ route('galleries.show', $content) }}" class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                            @endif
+                        </div>
                     </div>
                 @empty
                     <p class="text-muted text-center py-3">
                         {{ Auth::user()->role === 'superadmin' ? 'No content available' : 'You haven\'t created any content yet' }}
                     </p>
                 @endforelse
-                {{-- Hidden - Contents not used
-                <a href="{{ route('contents.index') }}" class="btn btn-sm btn-link">
-                    View All Content →
-                </a>
-                --}}
             </div>
         </div>
     </div>

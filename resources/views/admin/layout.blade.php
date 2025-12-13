@@ -723,6 +723,45 @@
                 margin-left: 0;
             }
         }
+
+        /* Image placeholder styles */
+        img[src*="poltek.png"] {
+            opacity: 0.8;
+            filter: grayscale(20%);
+            transition: all 0.3s ease;
+        }
+
+        img[src*="poltek.png"]:hover {
+            opacity: 1;
+            filter: grayscale(0%);
+            transform: scale(1.02);
+        }
+
+        /* Specific styles for different image contexts */
+        .card img[src*="poltek.png"] {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            padding: 8px;
+            border: 2px dashed #cbd5e1;
+        }
+
+        body.dark-mode .card img[src*="poltek.png"] {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            border-color: #475569;
+        }
+
+        /* Gallery/thumbnail placeholder styles */
+        img[style*="width: 60px"][src*="poltek.png"],
+        img[style*="width: 40px"][src*="poltek.png"] {
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            padding: 4px;
+        }
+
+        body.dark-mode img[style*="width: 60px"][src*="poltek.png"],
+        body.dark-mode img[style*="width: 40px"][src*="poltek.png"] {
+            background: #1e293b;
+            border-color: #475569;
+        }
     </style>
     @yield('styles')
 </head>
@@ -1064,6 +1103,71 @@
                     $('.dataTables_length select').addClass('form-select form-select-sm');
                 }, 100);
             }
+        });
+
+        // Global image error handling - replace broken images with poltek.png
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle existing images
+            const images = document.querySelectorAll('img');
+            images.forEach(function(img) {
+                img.addEventListener('error', function() {
+                    if (this.src !== '{{ asset("img/poltek.png") }}') {
+                        console.log('Image failed to load:', this.src, 'Replacing with poltek.png');
+                        this.src = '{{ asset("img/poltek.png") }}';
+                        this.alt = 'Default Image';
+                        this.title = 'Image not available';
+                    }
+                });
+                
+                // Check if image is already broken
+                if (img.complete && img.naturalHeight === 0) {
+                    if (img.src !== '{{ asset("img/poltek.png") }}') {
+                        img.src = '{{ asset("img/poltek.png") }}';
+                        img.alt = 'Default Image';
+                        img.title = 'Image not available';
+                    }
+                }
+            });
+
+            // Handle dynamically added images
+            const observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    mutation.addedNodes.forEach(function(node) {
+                        if (node.nodeType === 1) { // Element node
+                            // Check if the added node is an image
+                            if (node.tagName === 'IMG') {
+                                node.addEventListener('error', function() {
+                                    if (this.src !== '{{ asset("img/poltek.png") }}') {
+                                        console.log('Dynamic image failed to load:', this.src, 'Replacing with poltek.png');
+                                        this.src = '{{ asset("img/poltek.png") }}';
+                                        this.alt = 'Default Image';
+                                        this.title = 'Image not available';
+                                    }
+                                });
+                            }
+                            
+                            // Check for images within the added node
+                            const images = node.querySelectorAll ? node.querySelectorAll('img') : [];
+                            images.forEach(function(img) {
+                                img.addEventListener('error', function() {
+                                    if (this.src !== '{{ asset("img/poltek.png") }}') {
+                                        console.log('Nested dynamic image failed to load:', this.src, 'Replacing with poltek.png');
+                                        this.src = '{{ asset("img/poltek.png") }}';
+                                        this.alt = 'Default Image';
+                                        this.title = 'Image not available';
+                                    }
+                                });
+                            });
+                        }
+                    });
+                });
+            });
+
+            // Start observing
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
         });
     </script>
     @yield('scripts')

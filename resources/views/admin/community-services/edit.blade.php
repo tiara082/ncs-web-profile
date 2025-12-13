@@ -158,6 +158,15 @@
             reader.onload = function(e) {
                 previewImg.src = e.target.result;
                 preview.style.display = 'block';
+                
+                // Add error handler for preview image
+                previewImg.onerror = function() {
+                    if (this.src !== '{{ asset("img/poltek.png") }}') {
+                        this.src = '{{ asset("img/poltek.png") }}';
+                        this.alt = 'Preview not available';
+                        this.title = 'Image preview failed to load';
+                    }
+                };
             };
             reader.readAsDataURL(file);
         } else {

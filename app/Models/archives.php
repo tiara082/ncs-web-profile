@@ -16,6 +16,11 @@ class Archives extends Model
         return $this->belongsTo(Admin::class, 'uploaded_by');
     }
 
+    public function uploader()
+    {
+        return $this->belongsTo(Admin::class, 'uploaded_by');
+    }
+
     public function author()
     {
         return $this->belongsTo(Members::class, 'author_id');

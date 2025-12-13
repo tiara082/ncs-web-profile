@@ -193,4 +193,72 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 })();
+
+// Global image error handling - replace broken images with poltek.png
+(function() {
+    function handleImageError(img) {
+        if (img.src !== '{{ asset("img/poltek.png") }}') {
+            console.log('Image failed to load:', img.src, 'Replacing with poltek.png');
+            img.src = '{{ asset("img/poltek.png") }}';
+            img.alt = 'Default Image';
+            img.title = 'Image not available';
+            // Add some styling to indicate it's a placeholder
+            img.style.opacity = '0.8';
+            img.style.filter = 'grayscale(20%)';
+            img.style.transition = 'all 0.3s ease';
+        }
+    }
+
+    function setupImageErrorHandling() {
+        // Handle existing images
+        const images = document.querySelectorAll('img');
+        images.forEach(function(img) {
+            img.addEventListener('error', function() {
+                handleImageError(this);
+            });
+            
+            // Check if image is already broken
+            if (img.complete && img.naturalHeight === 0) {
+                handleImageError(img);
+            }
+        });
+
+        // Handle dynamically added images
+        const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                mutation.addedNodes.forEach(function(node) {
+                    if (node.nodeType === 1) { // Element node
+                        // Check if the added node is an image
+                        if (node.tagName === 'IMG') {
+                            node.addEventListener('error', function() {
+                                handleImageError(this);
+                            });
+                        }
+                        
+                        // Check for images within the added node
+                        const images = node.querySelectorAll ? node.querySelectorAll('img') : [];
+                        images.forEach(function(img) {
+                            img.addEventListener('error', function() {
+                                handleImageError(this);
+                            });
+                        });
+                    }
+                });
+            });
+        });
+
+        // Start observing
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+    }
+
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', setupImageErrorHandling);
+    } else {
+        setupImageErrorHandling();
+    }
+})();
 </script>
