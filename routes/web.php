@@ -48,11 +48,77 @@ Route::get('/', function () {
                 'type' => $archive->type === 'research' ? 'Journal' : 'Conference',
                 'category' => $archive->category ?? 'Research',
                 'author_name' => $archive->author ? $archive->author->member_name : 'Admin',
+                'author_photo' => asset('img/lab-member/' . $photoFile),
+                'cover_image' => $archive->cover_image ? asset('storage/' . $archive->cover_image) : 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=400&q=80',
                 'file_path' => $archive->file_path ? asset('storage/' . $archive->file_path) : null,
             ];
         });
     
-    return view('home', compact('featuredPublications'));
+    // Fetch gallery images from both agenda and past activities
+    $galleryImages = \App\Models\Gallery::whereIn('gallery_type', ['agenda', 'past_activity'])
+        ->whereNotNull('file_path')
+        ->orderBy('created_at', 'desc')
+        ->take(6)
+        ->get()
+        ->map(function($gallery) {
+            return [
+                'id' => $gallery->id,
+                'title' => $gallery->title,
+                'description' => $gallery->description ?? 'Laboratory activity',
+                'image' => $gallery->file_path ? asset('storage/' . $gallery->file_path) : null,
+                'type' => $gallery->gallery_type,
+                'event_date' => $gallery->event_date,
+                'location' => $gallery->location,
+            ];
+        });
+    
+    // Fetch latest articles from research documents for Knowledge Hub section
+    $latestArticles = \App\Models\Archives::with('author')
+        ->whereIn('type', ['research', 'publication', 'document'])
+        ->orderBy('created_at', 'desc')
+        ->take(4)
+        ->get()
+        ->map(function($archive) {
+            // Map member names to their photo filenames
+            $photoMap = [
+                'Erfan Rohadi' => 'erfan.png',
+                'Ade Ismail' => 'ade_ismail.png',
+                'Vipkas' => 'vipkas.png',
+                'Sofyan' => 'sofyan.png',
+                'Meyti' => 'meyti.png',
+            ];
+            
+            $photoFile = 'default-avatar.png';
+            if ($archive->author) {
+                foreach ($photoMap as $namePattern => $file) {
+                    if (stripos($archive->author->member_name, $namePattern) !== false) {
+                        $photoFile = $file;
+                        break;
+                    }
+                }
+            }
+            
+            // Generate reading time based on title length (rough estimate)
+            $readingTime = max(5, min(15, strlen($archive->title) / 10 + rand(3, 8)));
+            
+            return [
+                'id' => $archive->id,
+                'title' => $archive->title,
+                'description' => $archive->description ?? 'Expert insights and educational content on cybersecurity topics',
+                'publication' => $archive->publication ?? 'Research Publication',
+                'year' => $archive->year ?? date('Y'),
+                'type' => $archive->type,
+                'category' => $archive->category ?? 'Research',
+                'author_name' => $archive->author ? $archive->author->member_name : 'Admin',
+                'author_photo' => asset('img/lab-member/' . $photoFile),
+                'cover_image' => $archive->cover_image ? asset('storage/' . $archive->cover_image) : 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=400&q=80',
+                'file_path' => $archive->file_path ? asset('storage/' . $archive->file_path) : null,
+                'reading_time' => $readingTime,
+                'created_date' => $archive->created_at->format('M Y'),
+            ];
+        });
+    
+    return view('home', compact('featuredPublications', 'galleryImages', 'latestArticles'));
 });
 Route::get('/organization', function () {
     return view('organization');
@@ -342,143 +408,26 @@ Route::get('/consulting', function () {
 
 // Community Service Route
 Route::get('/community-service', function () {
-    $events = [
-        [
-            'title' => 'Workshop Keamanan Siber untuk UMKM',
-            'description' => 'Pelatihan keamanan dasar bagi pelaku UMKM di Malang Raya untuk melindungi bisnis dari ancaman siber',
-            'date' => '2024-11-15',
-            'day' => '15',
-            'month' => '11',
-            'month_name' => 'Nov',
-            'year' => '2024',
-            'location' => 'Balai Kota Malang',
-            'participants' => 85,
-            'category' => 'workshop',
-            'category_color' => 'blue',
-            'status' => 'completed',
-            'image' => 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600&q=80',
-        ],
-        [
-            'title' => 'Seminar Literasi Digital untuk Pelajar',
-            'description' => 'Sosialisasi penggunaan internet aman dan etis untuk siswa SMA/SMK se-Kota Malang',
-            'date' => '2024-10-22',
-            'day' => '22',
-            'month' => '10',
-            'month_name' => 'Okt',
-            'year' => '2024',
-            'location' => 'SMAN 1 Malang',
-            'participants' => 250,
-            'category' => 'seminar',
-            'category_color' => 'purple',
-            'status' => 'completed',
-            'image' => 'https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=600&q=80',
-        ],
-        [
-            'title' => 'Pelatihan Incident Response untuk Instansi Pemerintah',
-            'description' => 'Training penanganan insiden keamanan siber bagi IT staff pemerintah daerah',
-            'date' => '2024-09-18',
-            'day' => '18',
-            'month' => '09',
-            'month_name' => 'Sep',
-            'year' => '2024',
-            'location' => 'Diskominfo Kota Malang',
-            'participants' => 45,
-            'category' => 'training',
-            'category_color' => 'green',
-            'status' => 'completed',
-            'image' => 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80',
-        ],
-        [
-            'title' => 'Webinar Keamanan Data Pribadi',
-            'description' => 'Edukasi perlindungan data pribadi sesuai UU PDP untuk masyarakat umum',
-            'date' => '2024-08-12',
-            'day' => '12',
-            'month' => '08',
-            'month_name' => 'Agt',
-            'year' => '2024',
-            'location' => 'Online via Zoom',
-            'participants' => 320,
-            'category' => 'webinar',
-            'category_color' => 'orange',
-            'status' => 'completed',
-            'image' => 'https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=600&q=80',
-        ],
-        [
-            'title' => 'Konsultasi Keamanan Jaringan untuk Sekolah',
-            'description' => 'Pendampingan implementasi sistem keamanan jaringan untuk sekolah-sekolah',
-            'date' => '2024-07-25',
-            'day' => '25',
-            'month' => '07',
-            'month_name' => 'Jul',
-            'year' => '2024',
-            'location' => 'SMK Negeri 4 Malang',
-            'participants' => 15,
-            'category' => 'consultation',
-            'category_color' => 'pink',
-            'status' => 'completed',
-            'image' => 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&q=80',
-        ],
-        [
-            'title' => 'Workshop Ethical Hacking untuk Mahasiswa',
-            'description' => 'Pelatihan dasar penetration testing dan ethical hacking bagi mahasiswa IT',
-            'date' => '2024-06-10',
-            'day' => '10',
-            'month' => '06',
-            'month_name' => 'Jun',
-            'year' => '2024',
-            'location' => 'Polinema',
-            'participants' => 120,
-            'category' => 'workshop',
-            'category_color' => 'blue',
-            'status' => 'completed',
-            'image' => 'https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=600&q=80',
-        ],
-        [
-            'title' => 'Seminar Teknologi Blockchain dan Keamanannya',
-            'description' => 'Edukasi tentang teknologi blockchain dan aspek keamanan untuk masyarakat umum',
-            'date' => '2024-05-15',
-            'day' => '15',
-            'month' => '05',
-            'month_name' => 'Mei',
-            'year' => '2024',
-            'location' => 'Malang Creative Center',
-            'participants' => 180,
-            'category' => 'seminar',
-            'category_color' => 'purple',
-            'status' => 'completed',
-            'image' => 'https://images.unsplash.com/photo-1639322537228-f710d846310a?w=600&q=80',
-        ],
-        [
-            'title' => 'Training Forensik Digital untuk Aparat',
-            'description' => 'Pelatihan digital forensics untuk aparat penegak hukum',
-            'date' => '2024-04-08',
-            'day' => '08',
-            'month' => '04',
-            'month_name' => 'Apr',
-            'year' => '2024',
-            'location' => 'Polda Jatim',
-            'participants' => 35,
-            'category' => 'training',
-            'category_color' => 'green',
-            'status' => 'completed',
-            'image' => 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&q=80',
-        ],
-        [
-            'title' => 'Webinar IoT Security untuk Smart Home',
-            'description' => 'Edukasi keamanan perangkat IoT dan smart home untuk rumah tangga',
-            'date' => '2024-03-20',
-            'day' => '20',
-            'month' => '03',
-            'month_name' => 'Mar',
-            'year' => '2024',
-            'location' => 'Online via YouTube Live',
-            'participants' => 450,
-            'category' => 'webinar',
-            'category_color' => 'orange',
-            'status' => 'completed',
-            'image' => 'https://images.unsplash.com/photo-1558002038-1055907df827?w=600&q=80',
-        ],
-    ];
+    $events = \App\Models\CommunityService::orderBy('date', 'desc')
+        ->get()
+        ->map(function($service) {
+            return [
+                'title' => $service->title,
+                'description' => $service->description,
+                'date' => $service->date->format('Y-m-d'),
+                'day' => $service->date->format('d'),
+                'month' => $service->date->format('m'),
+                'month_name' => $service->date->format('M'),
+                'year' => $service->date->format('Y'),
+                'location' => $service->location,
+                'participants' => $service->participants,
+                'category' => $service->category,
+                'category_color' => 'blue', // Default color since we removed the field
+                'status' => $service->status,
+                'image' => $service->image ? asset('storage/' . $service->image) : 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600&q=80',
+            ];
+        })
+        ->toArray();
     
     return view('community-service', compact('events'));
 });
@@ -674,34 +623,57 @@ Route::post('/logout', function () {
 
 // Admin Panel Routes (with authentication middleware)
 Route::prefix('admin')->middleware(['auth'])->group(function () {
-    // Dashboard
+    // Dashboard - accessible by all authenticated users
     Route::get('/', [AdminController::class, 'dashboard'])->name('admins.index');
     
-    // Administrators Management
-    Route::resource('administrators', AdminController::class)->names([
-        'index' => 'administrators.index',
-        'create' => 'administrators.create',
-        'store' => 'administrators.store',
-        'show' => 'administrators.show',
-        'edit' => 'administrators.edit',
-        'update' => 'administrators.update',
-        'destroy' => 'administrators.destroy',
-    ]);
+    // Superadmin only routes
+    Route::middleware(['role:superadmin'])->group(function () {
+        // Administrators Management - only superadmin can manage other admins
+        Route::resource('administrators', AdminController::class)->names([
+            'index' => 'administrators.index',
+            'create' => 'administrators.create',
+            'store' => 'administrators.store',
+            'show' => 'administrators.show',
+            'edit' => 'administrators.edit',
+            'update' => 'administrators.update',
+            'destroy' => 'administrators.destroy',
+        ]);
+        
+        // Members Management - only superadmin can manage members
+        Route::resource('members', MembersController::class);
+        
+        // Categories Management - only superadmin can manage categories
+        Route::resource('categories', CategoriesController::class);
+        
+        // Links Management - only superadmin can manage links
+        Route::resource('links', LinksController::class);
+        
+        // Admin Logs - only superadmin can view and manage logs
+        Route::resource('admin_logs', Admin_LogsController::class)->except(['create', 'store', 'edit', 'update']);
+        Route::delete('admin_logs/destroy-all', [Admin_LogsController::class, 'destroyAll'])->name('admin_logs.destroyAll');
+        
+        // Consultations Management - only superadmin can manage consultations
+        Route::resource('consultations', \App\Http\Controllers\ConsultationController::class)->except(['create', 'edit']);
+    });
     
-    // Other Resources
-    Route::resource('galleries', GalleryController::class);
-    Route::resource('archives', ArchivesController::class);
-    Route::resource('contents', ContentController::class);
-    Route::resource('categories', CategoriesController::class);
-    Route::resource('members', MembersController::class);
-    Route::resource('links', LinksController::class);
-    
-    // Admin Logs (read-only except delete)
-    Route::resource('admin_logs', Admin_LogsController::class)->except(['create', 'store', 'edit', 'update']);
-    Route::delete('admin_logs/destroy-all', [Admin_LogsController::class, 'destroyAll'])->name('admin_logs.destroyAll');
-    
-    // Consultations Management
-    Route::resource('consultations', \App\Http\Controllers\ConsultationController::class)->except(['create', 'edit']);
+    // Admin routes - accessible by both admin and superadmin
+    Route::middleware(['role:admin'])->group(function () {
+        // Gallery Management - admins can manage galleries (their own content)
+        Route::resource('galleries', GalleryController::class);
+        
+        // Archives Management - admins can manage archives (their own research)
+        Route::resource('archives', ArchivesController::class);
+        
+        // Community Service Management - admins can manage community services (their own content)
+        Route::resource('community-services', \App\Http\Controllers\CommunityServiceController::class);
+        
+        // Content Management - admins can manage content (Hidden - not used)
+        // Route::resource('contents', ContentController::class);
+        
+        // Profile Management - admins can edit their own profile
+        Route::get('profile', [AdminController::class, 'profile'])->name('admin.profile');
+        Route::put('profile', [AdminController::class, 'updateProfile'])->name('admin.profile.update');
+    });
 });
 
 // Public Consultation Submission

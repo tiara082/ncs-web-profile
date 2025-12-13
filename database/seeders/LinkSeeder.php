@@ -40,16 +40,6 @@ class LinkSeeder extends Seeder
                 'url' => 'https://ieeexplore.ieee.org',
                 'description' => 'IEEE Xplore Digital Library',
             ],
-            [
-                'name' => 'ACM Digital Library',
-                'url' => 'https://dl.acm.org',
-                'description' => 'ACM Digital Library - Computing Research',
-            ],
-            [
-                'name' => 'arXiv',
-                'url' => 'https://arxiv.org',
-                'description' => 'arXiv - Open Access Research Papers',
-            ],
         ];
 
         foreach ($links as $link) {

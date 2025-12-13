@@ -63,15 +63,11 @@
             </table>
         </div>
         
-        <!-- Pagination -->
-        <div class="d-flex justify-content-between align-items-center mt-3 px-3">
-            <div class="text-muted small">
-                Showing {{ $archives->firstItem() ?? 0 }} to {{ $archives->lastItem() ?? 0 }} of {{ $archives->total() }} entries
-            </div>
-            <div>
-                {{ $archives->links('pagination::bootstrap-4') }}
-            </div>
+        <!-- Pagination Links -->
+        <div class="d-flex justify-content-center mt-4">
+            {{ $archives->links('custom.pagination') }}
         </div>
+
     </div>
 </div>
 @endsection

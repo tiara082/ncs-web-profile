@@ -16,7 +16,7 @@
                     @method('PUT')
                     
                     <div class="mb-3">
-                        <label for="title" class="form-label">Judul <span class="text-danger">*</span></label>
+                        <label for="title" class="form-label">Title <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="title" name="title" value="{{ old('title', $archive->title) }}" required>
                     </div>
 
@@ -31,11 +31,24 @@
 
                     <div class="mb-3">
                         <label for="category" class="form-label">Category <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="category" name="category" value="{{ old('category', $archive->category) }}" required>
+                        <select class="form-select" id="category" name="category" required>
+                            <option value="">Select Category</option>
+                            @foreach($categories as $category)
+                                <option value="{{ $category->name }}" {{ old('category', $archive->category) == $category->name ? 'selected' : '' }}>
+                                    {{ $category->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <small class="text-muted">
+                            Categories are managed by superadmin. 
+                            @if(Auth::user()->role === 'superadmin')
+                                <a href="{{ route('categories.index') }}" target="_blank">Manage Categories</a>
+                            @endif
+                        </small>
                     </div>
 
                     <div class="mb-3">
-                        <label for="description" class="form-label">Deskripsi</label>
+                        <label for="description" class="form-label">Description</label>
                         <textarea class="form-control" id="description" name="description" rows="3">{{ old('description', $archive->description) }}</textarea>
                     </div>
 
@@ -62,28 +75,46 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Cover Image Saat Ini</label>
+                        <label class="form-label">
+                            <i class="fas fa-image me-2 text-primary"></i>Cover Image for Research Documents Page
+                        </label>
                         @if($archive->cover_image)
-                            <div class="mb-2">
-                                <img src="{{ asset('storage/' . $archive->cover_image) }}" alt="Cover" style="max-width: 200px; border-radius: 8px;">
+                            <div class="mb-3 p-3 bg-light rounded">
+                                <p class="text-muted mb-2"><strong>Current Cover Image:</strong></p>
+                                <img src="{{ asset('storage/' . $archive->cover_image) }}" alt="Current Cover" 
+                                     style="max-width: 200px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                <p class="text-success mt-2 mb-0">
+                                    <i class="fas fa-check-circle me-1"></i>
+                                    This image is displayed on the research-documents page
+                                </p>
+                            </div>
+                        @else
+                            <div class="mb-3 p-3 bg-warning bg-opacity-10 border border-warning rounded">
+                                <p class="text-warning mb-0">
+                                    <i class="fas fa-exclamation-triangle me-1"></i>
+                                    No cover image set. A default image will be used on the research-documents page.
+                                </p>
                             </div>
                         @endif
-                        <label for="cover_image" class="form-label">Upload Cover Image Baru (Opsional)</label>
+                        <label for="cover_image" class="form-label">Upload New Cover Image (Optional)</label>
                         <input type="file" class="form-control" id="cover_image" name="cover_image" accept="image/*">
-                        <small class="text-muted">Max: 2MB (JPG, PNG)</small>
+                        <small class="text-muted">
+                            <i class="fas fa-info-circle me-1"></i>
+                            Max: 2MB (JPG, PNG). Recommended size: 400x600px. This will replace the current image.
+                        </small>
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">File Saat Ini</label>
+                        <label class="form-label">Current File</label>
                         <p>{{ basename($archive->file_path) }} <a href="{{ asset('storage/' . $archive->file_path) }}" target="_blank"><i class="fas fa-download"></i></a></p>
-                        <label for="file" class="form-label">Upload File Baru (Opsional)</label>
+                        <label for="file" class="form-label">Upload New File (Optional)</label>
                         <input type="file" class="form-control" id="file" name="file" accept=".pdf,.doc,.docx,.xls,.xlsx,.zip,.rar">
                         <small class="text-muted">Max: 50MB</small>
                     </div>
 
                     <div class="d-flex gap-2">
                         <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Update</button>
-                        <a href="{{ route('archives.index') }}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Kembali</a>
+                        <a href="{{ route('archives.index') }}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back</a>
                     </div>
                 </form>
             </div>

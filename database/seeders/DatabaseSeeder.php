@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             EventSeeder::class,
             ArchiveSeeder::class,
             ResearchSeeder::class,
+            CommunityServiceSeeder::class,
         ]);
     }
 }

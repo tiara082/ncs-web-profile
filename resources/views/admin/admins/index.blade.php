@@ -6,11 +6,11 @@
 <div class="page-header d-flex justify-content-between align-items-center">
     <div>
         <h1 class="page-title">Administrators</h1>
-        <p class="page-subtitle">Kelola akun administrator</p>
+        <p class="page-subtitle">Manage administrator accounts</p>
     </div>
     <div>
         <a href="{{ route('administrators.create') }}" class="btn btn-primary">
-            <i class="fas fa-plus"></i> Tambah Admin
+            <i class="fas fa-plus"></i> Add Admin
         </a>
     </div>
 </div>
@@ -35,7 +35,11 @@
                             <td>{{ $loop->iteration + ($admins->currentPage() - 1) * $admins->perPage() }}</td>
                             <td><strong>{{ $admin->username }}</strong></td>
                             <td>{{ $admin->email }}</td>
-                            <td><span class="badge bg-primary">{{ ucfirst(str_replace('_', ' ', $admin->role)) }}</span></td>
+                            <td>
+                                <span class="badge {{ $admin->role === 'superadmin' ? 'bg-danger' : 'bg-primary' }}">
+                                    {{ $admin->role === 'superadmin' ? 'Super Admin' : 'Admin' }}
+                                </span>
+                            </td>
                             <td>{{ $admin->created_at->format('d M Y') }}</td>
                             <td>
                                 <div class="btn-group btn-group-sm" role="group">

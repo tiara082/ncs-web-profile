@@ -21,5 +21,8 @@ class AppServiceProvider extends ServiceProvider
     {
         // Register View Composer for footer links
         view()->composer('partials.footer', \App\View\Composers\FooterComposer::class);
+        
+        // Set default pagination view
+        \Illuminate\Pagination\Paginator::defaultView('custom.pagination');
     }
 }

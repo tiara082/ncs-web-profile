@@ -1,10 +1,10 @@
 @extends('admin.layout')
 
-@section('title', 'Tambah Archive')
+@section('title', 'Add Archive')
 
 @section('content')
 <div class="page-header">
-    <h1 class="page-title">Tambah Archive</h1>
+    <h1 class="page-title">Add Archive</h1>
 </div>
 
 <div class="row">
@@ -15,7 +15,7 @@
                     @csrf
                     
                     <div class="mb-3">
-                        <label for="title" class="form-label">Judul <span class="text-danger">*</span></label>
+                        <label for="title" class="form-label">Title <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="title" name="title" value="{{ old('title') }}" required>
                     </div>
 
@@ -31,11 +31,24 @@
 
                     <div class="mb-3">
                         <label for="category" class="form-label">Category <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="category" name="category" value="{{ old('category') }}" required placeholder="e.g., Reports, Financial, Research">
+                        <select class="form-select" id="category" name="category" required>
+                            <option value="">Select Category</option>
+                            @foreach($categories as $category)
+                                <option value="{{ $category->name }}" {{ old('category') == $category->name ? 'selected' : '' }}>
+                                    {{ $category->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <small class="text-muted">
+                            Categories are managed by superadmin. 
+                            @if(Auth::user()->role === 'superadmin')
+                                <a href="{{ route('categories.index') }}" target="_blank">Manage Categories</a>
+                            @endif
+                        </small>
                     </div>
 
                     <div class="mb-3">
-                        <label for="description" class="form-label">Deskripsi</label>
+                        <label for="description" class="form-label">Description</label>
                         <textarea class="form-control" id="description" name="description" rows="3">{{ old('description') }}</textarea>
                     </div>
 
@@ -71,9 +84,15 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="cover_image" class="form-label">Cover Image</label>
+                        <label for="cover_image" class="form-label">
+                            <i class="fas fa-image me-2 text-primary"></i>Cover Image
+                        </label>
                         <input type="file" class="form-control" id="cover_image" name="cover_image" accept="image/*">
-                        <small class="text-muted">Max: 2MB (JPG, PNG). For research/publication display</small>
+                        <small class="text-muted">
+                            <i class="fas fa-info-circle me-1"></i>
+                            <strong>Important:</strong> This image will be displayed on the research-documents page. 
+                            Max: 2MB (JPG, PNG). Recommended size: 400x600px for best display.
+                        </small>
                     </div>
 
                     <div class="mb-3">
@@ -83,8 +102,8 @@
                     </div>
 
                     <div class="d-flex gap-2">
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan</button>
-                        <a href="{{ route('archives.index') }}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Kembali</a>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save</button>
+                        <a href="{{ route('archives.index') }}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back</a>
                     </div>
                 </form>
             </div>

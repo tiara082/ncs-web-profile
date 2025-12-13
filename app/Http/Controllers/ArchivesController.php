@@ -16,7 +16,16 @@ class ArchivesController extends Controller
      */
     public function index()
     {
-        $archives = Archives::with('admin')->latest()->paginate(10);
+        $user = Auth::user();
+        
+        // If user is not superadmin, only show their own archives
+        $archivesQuery = Archives::with('admin');
+        
+        if ($user->role !== 'superadmin') {
+            $archivesQuery->where('uploaded_by', $user->id);
+        }
+        
+        $archives = $archivesQuery->latest()->paginate(10);
         return view('admin.archives.index', compact('archives'));
     }
 
@@ -25,7 +34,8 @@ class ArchivesController extends Controller
      */
     public function create()
     {
-        return view('admin.archives.create');
+        $categories = \App\Models\Categories::orderBy('name')->get();
+        return view('admin.archives.create', compact('categories'));
     }
 
     /**
@@ -36,7 +46,7 @@ class ArchivesController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'category' => 'required|string|max:100',
+            'category' => 'required|string|max:100|exists:categories,name',
             'type' => 'required|string|in:document,research,publication',
             'publication' => 'nullable|string|max:255',
             'year' => 'nullable|string|max:4',
@@ -69,7 +79,7 @@ class ArchivesController extends Controller
         $this->logActivity('create', 'archives', $archive->id, "Created archive: {$archive->title}");
 
         return redirect()->route('archives.index')
-            ->with('success', 'Archive berhasil ditambahkan.');
+            ->with('success', 'Archive successfully added.');
     }
 
     /**
@@ -77,7 +87,16 @@ class ArchivesController extends Controller
      */
     public function show($id)
     {
+        $user = Auth::user();
         $archive = Archives::findOrFail($id);
+        
+        // If user is not superadmin, only allow viewing their own archives
+        if ($user->role !== 'superadmin' && $archive->uploaded_by !== $user->id) {
+            return response()->view('admin.access-denied', [
+                'message' => 'Access Denied: You can only view your own research articles.'
+            ], 403);
+        }
+        
         $archive->load('admin');
         return view('admin.archives.show', compact('archive'));
     }
@@ -87,8 +106,18 @@ class ArchivesController extends Controller
      */
     public function edit($id)
     {
+        $user = Auth::user();
         $archive = Archives::findOrFail($id);
-        return view('admin.archives.edit', compact('archive'));
+        
+        // If user is not superadmin, only allow editing their own archives
+        if ($user->role !== 'superadmin' && $archive->uploaded_by !== $user->id) {
+            return response()->view('admin.access-denied', [
+                'message' => 'Access Denied: You can only edit your own research articles.'
+            ], 403);
+        }
+        
+        $categories = \App\Models\Categories::orderBy('name')->get();
+        return view('admin.archives.edit', compact('archive', 'categories'));
     }
 
     /**
@@ -96,11 +125,20 @@ class ArchivesController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $user = Auth::user();
         $archive = Archives::findOrFail($id);
+        
+        // If user is not superadmin, only allow updating their own archives
+        if ($user->role !== 'superadmin' && $archive->uploaded_by !== $user->id) {
+            return response()->view('admin.access-denied', [
+                'message' => 'Access Denied: You can only edit your own research articles.'
+            ], 403);
+        }
+        
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'category' => 'required|string|max:100',
+            'category' => 'required|string|max:100|exists:categories,name',
             'type' => 'required|string|in:document,research,publication',
             'publication' => 'nullable|string|max:255',
             'year' => 'nullable|string|max:4',
@@ -136,7 +174,7 @@ class ArchivesController extends Controller
         $this->logActivity('update', 'archives', $archive->id, "Updated archive: {$archive->title}");
 
         return redirect()->route('archives.index')
-            ->with('success', 'Archive berhasil diupdate.');
+            ->with('success', 'Archive successfully updated.');
     }
 
     /**
@@ -144,7 +182,16 @@ class ArchivesController extends Controller
      */
     public function destroy($id)
     {
+        $user = Auth::user();
         $archive = Archives::findOrFail($id);
+        
+        // If user is not superadmin, only allow deleting their own archives
+        if ($user->role !== 'superadmin' && $archive->uploaded_by !== $user->id) {
+            return response()->view('admin.access-denied', [
+                'message' => 'Access Denied: You can only delete your own research articles.'
+            ], 403);
+        }
+        
         $title = $archive->title;
         if ($archive->file_path) {
             Storage::disk('public')->delete($archive->file_path);
@@ -155,6 +202,6 @@ class ArchivesController extends Controller
         $this->logActivity('delete', 'archives', null, "Deleted archive: {$title}");
 
         return redirect()->route('archives.index')
-            ->with('success', 'Archive berhasil dihapus.');
+            ->with('success', 'Archive successfully deleted.');
     }
 }

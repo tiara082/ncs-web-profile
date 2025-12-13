@@ -52,8 +52,8 @@
                 <ul class="space-y-2.5">
                     <li><a href="/profile" class="text-white/60 hover:text-primary transition-colors flex items-center gap-2 group text-sm"><i data-feather="chevron-right" width="12" height="12" class="text-primary/60 group-hover:translate-x-1 transition-transform"></i>About Lab</a></li>
                     <li><a href="/vision-mission" class="text-white/60 hover:text-primary transition-colors flex items-center gap-2 group text-sm"><i data-feather="chevron-right" width="12" height="12" class="text-primary/60 group-hover:translate-x-1 transition-transform"></i>Vision Mission</a></li>
-                    <li><a href="/services" class="text-white/60 hover:text-primary transition-colors flex items-center gap-2 group text-sm"><i data-feather="chevron-right" width="12" height="12" class="text-primary/60 group-hover:translate-x-1 transition-transform"></i>Services</a></li>
-                    <li><a href="/gallery" class="text-white/60 hover:text-primary transition-colors flex items-center gap-2 group text-sm"><i data-feather="chevron-right" width="12" height="12" class="text-primary/60 group-hover:translate-x-1 transition-transform"></i>Gallery</a></li>
+                    <li><a href="/consulting" class="text-white/60 hover:text-primary transition-colors flex items-center gap-2 group text-sm"><i data-feather="chevron-right" width="12" height="12" class="text-primary/60 group-hover:translate-x-1 transition-transform"></i>Services</a></li>
+                    <li><a href="/agenda" class="text-white/60 hover:text-primary transition-colors flex items-center gap-2 group text-sm"><i data-feather="chevron-right" width="12" height="12" class="text-primary/60 group-hover:translate-x-1 transition-transform"></i>Gallery</a></li>
                     <li><a href="/admin" class="text-white/60 hover:text-primary transition-colors flex items-center gap-2 group text-sm"><i data-feather="chevron-right" width="12" height="12" class="text-primary/60 group-hover:translate-x-1 transition-transform"></i>Admin Portal</a></li>
                 </ul>
             </div>
@@ -62,8 +62,7 @@
             <div class="lg:col-span-2">
                 <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Resources</h4>
                 <ul class="space-y-2.5">
-                    <li><a href="/archive" class="text-white/60 hover:text-primary transition-colors flex items-center gap-2 group text-sm"><i data-feather="chevron-right" width="12" height="12" class="text-primary/60 group-hover:translate-x-1 transition-transform"></i>Research Archive</a></li>
-                    <li><a href="/publications" class="text-white/60 hover:text-primary transition-colors flex items-center gap-2 group text-sm"><i data-feather="chevron-right" width="12" height="12" class="text-primary/60 group-hover:translate-x-1 transition-transform"></i>Publications</a></li>
+                    <li><a href="/research-documents" class="text-white/60 hover:text-primary transition-colors flex items-center gap-2 group text-sm"><i data-feather="chevron-right" width="12" height="12" class="text-primary/60 group-hover:translate-x-1 transition-transform"></i>Research Archive</a></li>
                     <li><a href="/agenda" class="text-white/60 hover:text-primary transition-colors flex items-center gap-2 group text-sm"><i data-feather="chevron-right" width="12" height="12" class="text-primary/60 group-hover:translate-x-1 transition-transform"></i>Events</a></li>
                     <li><a href="/organization" class="text-white/60 hover:text-primary transition-colors flex items-center gap-2 group text-sm"><i data-feather="chevron-right" width="12" height="12" class="text-primary/60 group-hover:translate-x-1 transition-transform"></i>Our Team</a></li>
                 </ul>

@@ -224,9 +224,6 @@
                                     <option value="title-asc">Title A-Z</option>
                                     <option value="title-desc">Title Z-A</option>
                                 </select>
-                                <button onclick="toggleView()" class="p-2 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors" title="Toggle view">
-                                    <i data-feather="grid" id="viewIcon" width="18" height="18"></i>
-                                </button>
                             </div>
                         </div>
                     </div>
@@ -245,9 +242,10 @@
                                     <!-- Journal Cover Thumbnail -->
                                     <div class="flex-shrink-0">
                                         <div class="relative w-24 h-32 bg-gradient-to-br from-slate-100 to-slate-200 rounded-lg overflow-hidden shadow-md group-hover:shadow-xl transition-all">
-                                            <img src="https://images.unsplash.com/photo-1532012197267-da84d127e765?w=400&q=80" 
-                                                 alt="Journal Cover" 
-                                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"/>
+                                            <img src="{{ $pub['cover'] }}" 
+                                                 alt="{{ $pub['title'] }} Cover" 
+                                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                                 onerror="this.src='https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=400&q=80'"/>
                                             <!-- Year Badge Overlay -->
                                             <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-2">
                                                 <span class="text-white text-xs font-bold">{{ $pub['year'] }}</span>
@@ -551,25 +549,22 @@
             
             cards.sort((a, b) => {
                 if (sortValue === 'year-desc') {
-                    return b.getAttribute('data-year') - a.getAttribute('data-year');
+                    return parseInt(b.getAttribute('data-year')) - parseInt(a.getAttribute('data-year'));
                 } else if (sortValue === 'year-asc') {
-                    return a.getAttribute('data-year') - b.getAttribute('data-year');
+                    return parseInt(a.getAttribute('data-year')) - parseInt(b.getAttribute('data-year'));
                 } else if (sortValue === 'title-asc') {
                     return a.getAttribute('data-title').localeCompare(b.getAttribute('data-title'));
                 } else if (sortValue === 'title-desc') {
                     return b.getAttribute('data-title').localeCompare(a.getAttribute('data-title'));
                 }
+                return 0; // Default case
             });
             
             cards.forEach(card => container.appendChild(card));
             feather.replace();
         }
 
-        // Toggle view (list/grid) - placeholder for future enhancement
-        function toggleView() {
-            // Future: Toggle between list and grid view
-            console.log('View toggle - coming soon');
-        }
+
 
         // Share Publication Functions
         let currentShareTitle = '';

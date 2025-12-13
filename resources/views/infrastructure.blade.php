@@ -53,9 +53,9 @@
                 <!-- Main Facilities Overview -->
                 <section class="mb-16">
                     <div class="text-center mb-12">
-                        <h2 class="text-4xl font-bold text-slate-800 mb-4">Sarana & Prasarana</h2>
+                        <h2 class="text-4xl font-bold text-slate-800 mb-4">Facilities & Infrastructure</h2>
                         <p class="text-lg text-slate-600 max-w-3xl mx-auto">
-                            Fasilitas laboratorium dengan teknologi terkini untuk mendukung riset, pendidikan, dan pelatihan keamanan siber
+                            Laboratory facilities with the latest technology to support cybersecurity research, education and training.
                         </p>
                     </div>
                     
@@ -93,192 +93,18 @@
                                 </div>
                             </div>
                             
-                            <!-- Hover Arrow -->
-                            <div class="absolute top-4 right-4 w-8 h-8 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                                <i data-feather="arrow-right" class="text-white" width="16" height="16"></i>
-                            </div>
+
                         </div>
                         @endforeach
                     </div>
                 </section>
                 
-                <!-- Detailed Facilities by Area -->
-                <section class="mb-20">
-                    <div class="text-center mb-12">
-                        <h2 class="text-3xl font-bold text-slate-800 mb-4">Ruang Laboratorium NCS</h2>
-                        <p class="text-slate-600">Fasilitas lengkap untuk mendukung pembelajaran dan penelitian keamanan siber</p>
-                    </div>
-                    
-                    <!-- Area Tabs -->
-                    <div class="flex flex-wrap justify-center gap-3 mb-8">
-                        @php
-                        $areas = ['Main Lab', 'Server Room', 'Research', 'Meeting', 'Library', 'Network'];
-                        @endphp
-                        @foreach($areas as $index => $area)
-                        <button onclick="switchArea('area{{ $index }}')" class="area-tab px-6 py-3 rounded-xl font-semibold transition-all {{ $index === 0 ? 'bg-gradient-to-r from-primary to-secondary text-white shadow-lg' : 'bg-white text-slate-700 border border-slate-200 hover:border-primary' }}" data-area="area{{ $index }}">
-                            {{ $area }}
-                        </button>
-                        @endforeach
-                    </div>
-                    
-                    <!-- Area Content -->
-                    <div id="areaContent">
-                        <!-- Main Lab -->
-                        <div id="area0" class="area-section space-y-6">
-                            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                @php
-                                $mainLabFacilities = [
-                                    ['name' => 'Workstation Area', 'desc' => '50+ high-performance workstations', 'image' => 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80'],
-                                    ['name' => 'Praktikum Space', 'desc' => 'Hands-on learning environment', 'image' => 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=600&q=80'],
-                                    ['name' => 'Testing Lab', 'desc' => 'Security testing & penetration testing', 'image' => 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&q=80'],
-                                ];
-                                @endphp
-                                @foreach($mainLabFacilities as $facility)
-                                <div class="group bg-white rounded-2xl overflow-hidden shadow-md border border-slate-200 hover:shadow-xl transition-all duration-300">
-                                    <div class="relative h-48 overflow-hidden">
-                                        <img src="{{ $facility['image'] }}" alt="{{ $facility['name'] }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"/>
-                                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                                    </div>
-                                    <div class="p-5">
-                                        <h4 class="font-bold text-lg text-slate-800 mb-2">{{ $facility['name'] }}</h4>
-                                        <p class="text-sm text-slate-600">{{ $facility['desc'] }}</p>
-                                    </div>
-                                </div>
-                                @endforeach
-                            </div>
-                        </div>
-                        
-                        <!-- Server Room -->
-                        <div id="area1" class="area-section hidden space-y-6">
-                            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                @php
-                                $serverFacilities = [
-                                    ['name' => 'Server Rack', 'desc' => 'Enterprise-grade server infrastructure', 'image' => 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&q=80'],
-                                    ['name' => 'Storage System', 'desc' => 'High-capacity storage arrays', 'image' => 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=600&q=80'],
-                                    ['name' => 'Cooling System', 'desc' => 'Climate-controlled environment', 'image' => 'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=600&q=80'],
-                                ];
-                                @endphp
-                                @foreach($serverFacilities as $facility)
-                                <div class="group bg-white rounded-2xl overflow-hidden shadow-md border border-slate-200 hover:shadow-xl transition-all duration-300">
-                                    <div class="relative h-48 overflow-hidden">
-                                        <img src="{{ $facility['image'] }}" alt="{{ $facility['name'] }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"/>
-                                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                                    </div>
-                                    <div class="p-5">
-                                        <h4 class="font-bold text-lg text-slate-800 mb-2">{{ $facility['name'] }}</h4>
-                                        <p class="text-sm text-slate-600">{{ $facility['desc'] }}</p>
-                                    </div>
-                                </div>
-                                @endforeach
-                            </div>
-                        </div>
-                        
-                        <!-- Research Area -->
-                        <div id="area2" class="area-section hidden space-y-6">
-                            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                @php
-                                $researchFacilities = [
-                                    ['name' => 'Research Workstation', 'desc' => 'Dedicated research computing', 'image' => 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&q=80'],
-                                    ['name' => 'Analysis Room', 'desc' => 'Malware & forensic analysis', 'image' => 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&q=80'],
-                                    ['name' => 'Development Zone', 'desc' => 'Software development & testing', 'image' => 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&q=80'],
-                                ];
-                                @endphp
-                                @foreach($researchFacilities as $facility)
-                                <div class="group bg-white rounded-2xl overflow-hidden shadow-md border border-slate-200 hover:shadow-xl transition-all duration-300">
-                                    <div class="relative h-48 overflow-hidden">
-                                        <img src="{{ $facility['image'] }}" alt="{{ $facility['name'] }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"/>
-                                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                                    </div>
-                                    <div class="p-5">
-                                        <h4 class="font-bold text-lg text-slate-800 mb-2">{{ $facility['name'] }}</h4>
-                                        <p class="text-sm text-slate-600">{{ $facility['desc'] }}</p>
-                                    </div>
-                                </div>
-                                @endforeach
-                            </div>
-                        </div>
-                        
-                        <!-- Meeting Room -->
-                        <div id="area3" class="area-section hidden space-y-6">
-                            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                @php
-                                $meetingFacilities = [
-                                    ['name' => 'Conference Room', 'desc' => 'Main meeting & presentation space', 'image' => 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=600&q=80'],
-                                    ['name' => 'Discussion Area', 'desc' => 'Collaborative workspace', 'image' => 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&q=80'],
-                                    ['name' => 'Presentation Zone', 'desc' => 'Equipped with projector & display', 'image' => 'https://images.unsplash.com/photo-1556761175-4b46a572b786?w=600&q=80'],
-                                ];
-                                @endphp
-                                @foreach($meetingFacilities as $facility)
-                                <div class="group bg-white rounded-2xl overflow-hidden shadow-md border border-slate-200 hover:shadow-xl transition-all duration-300">
-                                    <div class="relative h-48 overflow-hidden">
-                                        <img src="{{ $facility['image'] }}" alt="{{ $facility['name'] }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"/>
-                                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                                    </div>
-                                    <div class="p-5">
-                                        <h4 class="font-bold text-lg text-slate-800 mb-2">{{ $facility['name'] }}</h4>
-                                        <p class="text-sm text-slate-600">{{ $facility['desc'] }}</p>
-                                    </div>
-                                </div>
-                                @endforeach
-                            </div>
-                        </div>
-                        
-                        <!-- Library -->
-                        <div id="area4" class="area-section hidden space-y-6">
-                            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                @php
-                                $libraryFacilities = [
-                                    ['name' => 'Book Collection', 'desc' => 'Cybersecurity reference books', 'image' => 'https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=600&q=80'],
-                                    ['name' => 'Reading Area', 'desc' => 'Quiet study environment', 'image' => 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=600&q=80'],
-                                    ['name' => 'Digital Resources', 'desc' => 'Online journals & databases', 'image' => 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&q=80'],
-                                ];
-                                @endphp
-                                @foreach($libraryFacilities as $facility)
-                                <div class="group bg-white rounded-2xl overflow-hidden shadow-md border border-slate-200 hover:shadow-xl transition-all duration-300">
-                                    <div class="relative h-48 overflow-hidden">
-                                        <img src="{{ $facility['image'] }}" alt="{{ $facility['name'] }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"/>
-                                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                                    </div>
-                                    <div class="p-5">
-                                        <h4 class="font-bold text-lg text-slate-800 mb-2">{{ $facility['name'] }}</h4>
-                                        <p class="text-sm text-slate-600">{{ $facility['desc'] }}</p>
-                                    </div>
-                                </div>
-                                @endforeach
-                            </div>
-                        </div>
-                        
-                        <!-- Network Lab -->
-                        <div id="area5" class="area-section hidden space-y-6">
-                            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                @php
-                                $networkFacilities = [
-                                    ['name' => 'Network Equipment', 'desc' => 'Routers, switches & firewalls', 'image' => 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=600&q=80'],
-                                    ['name' => 'Cable Management', 'desc' => 'Structured cabling system', 'image' => 'https://images.unsplash.com/photo-1576073719239-1ed5e1bb47ca?w=600&q=80'],
-                                    ['name' => 'Network Testing', 'desc' => 'Traffic analysis & monitoring', 'image' => 'https://images.unsplash.com/photo-1573164713988-8665fc963095?w=600&q=80'],
-                                ];
-                                @endphp
-                                @foreach($networkFacilities as $facility)
-                                <div class="group bg-white rounded-2xl overflow-hidden shadow-md border border-slate-200 hover:shadow-xl transition-all duration-300">
-                                    <div class="relative h-48 overflow-hidden">
-                                        <img src="{{ $facility['image'] }}" alt="{{ $facility['name'] }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"/>
-                                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                                    </div>
-                                    <div class="p-5">
-                                        <h4 class="font-bold text-lg text-slate-800 mb-2">{{ $facility['name'] }}</h4>
-                                        <p class="text-sm text-slate-600">{{ $facility['desc'] }}</p>
-                                    </div>
-                                </div>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                </section>
+
                 
                 <!-- Equipment & Technology -->
                 <section class="mb-20">
                     <div class="mb-12">
-                        <h2 class="text-3xl font-bold text-slate-800 mb-4">Peralatan & Teknologi</h2>
+                        <h2 class="text-3xl font-bold text-slate-800 mb-4">Tools & Technology</h2>
                         <p class="text-slate-600">Advanced computing and networking hardware for research and training</p>
                     </div>
                     

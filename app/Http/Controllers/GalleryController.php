@@ -16,15 +16,19 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        $agendas = Gallery::with('admin')
-            ->where('gallery_type', 'agenda')
-            ->orderBy('event_date', 'desc')
-            ->paginate(10, ['*'], 'agendas');
-            
-        $pastActivities = Gallery::with('admin')
-            ->where('gallery_type', 'past_activity')
-            ->latest()
-            ->paginate(10, ['*'], 'activities');
+        $user = Auth::user();
+        
+        // If user is not superadmin, only show their own galleries
+        $agendasQuery = Gallery::with('admin')->where('gallery_type', 'agenda');
+        $pastActivitiesQuery = Gallery::with('admin')->where('gallery_type', 'past_activity');
+        
+        if ($user->role !== 'superadmin') {
+            $agendasQuery->where('uploaded_by', $user->id);
+            $pastActivitiesQuery->where('uploaded_by', $user->id);
+        }
+        
+        $agendas = $agendasQuery->orderBy('event_date', 'desc')->paginate(10, ['*'], 'agendas');
+        $pastActivities = $pastActivitiesQuery->latest()->paginate(10, ['*'], 'activities');
             
         return view('admin.galleries.index', compact('agendas', 'pastActivities'));
     }
@@ -70,7 +74,7 @@ class GalleryController extends Controller
         $this->logActivity('create', 'galleries', $gallery->id, "Created {$gallery->gallery_type}: {$gallery->title}");
 
         return redirect()->route('galleries.index')
-            ->with('success', ucfirst($gallery->gallery_type) . ' berhasil ditambahkan.');
+            ->with('success', ucfirst($gallery->gallery_type) . ' successfully added.');
     }
 
     /**
@@ -78,7 +82,16 @@ class GalleryController extends Controller
      */
     public function show($id)
     {
+        $user = Auth::user();
         $gallery = Gallery::findOrFail($id);
+        
+        // If user is not superadmin, only allow viewing their own galleries
+        if ($user->role !== 'superadmin' && $gallery->uploaded_by !== $user->id) {
+            return response()->view('admin.access-denied', [
+                'message' => 'Access Denied: You can only view your own content.'
+            ], 403);
+        }
+        
         $gallery->load('admin');
         return view('admin.galleries.show', compact('gallery'));
     }
@@ -88,7 +101,16 @@ class GalleryController extends Controller
      */
     public function edit($id)
     {
+        $user = Auth::user();
         $gallery = Gallery::findOrFail($id);
+        
+        // If user is not superadmin, only allow editing their own galleries
+        if ($user->role !== 'superadmin' && $gallery->uploaded_by !== $user->id) {
+            return response()->view('admin.access-denied', [
+                'message' => 'Access Denied: You can only edit your own content.'
+            ], 403);
+        }
+        
         return view('admin.galleries.edit', compact('gallery'));
     }
 
@@ -97,7 +119,16 @@ class GalleryController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $user = Auth::user();
         $gallery = Gallery::findOrFail($id);
+        
+        // If user is not superadmin, only allow updating their own galleries
+        if ($user->role !== 'superadmin' && $gallery->uploaded_by !== $user->id) {
+            return response()->view('admin.access-denied', [
+                'message' => 'Access Denied: You can only edit your own content.'
+            ], 403);
+        }
+        
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
@@ -128,7 +159,7 @@ class GalleryController extends Controller
         $this->logActivity('update', 'galleries', $gallery->id, "Updated {$gallery->gallery_type}: {$gallery->title}");
 
         return redirect()->route('galleries.index')
-            ->with('success', ucfirst($gallery->gallery_type) . ' berhasil diupdate.');
+            ->with('success', ucfirst($gallery->gallery_type) . ' successfully updated.');
     }
 
     /**
@@ -136,7 +167,16 @@ class GalleryController extends Controller
      */
     public function destroy($id)
     {
+        $user = Auth::user();
         $gallery = Gallery::findOrFail($id);
+        
+        // If user is not superadmin, only allow deleting their own galleries
+        if ($user->role !== 'superadmin' && $gallery->uploaded_by !== $user->id) {
+            return response()->view('admin.access-denied', [
+                'message' => 'Access Denied: You can only delete your own content.'
+            ], 403);
+        }
+        
         $title = $gallery->title;
         if ($gallery->file_path) {
             Storage::disk('public')->delete($gallery->file_path);
@@ -147,6 +187,6 @@ class GalleryController extends Controller
         $this->logActivity('delete', 'galleries', null, "Deleted gallery: {$title}");
 
         return redirect()->route('galleries.index')
-            ->with('success', 'Gallery berhasil dihapus.');
+            ->with('success', 'Gallery successfully deleted.');
     }
 }

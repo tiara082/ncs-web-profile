@@ -1,10 +1,10 @@
 @extends('admin.layout')
 
-@section('title', 'Tambah Administrator')
+@section('title', 'Add Administrator')
 
 @section('content')
 <div class="page-header">
-    <h1 class="page-title">Tambah Administrator</h1>
+    <h1 class="page-title">Add Administrator</h1>
 </div>
 
 <div class="row">
@@ -28,10 +28,9 @@
                         <label for="role" class="form-label">Role <span class="text-danger">*</span></label>
                         <select class="form-control" id="role" name="role" required>
                             <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
-                            <option value="super_admin" {{ old('role') == 'super_admin' ? 'selected' : '' }}>Super Admin</option>
-                            <option value="editor" {{ old('role') == 'editor' ? 'selected' : '' }}>Editor</option>
-                            <option value="moderator" {{ old('role') == 'moderator' ? 'selected' : '' }}>Moderator</option>
+                            <option value="superadmin" {{ old('role') == 'superadmin' ? 'selected' : '' }}>Super Admin</option>
                         </select>
+                        <small class="text-muted">Admin: Can manage own content only. Super Admin: Full system access.</small>
                     </div>
 
                     <div class="mb-3">
@@ -59,8 +58,8 @@
                     </div>
 
                     <div class="d-flex gap-2">
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan</button>
-                        <a href="{{ route('administrators.index') }}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Kembali</a>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save</button>
+                        <a href="{{ route('administrators.index') }}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back</a>
                     </div>
                 </form>
             </div>

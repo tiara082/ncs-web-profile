@@ -67,15 +67,7 @@
             </table>
         </div>
         
-        <!-- Pagination -->
-        <div class="d-flex justify-content-between align-items-center mt-3 px-3">
-            <div class="text-muted small">
-                Showing {{ $members->firstItem() ?? 0 }} to {{ $members->lastItem() ?? 0 }} of {{ $members->total() }} entries
-            </div>
-            <div>
-                {{ $members->links('pagination::bootstrap-4') }}
-            </div>
-        </div>
+
     </div>
 </div>
 @endsection

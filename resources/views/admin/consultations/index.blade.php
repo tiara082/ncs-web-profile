@@ -75,7 +75,7 @@
                 </tbody>
             </table>
         </div>
-        {{ $consultations->links() }}
+
     </div>
 </div>
 @endsection

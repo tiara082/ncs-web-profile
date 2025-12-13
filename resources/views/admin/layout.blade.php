@@ -748,31 +748,48 @@
                 </a>
             </div>
 
+            <!-- Content Management - Available to all authenticated users -->
             <div class="nav-section">
-                <div class="nav-section-title">Manajemen Konten</div>
-                <a href="{{ route('contents.index') }}" class="nav-link {{ request()->routeIs('contents.*') ? 'active' : '' }}">
-                    <i class="fas fa-file-alt"></i>
-                    <span>Contents</span>
-                </a>
-                <a href="{{ route('categories.index') }}" class="nav-link {{ request()->routeIs('categories.*') ? 'active' : '' }}">
-                    <i class="fas fa-tags"></i>
-                    <span>Categories</span>
-                </a>
+                <div class="nav-section-title">Content</div>
                 <a href="{{ route('galleries.index') }}" class="nav-link {{ request()->routeIs('galleries.*') ? 'active' : '' }}">
                     <i class="fas fa-images"></i>
                     <span>Gallery</span>
                 </a>
+                <a href="{{ route('archives.index') }}" class="nav-link {{ request()->routeIs('archives.*') ? 'active' : '' }}">
+                    <i class="fas fa-archive"></i>
+                    <span>Research</span>
+                </a>
+                <a href="{{ route('community-services.index') }}" class="nav-link {{ request()->routeIs('community-services.*') ? 'active' : '' }}">
+                    <i class="fas fa-hands-helping"></i>
+                    <span>Community Service</span>
+                </a>
+                {{-- Hidden for now - not used in backend/frontend
+                <a href="{{ route('contents.index') }}" class="nav-link {{ request()->routeIs('contents.*') ? 'active' : '' }}">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Contents</span>
+                </a>
+                --}}</div>
+
+            <!-- Profile Management - Available to all authenticated users -->
+            <div class="nav-section">
+                <div class="nav-section-title">Account</div>
+                <a href="{{ route('admin.profile') }}" class="nav-link {{ request()->routeIs('admin.profile') ? 'active' : '' }}">
+                    <i class="fas fa-user-edit"></i>
+                    <span>Edit Profile</span>
+                </a>
             </div>
 
+            @if(Auth::user()->role === 'superadmin')
+            <!-- Superadmin Only Sections -->
             <div class="nav-section">
-                <div class="nav-section-title">Manajemen Data</div>
+                <div class="nav-section-title">System Management</div>
+                <a href="{{ route('categories.index') }}" class="nav-link {{ request()->routeIs('categories.*') ? 'active' : '' }}">
+                    <i class="fas fa-tags"></i>
+                    <span>Categories</span>
+                </a>
                 <a href="{{ route('members.index') }}" class="nav-link {{ request()->routeIs('members.*') ? 'active' : '' }}">
                     <i class="fas fa-users"></i>
                     <span>Members</span>
-                </a>
-                <a href="{{ route('archives.index') }}" class="nav-link {{ request()->routeIs('archives.*') ? 'active' : '' }}">
-                    <i class="fas fa-archive"></i>
-                    <span>Archives</span>
                 </a>
                 <a href="{{ route('links.index') }}" class="nav-link {{ request()->routeIs('links.*') ? 'active' : '' }}">
                     <i class="fas fa-link"></i>
@@ -781,7 +798,7 @@
             </div>
 
             <div class="nav-section">
-                <div class="nav-section-title">Sistem</div>
+                <div class="nav-section-title">Administration</div>
                 <a href="{{ route('administrators.index') }}" class="nav-link {{ request()->routeIs('administrators.*') ? 'active' : '' }}">
                     <i class="fas fa-user-shield"></i>
                     <span>Administrators</span>
@@ -795,6 +812,7 @@
                     <span>Activity Logs</span>
                 </a>
             </div>
+            @endif
         </nav>
     </div>
 
@@ -813,9 +831,14 @@
                 </span>
                 <div class="d-flex align-items-center gap-2 px-3 py-2" style="background: rgba(102, 187, 242, 0.1); border-radius: 8px;">
                     <i class="fas fa-user-circle" style="font-size: 1.2rem; color: #66bbf2;"></i> 
-                    <span style="font-weight: 500; color: var(--text-primary);">
-                        {{ Auth::user()->name ?? Auth::user()->username ?? 'Admin' }}
-                    </span>
+                    <div class="d-flex flex-column">
+                        <span style="font-weight: 500; color: var(--text-primary); font-size: 0.9rem;">
+                            {{ Auth::user()->name ?? Auth::user()->username ?? 'Admin' }}
+                        </span>
+                        <small class="badge {{ Auth::user()->role === 'superadmin' ? 'badge-primary' : 'bg-secondary' }}" style="font-size: 0.7rem;">
+                            {{ Auth::user()->role === 'superadmin' ? 'Super Admin' : 'Admin' }}
+                        </small>
+                    </div>
                 </div>
                 <a href="{{ route('logout') }}" class="btn btn-sm btn-outline-danger" onclick="event.preventDefault(); confirmLogout();" style="font-weight: 600;">
                     <i class="fas fa-sign-out-alt"></i> Logout
@@ -898,12 +921,12 @@
         // Logout confirmation
         function confirmLogout() {
             Swal.fire({
-                title: 'Konfirmasi Logout',
-                text: 'Apakah Anda yakin ingin keluar?',
+                title: 'Confirm Logout',
+                text: 'Are you sure you want to logout?',
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonText: 'Ya, Logout',
-                cancelButtonText: 'Batal',
+                confirmButtonText: 'Yes, Logout',
+                cancelButtonText: 'Cancel',
                 ...getSwalTheme()
             }).then((result) => {
                 if (result.isConfirmed) {
@@ -918,12 +941,12 @@
             const form = event.target;
             
             Swal.fire({
-                title: 'Konfirmasi Hapus',
-                text: 'Data yang dihapus tidak dapat dikembalikan!',
+                title: 'Confirm Delete',
+                text: 'Deleted data cannot be recovered!',
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonText: 'Ya, Hapus',
-                cancelButtonText: 'Batal',
+                confirmButtonText: 'Yes, Delete',
+                cancelButtonText: 'Cancel',
                 ...getSwalTheme()
             }).then((result) => {
                 if (result.isConfirmed) {
@@ -938,7 +961,7 @@
         @if(session('success'))
             Swal.fire({
                 icon: 'success',
-                title: 'Berhasil!',
+                title: 'Success!',
                 text: '{{ session("success") }}',
                 timer: 3000,
                 showConfirmButton: false,
@@ -950,7 +973,7 @@
         @if(session('error'))
             Swal.fire({
                 icon: 'error',
-                title: 'Gagal!',
+                title: 'Failed!',
                 text: '{{ session("error") }}',
                 ...getSwalTheme()
             });

@@ -97,7 +97,7 @@
                 </tbody>
             </table>
         </div>
-        {{ $agendas->links() }}
+        {{ $agendas->links('custom.pagination') }}
     </div>
 </div>
 
@@ -142,7 +142,7 @@
                 </div>
             @endforelse
         </div>
-        {{ $pastActivities->links() }}
+        {{ $pastActivities->links('custom.pagination') }}
     </div>
 </div>
 @endsection

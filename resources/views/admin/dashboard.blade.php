@@ -5,9 +5,17 @@
 @section('content')
 <div class="page-header">
     <h1 class="page-title">Dashboard</h1>
-    <p class="page-subtitle">Selamat datang di Admin Panel NCS Lab</p>
+    <p class="page-subtitle">
+        Welcome to NCS Lab Admin Panel, 
+        <strong>{{ Auth::user()->username }}</strong>
+        <span class="badge {{ Auth::user()->role === 'superadmin' ? 'bg-primary' : 'bg-secondary' }} ms-2">
+            {{ Auth::user()->role === 'superadmin' ? 'Super Admin' : 'Admin' }}
+        </span>
+    </p>
 </div>
 
+@if(Auth::user()->role === 'superadmin')
+<!-- Superadmin Statistics -->
 <div class="row g-4 mb-4">
     <div class="col-md-3">
         <div class="card stat-card">
@@ -25,6 +33,7 @@
         </div>
     </div>
     
+    {{-- Hidden - Contents not used
     <div class="col-md-3">
         <div class="card stat-card">
             <div class="card-body">
@@ -40,6 +49,7 @@
             </div>
         </div>
     </div>
+    --}}
     
     <div class="col-md-3">
         <div class="card stat-card">
@@ -121,15 +131,121 @@
         </div>
     </div>
 </div>
+@else
+<!-- Regular Admin Statistics -->
+<div class="row g-4 mb-4">
+    <div class="col-md-4">
+        <div class="card stat-card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <p class="text-muted mb-1">Galleries</p>
+                        <h3 class="mb-0">{{ $stats['my_galleries'] }}</h3>
+                        <small class="text-info">of {{ $stats['total_galleries'] }} total</small>
+                    </div>
+                    <div class="stat-icon bg-purple">
+                        <i class="fas fa-images"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card stat-card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <p class="text-muted mb-1">Research</p>
+                        <h3 class="mb-0">{{ $stats['my_archives'] }}</h3>
+                        <small class="text-info">of {{ $stats['total_archives'] }} total</small>
+                    </div>
+                    <div class="stat-icon bg-danger">
+                        <i class="fas fa-archive"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    {{-- Hidden - Contents not used
+    <div class="col-md-4">
+        <div class="card stat-card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <p class="text-muted mb-1">Contents</p>
+                        <h3 class="mb-0">{{ $stats['my_contents'] }}</h3>
+                        <small class="text-info">of {{ $stats['total_contents'] }} total</small>
+                    </div>
+                    <div class="stat-icon bg-success">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    --}}
+</div>
+
+<!-- Quick Actions for Regular Admin -->
+<div class="row g-4 mb-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-rocket"></i> Quick Actions</h5>
+            </div>
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-md-3">
+                        <a href="{{ route('galleries.create') }}" class="btn btn-primary w-100">
+                            <i class="fas fa-plus-circle me-2"></i>Add Gallery
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="{{ route('archives.create') }}" class="btn btn-success w-100">
+                            <i class="fas fa-upload me-2"></i>Upload Research
+                        </a>
+                    </div>
+                    {{-- Hidden - Contents not used
+                    <div class="col-md-3">
+                        <a href="{{ route('contents.create') }}" class="btn btn-info w-100">
+                            <i class="fas fa-edit me-2"></i>Create Content
+                        </a>
+                    </div>
+                    --}}
+                    <div class="col-md-3">
+                        <a href="{{ route('admin.profile') }}" class="btn btn-warning w-100">
+                            <i class="fas fa-user-edit me-2"></i>Edit Profile
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endif
 
 <div class="row g-4 mb-4">
     <div class="col-md-6">
         <div class="card">
             <div class="card-header">
-                <h5 class="mb-0"><i class="fas fa-chart-pie"></i> Content by Type</h5>
+                <h5 class="mb-0">
+                    <i class="fas fa-chart-pie"></i> 
+                    Content by Type
+                </h5>
             </div>
             <div class="card-body">
-                <canvas id="contentTypeChart" height="250"></canvas>
+                @if(empty($contentsByType))
+                    <div class="text-center py-5">
+                        <i class="fas fa-chart-pie text-muted" style="font-size: 3rem; opacity: 0.3;"></i>
+                        <p class="text-muted mt-3">
+                            {{ Auth::user()->role === 'superadmin' ? 'No content data available' : 'You haven\'t created any content yet' }}
+                        </p>
+                    </div>
+                @else
+                    <canvas id="contentTypeChart" height="250"></canvas>
+                @endif
             </div>
         </div>
     </div>
@@ -137,10 +253,22 @@
     <div class="col-md-6">
         <div class="card">
             <div class="card-header">
-                <h5 class="mb-0"><i class="fas fa-chart-line"></i> Monthly Content Creation ({{ date('Y') }})</h5>
+                <h5 class="mb-0">
+                    <i class="fas fa-chart-line"></i> 
+                    Monthly Content Creation ({{ date('Y') }})
+                </h5>
             </div>
             <div class="card-body">
-                <canvas id="monthlyChart" height="250"></canvas>
+                @if(array_sum($monthlyData) == 0)
+                    <div class="text-center py-5">
+                        <i class="fas fa-chart-line text-muted" style="font-size: 3rem; opacity: 0.3;"></i>
+                        <p class="text-muted mt-3">
+                            {{ Auth::user()->role === 'superadmin' ? 'No monthly data available' : 'No activity this year yet' }}
+                        </p>
+                    </div>
+                @else
+                    <canvas id="monthlyChart" height="250"></canvas>
+                @endif
             </div>
         </div>
     </div>
@@ -150,7 +278,10 @@
     <div class="col-md-6">
         <div class="card">
             <div class="card-header">
-                <h5 class="mb-0"><i class="fas fa-newspaper"></i> Content Terbaru</h5>
+                <h5 class="mb-0">
+                    <i class="fas fa-newspaper"></i> 
+                    Recent Content
+                </h5>
             </div>
             <div class="card-body">
                 @forelse($recentContents as $content)
@@ -158,18 +289,29 @@
                         <div>
                             <h6 class="mb-1">{{ Str::limit($content->title, 50) }}</h6>
                             <small class="text-muted">
-                                <i class="fas fa-user"></i> {{ $content->creator->username ?? 'Unknown' }}
-                                | <i class="fas fa-clock"></i> {{ $content->created_at->diffForHumans() }}
+                                @if(Auth::user()->role === 'superadmin')
+                                    <i class="fas fa-user"></i> {{ $content->creator->username ?? 'Unknown' }}
+                                    | 
+                                @endif
+                                <i class="fas fa-clock"></i> {{ $content->created_at->diffForHumans() }}
                             </small>
                         </div>
+                        {{-- Hidden - Contents not used
                         <a href="{{ route('contents.show', $content) }}" class="btn btn-sm btn-outline-primary">
                             <i class="fas fa-eye"></i>
                         </a>
+                        --}}
                     </div>
                 @empty
-                    <p class="text-muted text-center py-3">Belum ada content</p>
+                    <p class="text-muted text-center py-3">
+                        {{ Auth::user()->role === 'superadmin' ? 'No content available' : 'You haven\'t created any content yet' }}
+                    </p>
                 @endforelse
-                <a href="{{ route('contents.index') }}" class="btn btn-sm btn-link">Lihat Semua Content →</a>
+                {{-- Hidden - Contents not used
+                <a href="{{ route('contents.index') }}" class="btn btn-sm btn-link">
+                    View All Content →
+                </a>
+                --}}
             </div>
         </div>
     </div>
@@ -177,15 +319,20 @@
     <div class="col-md-6">
         <div class="card">
             <div class="card-header">
-                <h5 class="mb-0"><i class="fas fa-history"></i> Log Aktivitas Terbaru</h5>
+                <h5 class="mb-0">
+                    <i class="fas fa-history"></i> 
+                    Recent Activity
+                </h5>
             </div>
             <div class="card-body" style="max-height: 400px; overflow-y: auto;">
                 @forelse($recentLogs as $log)
                     <div class="d-flex mb-3 pb-3 border-bottom">
                         <div class="flex-grow-1">
-                            <small class="text-muted">
-                                <i class="fas fa-user"></i> {{ $log->admin->username ?? 'Unknown' }}
-                            </small>
+                            @if(Auth::user()->role === 'superadmin')
+                                <small class="text-muted">
+                                    <i class="fas fa-user"></i> {{ $log->admin->username ?? 'Unknown' }}
+                                </small>
+                            @endif
                             <p class="mb-0 small">{{ $log->action }} - {{ $log->table_name }}</p>
                             <small class="text-muted">
                                 <i class="fas fa-clock"></i> {{ $log->created_at->diffForHumans() }}
@@ -193,9 +340,13 @@
                         </div>
                     </div>
                 @empty
-                    <p class="text-muted text-center py-3">Belum ada log aktivitas</p>
+                    <p class="text-muted text-center py-3">
+                        {{ Auth::user()->role === 'superadmin' ? 'No activity logs' : 'No recent activity' }}
+                    </p>
                 @endforelse
-                <a href="{{ route('admin_logs.index') }}" class="btn btn-sm btn-link">Lihat Semua Log →</a>
+                @if(Auth::user()->role === 'superadmin')
+                    <a href="{{ route('admin_logs.index') }}" class="btn btn-sm btn-link">View All Logs →</a>
+                @endif
             </div>
         </div>
     </div>
@@ -320,10 +471,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const textColor = isDark ? '#e5e7eb' : '#6B7280';
     
     // Content by Type Chart (Doughnut)
-    const contentTypeCtx = document.getElementById('contentTypeChart').getContext('2d');
+    const contentTypeCtx = document.getElementById('contentTypeChart');
     const contentTypeData = @json($contentsByType);
     
-    new Chart(contentTypeCtx, {
+    if (contentTypeCtx && Object.keys(contentTypeData).length > 0) {
+        new Chart(contentTypeCtx.getContext('2d'), {
         type: 'doughnut',
         data: {
             labels: Object.keys(contentTypeData).map(key => key.charAt(0).toUpperCase() + key.slice(1)),
@@ -367,13 +519,15 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+    }
     
     // Monthly Content Chart (Line)
-    const monthlyCtx = document.getElementById('monthlyChart').getContext('2d');
+    const monthlyCtx = document.getElementById('monthlyChart');
     const monthlyData = @json(array_values($monthlyData));
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     
-    new Chart(monthlyCtx, {
+    if (monthlyCtx && monthlyData.some(val => val > 0)) {
+        new Chart(monthlyCtx.getContext('2d'), {
         type: 'line',
         data: {
             labels: months,
@@ -430,6 +584,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+    }
 });
 </script>
 @endsection

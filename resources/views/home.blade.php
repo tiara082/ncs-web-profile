@@ -637,22 +637,40 @@
                     @forelse($featuredPublications as $publication)
                     <!-- Publication Card -->
                     <div class="group relative overflow-hidden h-full">
-                        <div class="relative p-6 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 hover:border-primary/40 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/20 h-full flex flex-col">
-                            <div class="flex items-start justify-between mb-4">
-                                <span class="px-3 py-1.5 bg-primary/20 text-primary text-xs font-bold rounded-full">{{ $publication['type'] }}</span>
-                                <span class="text-sm text-white/40 font-semibold">{{ $publication['year'] }}</span>
+                        <div class="relative bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 hover:border-primary/40 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/20 h-full flex flex-col p-6">
+                            <!-- Type Badge -->
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="px-3 py-1.5 bg-primary/90 text-white text-xs font-bold rounded-full backdrop-blur-sm">{{ $publication['type'] }}</span>
+                                <span class="px-3 py-1.5 bg-white/10 text-white/70 text-xs font-semibold rounded-full backdrop-blur-sm">{{ $publication['year'] }}</span>
                             </div>
-                            <h3 class="text-xl font-bold text-white mb-3 group-hover:text-primary transition-colors leading-tight">{{ $publication['title'] }}</h3>
-                            <p class="text-sm text-white/60 mb-4 flex-grow">{{ $publication['author_name'] }}</p>
-                            <div class="flex items-center justify-between mt-auto">
-                                <span class="px-3 py-1 bg-white/10 text-white/70 text-xs font-semibold rounded uppercase">{{ Str::limit($publication['category'], 20) }}</span>
-                                @if($publication['file_path'])
-                                <a href="{{ $publication['file_path'] }}" target="_blank" class="text-primary font-semibold text-sm hover:translate-x-2 transition-all inline-flex items-center gap-2 group/link">
-                                    Read <span class="group-hover/link:translate-x-1 transition-transform">→</span>
-                                </a>
-                                @else
-                                <span class="text-white/40 text-sm italic">No file</span>
-                                @endif
+                            
+                            <!-- Content -->
+                            <div class="flex flex-col flex-grow">
+                                <h3 class="text-xl font-bold text-white mb-4 group-hover:text-primary transition-colors leading-tight">{{ $publication['title'] }}</h3>
+                                
+                                <!-- Author Info -->
+                                <div class="flex items-center gap-3 mb-4">
+                                    <img src="{{ $publication['author_photo'] }}" 
+                                         alt="{{ $publication['author_name'] }}" 
+                                         class="w-10 h-10 rounded-full object-cover border-2 border-primary/30"
+                                         onerror="this.src='https://ui-avatars.com/api/?name={{ urlencode($publication['author_name']) }}&background=66bbf2&color=fff&size=40'">
+                                    <span class="text-sm text-white/70 font-medium">{{ $publication['author_name'] }}</span>
+                                </div>
+                                
+                                <!-- Publication Info -->
+                                <p class="text-sm text-white/60 mb-6 flex-grow">{{ Str::limit($publication['publication'], 150) }}</p>
+                                
+                                <!-- Footer -->
+                                <div class="flex items-center justify-between mt-auto">
+                                    <span class="px-3 py-1 bg-white/10 text-white/70 text-xs font-semibold rounded uppercase">{{ Str::limit($publication['category'], 20) }}</span>
+                                    @if($publication['file_path'])
+                                    <a href="{{ $publication['file_path'] }}" target="_blank" class="text-primary font-semibold text-sm hover:translate-x-2 transition-all inline-flex items-center gap-2 group/link">
+                                        Read <span class="group-hover/link:translate-x-1 transition-transform">→</span>
+                                    </a>
+                                    @else
+                                    <span class="text-white/40 text-sm italic">No file</span>
+                                    @endif
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -665,8 +683,11 @@
                 </div>
                 
                 <div class="text-center">
-                    <a href="/research-documents" class="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 hover:from-cyan-500/30 hover:to-blue-500/30 text-cyan-300 font-bold rounded-xl border border-cyan-400/30 hover:border-cyan-400/60 transition-all duration-300 hover:shadow-xl hover:shadow-cyan-500/30 hover:scale-105">
-                        View All Publications 
+                    <a href="/research-documents" class="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-primary/20 to-secondary/20 hover:from-primary/30 hover:to-secondary/30 text-primary font-bold rounded-xl border border-primary/30 hover:border-primary/60 transition-all duration-300 hover:shadow-xl hover:shadow-primary/30 hover:scale-105">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
+                        View All Research Documents
                         <span class="group-hover:translate-x-1 transition-transform">→</span>
                     </a>
                 </div>
@@ -686,118 +707,120 @@
                 </div>
                 
                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-                    <!-- Article Card 1 -->
-                    <div class="group bg-white rounded-2xl border border-border hover:border-primary/50 transition-all duration-300 overflow-hidden hover:shadow-xl hover:-translate-y-1">
-                        <div class="relative h-48 overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=800" alt="Network Segmentation" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"/>
-                            <div class="absolute top-3 left-3">
-                                <span class="px-3 py-1 bg-white/90 backdrop-blur-sm text-primary text-xs font-bold rounded-full">Best Practices</span>
-                            </div>
-                        </div>
-                        <div class="p-6 flex flex-col">
-                            <div class="flex items-center gap-2 mb-3 text-xs text-muted-foreground">
-                                <i data-feather="clock" class="w-3 h-3"></i>
-                                <span>8 min read</span>
-                            </div>
-                            <h3 class="text-lg font-bold text-foreground mb-3 group-hover:text-primary transition-colors line-clamp-2">Understanding Network Segmentation in Modern Infrastructure</h3>
-                            <p class="text-sm text-muted-foreground mb-4 line-clamp-2">Learn how network segmentation plays a crucial role in preventing lateral movement of threats...</p>
-                            <div class="flex items-center justify-between pt-4 border-t border-border mt-auto">
-                                <div class="text-xs text-muted-foreground">
-                                    <div class="font-semibold text-foreground">Erfan Rohadi</div>
-                                    <div>Nov 2024</div>
+                    @if($latestArticles->count() > 0)
+                        @foreach($latestArticles as $article)
+                            <!-- Article Card {{ $loop->iteration }} -->
+                            <div class="group bg-white rounded-2xl border border-border hover:border-primary/50 transition-all duration-300 overflow-hidden hover:shadow-xl hover:-translate-y-1">
+                                <div class="relative h-48 overflow-hidden">
+                                    @if($article['cover_image'])
+                                        <img src="{{ $article['cover_image'] }}" alt="{{ $article['title'] }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"/>
+                                    @else
+                                        <div class="w-full h-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
+                                            <i data-feather="file-text" class="text-primary/50" width="48" height="48"></i>
+                                        </div>
+                                    @endif
+                                    <div class="absolute top-3 left-3">
+                                        <span class="px-3 py-1 bg-white/90 backdrop-blur-sm text-primary text-xs font-bold rounded-full">{{ ucfirst($article['category']) }}</span>
+                                    </div>
                                 </div>
-                                <a href="/article/understanding-network-segmentation" class="text-primary font-semibold text-sm group-hover:translate-x-1 transition-transform inline-flex items-center">
-                                    Read →
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Article Card 2 -->
-                    <div class="group bg-white rounded-2xl border border-border hover:border-primary/50 transition-all duration-300 overflow-hidden hover:shadow-xl hover:-translate-y-1">
-                        <div class="relative h-48 overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?q=80&w=800" alt="Zero Trust Security" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"/>
-                            <div class="absolute top-3 left-3">
-                                <span class="px-3 py-1 bg-white/90 backdrop-blur-sm text-primary text-xs font-bold rounded-full">Strategy</span>
-                            </div>
-                        </div>
-                        <div class="p-6 flex flex-col">
-                            <div class="flex items-center gap-2 mb-3 text-xs text-muted-foreground">
-                                <i data-feather="clock" class="w-3 h-3"></i>
-                                <span>12 min read</span>
-                            </div>
-                            <h3 class="text-lg font-bold text-foreground mb-3 group-hover:text-primary transition-colors line-clamp-2">Zero Trust Security Model: A Complete Guide</h3>
-                            <p class="text-sm text-muted-foreground mb-4 line-clamp-2">Discover the principles of zero trust security and how to implement it in your organization...</p>
-                            <div class="flex items-center justify-between pt-4 border-t border-border mt-auto">
-                                <div class="text-xs text-muted-foreground">
-                                    <div class="font-semibold text-foreground">Dr. Siti Nurhaliza</div>
-                                    <div>Oct 2024</div>
+                                <div class="p-6 flex flex-col">
+                                    <div class="flex items-center gap-2 mb-3 text-xs text-muted-foreground">
+                                        <i data-feather="clock" class="w-3 h-3"></i>
+                                        <span>{{ $article['reading_time'] }} min read</span>
+                                    </div>
+                                    <h3 class="text-lg font-bold text-foreground mb-3 group-hover:text-primary transition-colors line-clamp-2">{{ $article['title'] }}</h3>
+                                    <p class="text-sm text-muted-foreground mb-4 line-clamp-2">{{ Str::limit($article['description'], 100) }}</p>
+                                    <div class="flex items-center justify-between pt-4 border-t border-border mt-auto">
+                                        <div class="text-xs text-muted-foreground">
+                                            <div class="font-semibold text-foreground">{{ $article['author_name'] }}</div>
+                                            <div>{{ $article['created_date'] }}</div>
+                                        </div>
+                                        @if($article['file_path'])
+                                            <a href="{{ $article['file_path'] }}" target="_blank" class="text-primary font-semibold text-sm group-hover:translate-x-1 transition-transform inline-flex items-center">
+                                                Read →
+                                            </a>
+                                        @else
+                                            <span class="text-muted-foreground text-sm">
+                                                View →
+                                            </span>
+                                        @endif
+                                    </div>
                                 </div>
-                                <a href="/article/zero-trust-security-model" class="text-primary font-semibold text-sm group-hover:translate-x-1 transition-transform inline-flex items-center">
-                                    Read →
-                                </a>
                             </div>
-                        </div>
-                    </div>
-
-                    <!-- Article Card 3 -->
-                    <div class="group bg-white rounded-2xl border border-border hover:border-primary/50 transition-all duration-300 overflow-hidden hover:shadow-xl hover:-translate-y-1">
-                        <div class="relative h-48 overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?q=80&w=800" alt="Incident Response" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"/>
-                            <div class="absolute top-3 left-3">
-                                <span class="px-3 py-1 bg-white/90 backdrop-blur-sm text-primary text-xs font-bold rounded-full">Incident Response</span>
-                            </div>
-                        </div>
-                        <div class="p-6 flex flex-col">
-                            <div class="flex items-center gap-2 mb-3 text-xs text-muted-foreground">
-                                <i data-feather="clock" class="w-3 h-3"></i>
-                                <span>10 min read</span>
-                            </div>
-                            <h3 class="text-lg font-bold text-foreground mb-3 group-hover:text-primary transition-colors line-clamp-2">Incident Response Planning for SMEs</h3>
-                            <p class="text-sm text-muted-foreground mb-4 line-clamp-2">Essential steps for small and medium enterprises to prepare for and respond to security incidents...</p>
-                            <div class="flex items-center justify-between pt-4 border-t border-border mt-auto">
-                                <div class="text-xs text-muted-foreground">
-                                    <div class="font-semibold text-foreground">Budi Santoso</div>
-                                    <div>Sep 2024</div>
+                        @endforeach
+                        
+                        @if($latestArticles->count() < 4)
+                            @php
+                                $fallbackArticles = [
+                                    ['title' => 'Understanding Network Segmentation', 'category' => 'Best Practices', 'author' => 'Erfan Rohadi', 'date' => 'Nov 2024', 'time' => '8', 'desc' => 'Learn how network segmentation plays a crucial role in preventing lateral movement of threats...', 'img' => 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=800'],
+                                    ['title' => 'Zero Trust Security Model', 'category' => 'Strategy', 'author' => 'Dr. Siti Nurhaliza', 'date' => 'Oct 2024', 'time' => '12', 'desc' => 'Discover the principles of zero trust security and how to implement it in your organization...', 'img' => 'https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?q=80&w=800'],
+                                    ['title' => 'Incident Response Planning', 'category' => 'Incident Response', 'author' => 'Budi Santoso', 'date' => 'Sep 2024', 'time' => '10', 'desc' => 'Essential steps for small and medium enterprises to prepare for and respond to security incidents...', 'img' => 'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?q=80&w=800']
+                                ];
+                                $needed = 4 - $latestArticles->count();
+                            @endphp
+                            
+                            @for($i = 0; $i < min($needed, 3); $i++)
+                                <div class="group bg-white rounded-2xl border border-border hover:border-primary/50 transition-all duration-300 overflow-hidden hover:shadow-xl hover:-translate-y-1">
+                                    <div class="relative h-48 overflow-hidden">
+                                        <img src="{{ $fallbackArticles[$i]['img'] }}" alt="{{ $fallbackArticles[$i]['title'] }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"/>
+                                        <div class="absolute top-3 left-3">
+                                            <span class="px-3 py-1 bg-white/90 backdrop-blur-sm text-primary text-xs font-bold rounded-full">{{ $fallbackArticles[$i]['category'] }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="p-6 flex flex-col">
+                                        <div class="flex items-center gap-2 mb-3 text-xs text-muted-foreground">
+                                            <i data-feather="clock" class="w-3 h-3"></i>
+                                            <span>{{ $fallbackArticles[$i]['time'] }} min read</span>
+                                        </div>
+                                        <h3 class="text-lg font-bold text-foreground mb-3 group-hover:text-primary transition-colors line-clamp-2">{{ $fallbackArticles[$i]['title'] }}</h3>
+                                        <p class="text-sm text-muted-foreground mb-4 line-clamp-2">{{ $fallbackArticles[$i]['desc'] }}</p>
+                                        <div class="flex items-center justify-between pt-4 border-t border-border mt-auto">
+                                            <div class="text-xs text-muted-foreground">
+                                                <div class="font-semibold text-foreground">{{ $fallbackArticles[$i]['author'] }}</div>
+                                                <div>{{ $fallbackArticles[$i]['date'] }}</div>
+                                            </div>
+                                            <span class="text-muted-foreground text-sm">
+                                                View →
+                                            </span>
+                                        </div>
+                                    </div>
                                 </div>
-                                <a href="/article/incident-response-planning-smes" class="text-primary font-semibold text-sm group-hover:translate-x-1 transition-transform inline-flex items-center">
-                                    Read →
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Article Card 4 -->
-                    <div class="group bg-white rounded-2xl border border-border hover:border-primary/50 transition-all duration-300 overflow-hidden hover:shadow-xl hover:-translate-y-1">
-                        <div class="relative h-48 overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800" alt="Cyber Threats" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"/>
-                            <div class="absolute top-3 left-3">
-                                <span class="px-3 py-1 bg-white/90 backdrop-blur-sm text-primary text-xs font-bold rounded-full">Threats</span>
-                            </div>
-                        </div>
-                        <div class="p-6 flex flex-col">
-                            <div class="flex items-center gap-2 mb-3 text-xs text-muted-foreground">
-                                <i data-feather="clock" class="w-3 h-3"></i>
-                                <span>15 min read</span>
-                            </div>
-                            <h3 class="text-lg font-bold text-foreground mb-3 group-hover:text-primary transition-colors line-clamp-2">Emerging Threats in 2024: What You Need to Know</h3>
-                            <p class="text-sm text-muted-foreground mb-4 line-clamp-2">An overview of the latest cybersecurity threats and trends that organizations should monitor...</p>
-                            <div class="flex items-center justify-between pt-4 border-t border-border mt-auto">
-                                <div class="text-xs text-muted-foreground">
-                                    <div class="font-semibold text-foreground">Ahmad Wijaya</div>
-                                    <div>Aug 2024</div>
+                            @endfor
+                        @endif
+                    @else
+                        <!-- Fallback static articles if no database content -->
+                        <div class="group bg-white rounded-2xl border border-border hover:border-primary/50 transition-all duration-300 overflow-hidden hover:shadow-xl hover:-translate-y-1">
+                            <div class="relative h-48 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=800" alt="Network Segmentation" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"/>
+                                <div class="absolute top-3 left-3">
+                                    <span class="px-3 py-1 bg-white/90 backdrop-blur-sm text-primary text-xs font-bold rounded-full">Best Practices</span>
                                 </div>
-                                <a href="/article/emerging-threats-2024" class="text-primary font-semibold text-sm group-hover:translate-x-1 transition-transform inline-flex items-center">
-                                    →
-                                </a>
+                            </div>
+                            <div class="p-6 flex flex-col">
+                                <div class="flex items-center gap-2 mb-3 text-xs text-muted-foreground">
+                                    <i data-feather="clock" class="w-3 h-3"></i>
+                                    <span>8 min read</span>
+                                </div>
+                                <h3 class="text-lg font-bold text-foreground mb-3 group-hover:text-primary transition-colors line-clamp-2">Understanding Network Segmentation</h3>
+                                <p class="text-sm text-muted-foreground mb-4 line-clamp-2">Learn how network segmentation plays a crucial role in preventing lateral movement of threats...</p>
+                                <div class="flex items-center justify-between pt-4 border-t border-border mt-auto">
+                                    <div class="text-xs text-muted-foreground">
+                                        <div class="font-semibold text-foreground">Erfan Rohadi</div>
+                                        <div>Nov 2024</div>
+                                    </div>
+                                    <span class="text-muted-foreground text-sm">View →</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
                 </div>
                 
                 <div class="text-center">
-                    <a href="/articles" class="group inline-flex items-center gap-3 px-8 py-4 bg-primary text-white font-bold rounded-xl hover:bg-secondary transition-all duration-300 hover:shadow-lg hover:shadow-primary/30 hover:scale-105">
-                        Explore All Articles 
+                    <a href="/research-documents" class="group inline-flex items-center gap-3 px-8 py-4 bg-primary text-white font-bold rounded-xl hover:bg-secondary transition-all duration-300 hover:shadow-lg hover:shadow-primary/30 hover:scale-105">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
+                        View All Research Documents
                         <span class="group-hover:translate-x-1 transition-transform">→</span>
                     </a>
                 </div>
@@ -822,76 +845,61 @@
                 </div>
                 
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
-                    <!-- Gallery Item 1 -->
-                    <div class="group relative overflow-hidden rounded-2xl border-2 border-border hover:border-primary/50 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/20 hover:-translate-y-2">
-                        <div class="aspect-video bg-gradient-to-br from-slate-100 to-slate-50">
-                            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80" alt="Cybersecurity Lab Equipment" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy"/>
-                        </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-start justify-end p-6">
-                            <h3 class="text-white font-bold text-lg mb-1">Cybersecurity Lab Equipment</h3>
-                            <p class="text-white/80 text-sm">Advanced networking and security hardware</p>
-                        </div>
-                    </div>
-
-                    <!-- Gallery Item 2 -->
-                    <div class="group relative overflow-hidden rounded-2xl border-2 border-border hover:border-primary/50 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/20 hover:-translate-y-2">
-                        <div class="aspect-video bg-gradient-to-br from-slate-100 to-slate-50">
-                            <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?w=800&q=80" alt="Research & Development" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy"/>
-                        </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-start justify-end p-6">
-                            <h3 class="text-white font-bold text-lg mb-1">Research & Development</h3>
-                            <p class="text-white/80 text-sm">Innovative cybersecurity research projects</p>
-                        </div>
-                    </div>
-
-                    <!-- Gallery Item 3 -->
-                    <div class="group relative overflow-hidden rounded-2xl border-2 border-border hover:border-primary/50 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/20 hover:-translate-y-2">
-                        <div class="aspect-video bg-gradient-to-br from-slate-100 to-slate-50">
-                            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80" alt="Team Collaboration" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy"/>
-                        </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-start justify-end p-6">
-                            <h3 class="text-white font-bold text-lg mb-1">Team Collaboration</h3>
-                            <p class="text-white/80 text-sm">Students working on security projects</p>
-                        </div>
-                    </div>
-
-                    <!-- Gallery Item 4 -->
-                    <div class="group relative overflow-hidden rounded-2xl border-2 border-border hover:border-primary/50 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/20 hover:-translate-y-2">
-                        <div class="aspect-video bg-gradient-to-br from-slate-100 to-slate-50">
-                            <img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=800&q=80" alt="Network Operations Center" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy"/>
-                        </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-start justify-end p-6">
-                            <h3 class="text-white font-bold text-lg mb-1">Network Operations Center</h3>
-                            <p class="text-white/80 text-sm">24/7 network monitoring and analysis</p>
-                        </div>
-                    </div>
-
-                    <!-- Gallery Item 5 -->
-                    <div class="group relative overflow-hidden rounded-2xl border-2 border-border hover:border-primary/50 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/20 hover:-translate-y-2">
-                        <div class="aspect-video bg-gradient-to-br from-slate-100 to-slate-50">
-                            <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&q=80" alt="Training Workshop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy"/>
-                        </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-start justify-end p-6">
-                            <h3 class="text-white font-bold text-lg mb-1">Training Workshop</h3>
-                            <p class="text-white/80 text-sm">Hands-on cybersecurity training sessions</p>
-                        </div>
-                    </div>
-
-                    <!-- Gallery Item 6 -->
-                    <div class="group relative overflow-hidden rounded-2xl border-2 border-border hover:border-primary/50 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/20 hover:-translate-y-2">
-                        <div class="aspect-video bg-gradient-to-br from-slate-100 to-slate-50">
-                            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80" alt="Hackathon Event" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy"/>
-                        </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-start justify-end p-6">
-                            <h3 class="text-white font-bold text-lg mb-1">Hackathon Event</h3>
-                            <p class="text-white/80 text-sm">Competitive cybersecurity challenges</p>
-                        </div>
-                    </div>
+                    @forelse($galleryImages as $gallery)
+                        <!-- Gallery Item {{ $loop->iteration }} -->
+                        <a href="{{ $gallery['type'] === 'agenda' ? '/agenda' : '/activities' }}" class="group relative overflow-hidden rounded-2xl border-2 border-border hover:border-primary/50 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/20 hover:-translate-y-2 block">
+                            <div class="aspect-video bg-gradient-to-br from-slate-100 to-slate-50">
+                                @if($gallery['image'])
+                                    <img src="{{ $gallery['image'] }}" alt="{{ $gallery['title'] }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy"/>
+                                @else
+                                    <div class="w-full h-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
+                                        <i data-feather="image" class="text-primary/50" width="48" height="48"></i>
+                                    </div>
+                                @endif
+                            </div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-start justify-end p-6">
+                                <h3 class="text-white font-bold text-lg mb-1">{{ $gallery['title'] }}</h3>
+                                <p class="text-white/80 text-sm">{{ Str::limit($gallery['description'], 50) }}</p>
+                                @if($gallery['event_date'])
+                                    <p class="text-white/60 text-xs mt-1">{{ \Carbon\Carbon::parse($gallery['event_date'])->format('M d, Y') }}</p>
+                                @endif
+                            </div>
+                        </a>
+                    @empty
+                        <!-- Fallback Gallery Items if no database images -->
+                        <a href="/activities" class="group relative overflow-hidden rounded-2xl border-2 border-border hover:border-primary/50 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/20 hover:-translate-y-2 block">
+                            <div class="aspect-video bg-gradient-to-br from-slate-100 to-slate-50">
+                                <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80" alt="Cybersecurity Lab Equipment" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy"/>
+                            </div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-start justify-end p-6">
+                                <h3 class="text-white font-bold text-lg mb-1">Cybersecurity Lab Equipment</h3>
+                                <p class="text-white/80 text-sm">Advanced networking and security hardware</p>
+                            </div>
+                        </a>
+                        <a href="/activities" class="group relative overflow-hidden rounded-2xl border-2 border-border hover:border-primary/50 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/20 hover:-translate-y-2 block">
+                            <div class="aspect-video bg-gradient-to-br from-slate-100 to-slate-50">
+                                <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?w=800&q=80" alt="Research & Development" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy"/>
+                            </div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-start justify-end p-6">
+                                <h3 class="text-white font-bold text-lg mb-1">Research & Development</h3>
+                                <p class="text-white/80 text-sm">Innovative cybersecurity research projects</p>
+                            </div>
+                        </a>
+                        <a href="/activities" class="group relative overflow-hidden rounded-2xl border-2 border-border hover:border-primary/50 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/20 hover:-translate-y-2 block">
+                            <div class="aspect-video bg-gradient-to-br from-slate-100 to-slate-50">
+                                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80" alt="Team Collaboration" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy"/>
+                            </div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-start justify-end p-6">
+                                <h3 class="text-white font-bold text-lg mb-1">Team Collaboration</h3>
+                                <p class="text-white/80 text-sm">Students working on security projects</p>
+                            </div>
+                        </a>
+                    @endforelse
                 </div>
 
                 <!-- View More Button -->
                 <div class="text-center">
-                    <a href="/gallery" class="group inline-flex items-center gap-3 px-8 py-4 bg-primary text-white font-bold rounded-xl hover:bg-secondary transition-all duration-300 hover:shadow-lg hover:shadow-primary/30 hover:scale-105">
+                    <a href="/activities" class="group inline-flex items-center gap-3 px-8 py-4 bg-primary text-white font-bold rounded-xl hover:bg-secondary transition-all duration-300 hover:shadow-lg hover:shadow-primary/30 hover:scale-105">
                         View Complete Gallery
                         <span class="group-hover:translate-x-1 transition-transform">→</span>
                     </a>

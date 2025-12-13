@@ -22,7 +22,7 @@ class EventSeeder extends Seeder
             [
                 'title' => 'Advanced Penetration Testing Workshop 2024',
                 'description' => 'Learn advanced techniques in penetration testing and ethical hacking from industry experts.',
-                'file_path' => 'gallery/agenda-pentest.jpg',
+                'file_path' => 'gallery/poltek.png',
                 'gallery_type' => 'agenda',
                 'event_date' => '2024-12-15',
                 'event_time' => '09:00:00',
@@ -37,7 +37,7 @@ class EventSeeder extends Seeder
             [
                 'title' => 'Cyber Security CTF Competition 2024',
                 'description' => 'Compete with the best teams in capture the flag challenges. Test your skills!',
-                'file_path' => 'gallery/agenda-ctf.jpg',
+                'file_path' => 'gallery/poltek.png',
                 'gallery_type' => 'agenda',
                 'event_date' => '2024-12-20',
                 'event_time' => '13:00:00',
@@ -52,7 +52,7 @@ class EventSeeder extends Seeder
             [
                 'title' => 'Network Security Seminar: Latest Trends',
                 'description' => 'Industry experts discuss the latest trends in network security and threat landscape.',
-                'file_path' => 'gallery/agenda-seminar.jpg',
+                'file_path' => 'gallery/poltek.png',
                 'gallery_type' => 'agenda',
                 'event_date' => '2024-12-22',
                 'event_time' => '15:00:00',
@@ -75,7 +75,7 @@ class EventSeeder extends Seeder
             [
                 'title' => 'Workshop Keamanan Siber untuk UMKM',
                 'description' => 'Pelatihan keamanan dasar bagi pelaku UMKM di Malang Raya untuk melindungi bisnis dari ancaman siber',
-                'file_path' => 'gallery/past-umkm.jpg',
+                'file_path' => 'gallery/poltek.png',
                 'gallery_type' => 'past_activity',
                 'event_date' => '2024-11-15',
                 'location' => 'Balai Kota Malang',
@@ -85,7 +85,7 @@ class EventSeeder extends Seeder
             [
                 'title' => 'Seminar Literasi Digital untuk Pelajar',
                 'description' => 'Sosialisasi penggunaan internet aman dan etis untuk siswa SMA/SMK se-Kota Malang',
-                'file_path' => 'gallery/past-literasi.jpg',
+                'file_path' => 'gallery/poltek.png',
                 'gallery_type' => 'past_activity',
                 'event_date' => '2024-10-22',
                 'location' => 'SMAN 1 Malang',
@@ -95,7 +95,7 @@ class EventSeeder extends Seeder
             [
                 'title' => 'Pelatihan Incident Response untuk Instansi Pemerintah',
                 'description' => 'Training penanganan insiden keamanan siber bagi IT staff pemerintah daerah',
-                'file_path' => 'gallery/past-incident.jpg',
+                'file_path' => 'gallery/poltek.png',
                 'gallery_type' => 'past_activity',
                 'event_date' => '2024-09-18',
                 'location' => 'Diskominfo Kota Malang',
