@@ -58,6 +58,7 @@ Route::get('/logo', function () {
     return view('logo');
 });
 
+
 // Helper function to get all articles with full content
 function getAllArticles() {
     return [
