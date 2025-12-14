@@ -13,4 +13,6 @@ class CreateGallery extends CreateRecord
     {
         return route('galleries.index');
     }
+
+
 }

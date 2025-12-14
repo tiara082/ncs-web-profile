@@ -41,14 +41,18 @@ class GalleryForm
                             ->required()
                             ->searchable()
                             ->preload()
-                            ->native(false),
+                            ->native(false)
+                            ->default(auth()->id()),
                         
                         FileUpload::make('file_path')
                             ->required()
                             ->image()
                             ->imageEditor()
                             ->directory('gallery')
+                            ->disk('public')
                             ->visibility('public')
+                            ->maxSize(2048) // 2MB max
+                            ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/gif', 'image/webp'])
                             ->columnSpanFull(),
                     ])
                     ->columns(2),

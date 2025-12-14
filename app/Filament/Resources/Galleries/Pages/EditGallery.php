@@ -22,4 +22,6 @@ class EditGallery extends EditRecord
     {
         return route('galleries.index');
     }
+
+
 }

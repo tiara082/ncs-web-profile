@@ -16,6 +16,8 @@ class Gallery extends Model
         'event_date' => 'date',
     ];
 
+
+
     public function admin()
     {
         return $this->belongsTo(Admin::class, 'uploaded_by');
