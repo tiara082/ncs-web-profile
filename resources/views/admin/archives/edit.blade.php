@@ -81,8 +81,9 @@
                         @if($archive->cover_image)
                             <div class="mb-3 p-3 bg-light rounded">
                                 <p class="text-muted mb-2"><strong>Current Cover Image:</strong></p>
-                                <img src="{{ asset('storage/' . $archive->cover_image) }}" alt="Current Cover" 
-                                     style="max-width: 200px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                <img src="{{ $archive->cover_image_url }}" alt="Current Cover" 
+                                     style="max-width: 200px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);"
+                                     data-has-valid-image="{{ $archive->hasValidCoverImage() ? 'true' : 'false' }}">
                                 <p class="text-success mt-2 mb-0">
                                     <i class="fas fa-check-circle me-1"></i>
                                     This image is displayed on the research-documents page

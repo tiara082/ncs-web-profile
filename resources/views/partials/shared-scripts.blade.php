@@ -209,18 +209,49 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    function preloadImage(src) {
+        return new Promise((resolve, reject) => {
+            const img = new Image();
+            img.onload = () => resolve(img);
+            img.onerror = () => reject(new Error(`Failed to load image: ${src}`));
+            img.src = src;
+        });
+    }
+
     function setupImageErrorHandling() {
         // Handle existing images
         const images = document.querySelectorAll('img');
         images.forEach(function(img) {
+            // Add loading state
+            if (!img.complete) {
+                img.style.opacity = '0.5';
+                img.style.transition = 'opacity 0.3s ease';
+            }
+            
+            img.addEventListener('load', function() {
+                this.style.opacity = '1';
+            });
+            
             img.addEventListener('error', function() {
                 handleImageError(this);
             });
             
-            // Check if image is already broken
-            if (img.complete && img.naturalHeight === 0) {
-                handleImageError(img);
-            }
+            // Check if image is already broken (with delay to allow loading)
+            setTimeout(function() {
+                if (img.complete && img.naturalHeight === 0 && img.src !== '{{ asset("img/poltek.png") }}') {
+                    // Double check that the image actually failed to load
+                    const testImg = new Image();
+                    testImg.onload = function() {
+                        // Image is actually valid, don't replace
+                        img.style.opacity = '1';
+                    };
+                    testImg.onerror = function() {
+                        // Image is actually broken, replace it
+                        handleImageError(img);
+                    };
+                    testImg.src = img.src;
+                }
+            }, 100);
         });
 
         // Handle dynamically added images

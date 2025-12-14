@@ -1110,22 +1110,48 @@
             // Handle existing images
             const images = document.querySelectorAll('img');
             images.forEach(function(img) {
+                // Add loading state
+                if (!img.complete) {
+                    img.style.opacity = '0.5';
+                    img.style.transition = 'opacity 0.3s ease';
+                }
+                
+                img.addEventListener('load', function() {
+                    this.style.opacity = '1';
+                });
+                
                 img.addEventListener('error', function() {
                     if (this.src !== '{{ asset("img/poltek.png") }}') {
                         console.log('Image failed to load:', this.src, 'Replacing with poltek.png');
                         this.src = '{{ asset("img/poltek.png") }}';
                         this.alt = 'Default Image';
                         this.title = 'Image not available';
+                        // Mark as fallback image
+                        this.setAttribute('data-is-fallback', 'true');
                     }
                 });
                 
-                // Check if image is already broken
-                if (img.complete && img.naturalHeight === 0) {
-                    if (img.src !== '{{ asset("img/poltek.png") }}') {
-                        img.src = '{{ asset("img/poltek.png") }}';
-                        img.alt = 'Default Image';
-                        img.title = 'Image not available';
-                    }
+                // Check if image is already broken (with delay to allow loading)
+                // Skip this check if the server already determined the image is valid
+                if (img.getAttribute('data-has-valid-image') !== 'true') {
+                    setTimeout(function() {
+                        if (img.complete && img.naturalHeight === 0 && img.src !== '{{ asset("img/poltek.png") }}') {
+                            // Double check that the image actually failed to load
+                            const testImg = new Image();
+                            testImg.onload = function() {
+                                // Image is actually valid, don't replace
+                                img.style.opacity = '1';
+                            };
+                            testImg.onerror = function() {
+                                // Image is actually broken, replace it
+                                img.src = '{{ asset("img/poltek.png") }}';
+                                img.alt = 'Default Image';
+                                img.title = 'Image not available';
+                                img.setAttribute('data-is-fallback', 'true');
+                            };
+                            testImg.src = img.src;
+                        }
+                    }, 100);
                 }
             });
 

@@ -91,7 +91,7 @@
                     <div class="mb-3">
                         <label class="form-label">Current Image</label>
                         <div class="mb-2">
-                            <img src="{{ asset('storage/' . $gallery->file_path) }}" alt="{{ $gallery->title }}" style="max-width: 400px; border-radius: 8px;">
+                            <img src="{{ $gallery->image_url }}" alt="{{ $gallery->title }}" style="max-width: 400px; border-radius: 8px;" data-has-valid-image="{{ $gallery->hasValidImage() ? 'true' : 'false' }}">
                         </div>
                         <label for="file" class="form-label">Upload New Image (Optional)</label>
                         <input type="file" class="form-control" id="file" name="file" accept="image/*">

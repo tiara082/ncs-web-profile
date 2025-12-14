@@ -17,7 +17,7 @@
             <div class="card-body">
                 <div class="mb-4 text-center">
                     @if(in_array(pathinfo($gallery->file_path, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png', 'gif']))
-                        <img src="{{ asset('storage/' . $gallery->file_path) }}" alt="{{ $gallery->title }}" class="img-fluid" style="max-height: 500px;">
+                        <img src="{{ $gallery->image_url }}" alt="{{ $gallery->title }}" class="img-fluid" style="max-height: 500px;" data-has-valid-image="{{ $gallery->hasValidImage() ? 'true' : 'false' }}">
                     @else
                         <i class="fas fa-file fa-5x text-secondary"></i>
                         <p class="mt-3">{{ basename($gallery->file_path) }}</p>

@@ -38,7 +38,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>
-                                <img src="{{ asset('storage/' . $agenda->file_path) }}" alt="{{ $agenda->title }}" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
+                                <img src="{{ $agenda->image_url }}" alt="{{ $agenda->title }}" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;" data-has-valid-image="{{ $agenda->hasValidImage() ? 'true' : 'false' }}">
                             </td>
                             <td>
                                 <strong>{{ $agenda->title }}</strong><br>
@@ -114,7 +114,7 @@
             @forelse($pastActivities as $activity)
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
-                        <img src="{{ asset('storage/' . $activity->file_path) }}" class="card-img-top" alt="{{ $activity->title }}" style="height: 200px; object-fit: cover;">
+                        <img src="{{ $activity->image_url }}" class="card-img-top" alt="{{ $activity->title }}" style="height: 200px; object-fit: cover;" data-has-valid-image="{{ $activity->hasValidImage() ? 'true' : 'false' }}">
                         <div class="card-body">
                             <h6 class="card-title">{{ $activity->title }}</h6>
                             <p class="card-text text-muted small">{{ Str::limit($activity->description, 100) }}</p>
