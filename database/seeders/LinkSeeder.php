@@ -9,6 +9,9 @@ class LinkSeeder extends Seeder
 {
     public function run(): void
     {
+        // Truncate table to avoid duplicates
+        Links::truncate();
+        
         $links = [
             [
                 'name' => 'Polinema',
@@ -26,19 +29,9 @@ class LinkSeeder extends Seeder
                 'description' => 'Sistem Informasi Manajemen Tugas Akhir - Polinema',
             ],
             [
-                'name' => 'SINTA',
-                'url' => 'https://sinta.kemdikbud.go.id/journals/profile/5102',
+                'name' => 'SINTA Kementerian',
+                'url' => 'https://sinta.kemdiktisaintek.go.id/',
                 'description' => 'Science and Technology Index - Kementerian Pendidikan',
-            ],
-            [
-                'name' => 'Google Scholar',
-                'url' => 'https://scholar.google.com',
-                'description' => 'Google Scholar - Academic Research Database',
-            ],
-            [
-                'name' => 'IEEE Xplore',
-                'url' => 'https://ieeexplore.ieee.org',
-                'description' => 'IEEE Xplore Digital Library',
             ],
         ];
 

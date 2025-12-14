@@ -464,11 +464,11 @@
                     <p class="text-lg text-muted-foreground max-w-2xl mx-auto">Hands-on learning experiences and research initiatives in cybersecurity</p>
                 </div>
                 
-                <div class="grid md:grid-cols-3 gap-8 mb-24">
+                <div class="grid md:grid-cols-3 gap-8 mb-24 items-stretch">
                     <!-- Card 1 -->
-                    <a href="/activities" class="group relative overflow-hidden block">
-                        <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 rounded-3xl transform group-hover:scale-105 transition-transform duration-500"></div>
-                        <div class="relative p-8 bg-white/80 backdrop-blur-sm rounded-3xl border border-cyan-200/50 hover:border-cyan-400/70 transition-all duration-500 hover:shadow-2xl hover:shadow-cyan-500/20 hover:-translate-y-2 text-center">
+                    <a href="/activities" class="group relative block p-2">
+                        <div class="absolute inset-2 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 rounded-3xl transform group-hover:scale-105 transition-transform duration-500"></div>
+                        <div class="relative h-full p-8 bg-white/80 backdrop-blur-sm rounded-3xl border border-cyan-200/50 hover:border-cyan-400/70 transition-all duration-500 hover:shadow-2xl hover:shadow-cyan-500/20 hover:-translate-y-2 text-center">
                             <div class="relative mb-6 flex justify-center">
                                 <div class="absolute inset-0 bg-cyan-500/30 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                                 <div class="relative w-16 h-16 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-2xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
@@ -484,9 +484,8 @@
                     </a>
 
                     <!-- Card 2 -->
-                    <a href="/research-documents" class="group relative overflow-hidden block">
-                        <div class="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-indigo-500/10 rounded-3xl transform group-hover:scale-105 transition-transform duration-500"></div>
-                        <div class="relative p-8 bg-white/80 backdrop-blur-sm rounded-3xl border border-blue-200/50 hover:border-blue-400/70 transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/20 hover:-translate-y-2 text-center">
+                    <a href="/research-documents" class="group relative block p-2">
+                        <div class="relative h-full p-8 bg-white/80 backdrop-blur-sm rounded-3xl border border-blue-200/50 hover:border-blue-400/70 transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/20 hover:-translate-y-2 text-center">
                             <div class="relative mb-6 flex justify-center">
                                 <div class="absolute inset-0 bg-blue-500/30 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                                 <div class="relative w-16 h-16 bg-gradient-to-br from-blue-500/20 to-indigo-500/20 rounded-2xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
@@ -502,9 +501,9 @@
                     </a>
 
                     <!-- Card 3 -->
-                    <a href="/activities" class="group relative overflow-hidden block">
-                        <div class="absolute inset-0 bg-gradient-to-br from-indigo-500/10 to-purple-500/10 rounded-3xl transform group-hover:scale-105 transition-transform duration-500"></div>
-                        <div class="relative p-8 bg-white/80 backdrop-blur-sm rounded-3xl border border-indigo-200/50 hover:border-indigo-400/70 transition-all duration-500 hover:shadow-2xl hover:shadow-indigo-500/20 hover:-translate-y-2 text-center">
+                    <a href="/activities" class="group relative block p-2">
+                        <div class="absolute inset-2 bg-gradient-to-br from-indigo-500/10 to-purple-500/10 rounded-3xl transform group-hover:scale-105 transition-transform duration-500"></div>
+                        <div class="relative h-full p-8 bg-white/80 backdrop-blur-sm rounded-3xl border border-indigo-200/50 hover:border-indigo-400/70 transition-all duration-500 hover:shadow-2xl hover:shadow-indigo-500/20 hover:-translate-y-2 text-center">
                             <div class="relative mb-6 flex justify-center">
                                 <div class="absolute inset-0 bg-indigo-500/30 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                                 <div class="relative w-16 h-16 bg-gradient-to-br from-indigo-500/20 to-purple-500/20 rounded-2xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">

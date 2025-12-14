@@ -5,11 +5,11 @@
     <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-tl from-accent/20 to-primary/20 rounded-full blur-3xl opacity-20 animate-float" style="animation-delay: 2s"></div>
     <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:64px_64px] opacity-20"></div>
     
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
+    <div class="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 py-10 relative z-10">
         <!-- Main Footer Content - Better Proportions -->
-        <div class="grid lg:grid-cols-12 md:grid-cols-2 gap-8 mb-10">
+        <div class="grid lg:grid-cols-12 md:grid-cols-2 gap-4 mb-8">
             <!-- Lab Info - Takes More Space (40%) -->
-            <div class="lg:col-span-5 md:col-span-2">
+            <div class="lg:col-span-3 md:col-span-2">
                 <div class="flex items-center gap-3 mb-4">
                     <div class="flex items-center gap-2 p-2 bg-white/5 rounded-lg border border-white/10">
                         <div class="logo-polinema">
@@ -37,16 +37,16 @@
                     </div>
                     <div class="flex items-center gap-2 text-white/60">
                         <i data-feather="phone" width="16" height="16" class="text-primary flex-shrink-0"></i>
-                        <span>+62 341 404424</span>
+                        <span>0341404424</span>
                     </div>
                     <div class="flex items-center gap-2 text-white/60">
                         <i data-feather="mail" width="16" height="16" class="text-primary flex-shrink-0"></i>
-                        <span>ncs-lab@polinema.ac.id</span>
+                        <span>humas@polinema.ac.id</span>
                     </div>
                 </div>
             </div>
             
-            <!-- Quick Links (20%) -->
+            <!-- Quick Links -->
             <div class="lg:col-span-2">
                 <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Quick Links</h4>
                 <ul class="space-y-2.5">
@@ -58,7 +58,7 @@
                 </ul>
             </div>
             
-            <!-- Resources (20%) -->
+            <!-- Resources -->
             <div class="lg:col-span-2">
                 <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Resources</h4>
                 <ul class="space-y-2.5">
@@ -68,8 +68,8 @@
                 </ul>
             </div>
             
-            <!-- Related Links (20%) -->
-            <div class="lg:col-span-3">
+            <!-- Related Links -->
+            <div class="lg:col-span-2">
                 <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Related Links</h4>
                 <ul class="space-y-2.5">
                     @forelse($footerLinks ?? [] as $link)
@@ -83,6 +83,23 @@
                     <li class="text-white/40 text-sm italic">No links available</li>
                     @endforelse
                 </ul>
+            </div>
+            
+            <!-- Our Location Map -->
+            <div class="lg:col-span-3">
+                <h4 class="text-white font-semibold mb-3 text-sm uppercase tracking-wider">Our Location</h4>
+                <div class="rounded-lg overflow-hidden border border-white/20 shadow-lg">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.4087889859246!2d112.61315607501045!3d-7.945968279221934!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e78827687d272e7%3A0x789ce9a636cd3aa2!2sPoliteknik%20Negeri%20Malang!5e0!3m2!1sen!2sid!4v1734194000000!5m2!1sen!2sid" 
+                        width="100%" 
+                        height="220" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade"
+                        class="grayscale hover:grayscale-0 transition-all duration-300">
+                    </iframe>
+                </div>
             </div>
         </div>
 
