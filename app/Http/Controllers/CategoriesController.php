@@ -40,7 +40,7 @@ class CategoriesController extends Controller
         $this->logActivity('create', 'categories', $category->id, "Created category: {$category->name}");
 
         return redirect()->route('categories.index')
-            ->with('success', 'Category berhasil ditambahkan.');
+            ->with('success', 'Category successfully added.');
     }
 
     /**
@@ -80,7 +80,7 @@ class CategoriesController extends Controller
         $this->logActivity('update', 'categories', $category->id, "Updated category: {$category->name}");
 
         return redirect()->route('categories.index')
-            ->with('success', 'Category berhasil diupdate.');
+            ->with('success', 'Category successfully updated.');
     }
 
     /**
@@ -97,6 +97,6 @@ class CategoriesController extends Controller
         $this->logActivity('delete', 'categories', null, "Deleted category: {$name}");
 
         return redirect()->route('categories.index')
-            ->with('success', 'Category berhasil dihapus.');
+            ->with('success', 'Category successfully deleted.');
     }
 }

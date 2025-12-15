@@ -10,7 +10,7 @@
     </div>
     <div>
         <a href="{{ route('categories.create') }}" class="btn btn-primary">
-            <i class="fas fa-plus"></i> Tambah Category
+            <i class="fas fa-plus"></i> Add Category
         </a>
     </div>
 </div>
@@ -22,10 +22,10 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Nama Category</th>
-                        <th>Jumlah Contents</th>
-                        <th>Tanggal Dibuat</th>
-                        <th>Aksi</th>
+                        <th>Category Name</th>
+                        <th>Content Count</th>
+                        <th>Created Date</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,7 +37,7 @@
                             <td>{{ $category->created_at->format('d M Y') }}</td>
                             <td>
                                 <div class="btn-group btn-group-sm" role="group">
-                                    <a href="{{ route('categories.show', $category) }}" class="btn btn-info" title="Detail">
+                                    <a href="{{ route('categories.show', $category) }}" class="btn btn-info" title="View Details">
                                         <i class="fas fa-eye"></i>
                                     </a>
                                     <a href="{{ route('categories.edit', $category) }}" class="btn btn-warning" title="Edit">
@@ -46,7 +46,7 @@
                                     <form action="{{ route('categories.destroy', $category) }}" method="POST" class="d-inline" onsubmit="return confirmDelete(event)">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger" title="Hapus">
+                                        <button type="submit" class="btn btn-danger" title="Delete">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </form>

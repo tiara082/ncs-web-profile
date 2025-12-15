@@ -33,7 +33,7 @@ class Admin_LogsController extends Controller
         $admin_log->delete();
 
         return redirect()->route('admin_logs.index')
-            ->with('success', 'Log berhasil dihapus.');
+            ->with('success', 'Log successfully deleted.');
     }
 
     /**
@@ -44,6 +44,6 @@ class Admin_LogsController extends Controller
         Admin_Logs::truncate();
 
         return redirect()->route('admin_logs.index')
-            ->with('success', 'Semua log berhasil dihapus.');
+            ->with('success', 'All logs successfully deleted.');
     }
 }

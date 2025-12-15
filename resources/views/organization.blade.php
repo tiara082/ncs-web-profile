@@ -281,7 +281,7 @@
                 <div class="org-chart-container min-w-[900px]">
                     <!-- Level 1: Laboratory Head -->
                     <div class="flex justify-center mb-16">
-                        <a href="/member/erfan-rohadi" class="org-card-head cursor-pointer">
+                        <a href="/member/erfan-rohadi,-st.,-m.eng.,-ph.d." class="org-card-head cursor-pointer">
                             <div class="org-avatar-container">
                                 <img src="{{ asset('img/lab-member/erfan.png') }}" alt="Erfan Rohadi" class="org-avatar-img">
                                 <div class="org-avatar-badge">
@@ -316,7 +316,7 @@
                     <!-- Level 2: Researchers -->
                     <div class="grid grid-cols-4 gap-6 max-w-6xl mx-auto pt-8">
                         <!-- Researcher 1 -->
-                        <a href="/member/ade-ismail" class="org-card-researcher cursor-pointer">
+                        <a href="/member/ade-ismail,-s.kom.,-m.ti" class="org-card-researcher cursor-pointer">
                             <div class="org-avatar-container-small">
                                 <img src="{{ asset('img/lab-member/ade_ismail.png') }}" alt="Ade Ismail" class="org-avatar-img-small">
                             </div>
@@ -326,7 +326,7 @@
                         </a>
 
                         <!-- Researcher 2 -->
-                        <a href="/member/vipkas-al-hadid-firdaus" class="org-card-researcher cursor-pointer">
+                        <a href="/member/vipkas-al-hadid-firdaus,-st.,-mt" class="org-card-researcher cursor-pointer">
                             <div class="org-avatar-container-small">
                                 <img src="{{ asset('img/lab-member/vipkas.png') }}" alt="Vipkas Al Hadid Firdaus" class="org-avatar-img-small">
                             </div>
@@ -336,7 +336,7 @@
                         </a>
 
                         <!-- Researcher 3 -->
-                        <a href="/member/sofyan-noor-arief" class="org-card-researcher cursor-pointer">
+                        <a href="/member/sofyan-noor-arief,-s.st.,-m.kom." class="org-card-researcher cursor-pointer">
                             <div class="org-avatar-container-small">
                                 <img src="{{ asset('img/lab-member/sofyan.png') }}" alt="Sofyan Noor Arief" class="org-avatar-img-small">
                             </div>
@@ -346,7 +346,7 @@
                         </a>
 
                         <!-- Researcher 4 -->
-                        <a href="/member/meyti-eka-apriyani" class="org-card-researcher cursor-pointer">
+                        <a href="/member/meyti-eka-apriyani,-st.,-mt." class="org-card-researcher cursor-pointer">
                             <div class="org-avatar-container-small">
                                 <img src="{{ asset('img/lab-member/meyti.png') }}" alt="Meyti Eka Apriyani" class="org-avatar-img-small">
                             </div>

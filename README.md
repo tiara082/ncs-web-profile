@@ -1,59 +1,289 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# NCS Lab - Network & Cyber Security Laboratory
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A comprehensive web platform for the Network & Cyber Security Laboratory at Politeknik Negeri Malang, showcasing research, publications, team members, and laboratory activities.
 
-## About Laravel
+![NCS Lab](https://img.shields.io/badge/NCS%20Lab-Cybersecurity%20Research-66bbf2)
+![Laravel](https://img.shields.io/badge/Laravel-10.0-FF2D20)
+![PHP](https://img.shields.io/badge/PHP-8.2-777BB4)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-3.x-38B2AC)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🌟 Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 🔐 Research & Publications
+- **Research Documents**: Comprehensive collection of academic papers and research publications
+- **Advanced Search**: Filter publications by year, author, keywords, and categories
+- **DOI & ISSN Integration**: Direct links to academic databases and journals
+- **Download Management**: Secure file access for research papers
+- **Citation Support**: Easy citation generation for academic references
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 👥 Team Management
+- **Member Profiles**: Detailed profiles of laboratory researchers and staff
+- **Organizational Structure**: Interactive org chart showing team hierarchy
+- **NIP Integration**: Professional staff identification system
+- **Multiple Contact Channels**: Email, phone, and social media links
+- **Skills & Expertise**: Specialization areas and research interests
 
-## Learning Laravel
+### 📅 Events & Activities
+- **Gallery Management**: Photo galleries of laboratory activities and events
+- **Event Scheduling**: Upcoming agenda and past activities tracking
+- **Community Service**: Documentation of community outreach programs
+- **Event Categories**: Better organization by event types
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+### 🛠️ Admin Dashboard
+- **Filament Admin**: Modern, responsive admin interface
+- **Role-Based Access**: Different access levels for admins and superadmins
+- **Content Management**: Easy content creation and editing
+- **Activity Logging**: Comprehensive audit trail of admin actions
+- **File Management**: Secure upload and organization of documents and images
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 🏗️ Technical Architecture
 
-## Laravel Sponsors
+### Backend
+- **Framework**: Laravel 10.x
+- **Database**: PostgreSQL
+- **Authentication**: Custom admin authentication system
+- **File Storage**: Laravel's filesystem with local storage
+- **Queue System**: Laravel Queues for background processing
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### Frontend
+- **Styling**: Tailwind CSS 3.x
+- **JavaScript**: Vanilla JS with Feather Icons
+- **Responsive Design**: Mobile-first approach
+- **Progressive Enhancement**: Works without JavaScript
+- **Accessibility**: WCAG 2.1 compliant where possible
 
-### Premium Partners
+### Key Components
+- **Database Migrations**: Version-controlled schema management
+- **Seeders**: Sample data for development and testing
+- **Form Requests**: Input validation and sanitization
+- **Policies**: Authorization and access control
+- **Events & Listeners**: Decoupled application logic
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## 📊 Database Schema
 
-## Contributing
+### Core Tables
+- **Members**: Laboratory staff and researchers information
+- **Archives**: Research papers and publications
+- **Categories**: Publication categorization
+- **Gallery**: Event photos and activities
+- **Community Service**: Outreach program records
+- **Admins**: System administrators
+- **Admin Logs**: Activity audit trail
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Key Relationships
+- Members can have multiple publications
+- Publications belong to categories
+- Galleries can be categorized as agenda or activities
+- Admins can be linked to member profiles
 
-## Code of Conduct
+## 🚀 Installation
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Prerequisites
+- PHP 8.2 or higher
+- Composer
+- Node.js and NPM
+- PostgreSQL database
+- Web server (Apache/Nginx)
 
-## Security Vulnerabilities
+### Setup Instructions
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd ncs-web-profile
+   ```
 
-## License
+2. **Install dependencies**
+   ```bash
+   composer install
+   npm install
+   ```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+3. **Environment setup**
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
+
+4. **Configure database**
+   ```bash
+   # Edit .env file with your database credentials
+   DB_CONNECTION=pgsql
+   DB_HOST=127.0.0.1
+   DB_PORT=5432
+   DB_DATABASE=ncs_lab
+   DB_USERNAME=your_username
+   DB_PASSWORD=your_password
+   ```
+
+5. **Run migrations and seeders**
+   ```bash
+   php artisan migrate
+   php artisan db:seed
+   ```
+
+6. **Build assets**
+   ```bash
+   npm run build
+   ```
+
+7. **Start development server**
+   ```bash
+   php artisan serve
+   ```
+
+## 📁 Project Structure
+
+```
+├── app/
+│   ├── Filament/          # Admin panel resources
+│   ├── Http/              # Controllers and middleware
+│   ├── Models/            # Eloquent models
+│   ├── Providers/         # Service providers
+│   └── Traits/            # Reusable traits
+├── database/
+│   ├── factories/         # Model factories
+│   ├── migrations/        # Database migrations
+│   └── seeders/           # Database seeders
+├── public/
+│   ├── img/               # Static images
+│   └── storage/           # Public storage files
+├── resources/
+│   ├── css/               # Custom CSS
+│   ├── js/                # JavaScript files
+│   └── views/             # Blade templates
+└── routes/
+    └── web.php            # Web routes
+```
+
+## 🎨 Custom Components
+
+### Partials
+- **Navbar**: Responsive navigation with mobile menu
+- **Footer**: Comprehensive site footer
+- **Scroll Progress**: Visual reading progress indicator
+- **Back to Top**: Smooth scroll navigation
+
+### Pages
+- **Home**: Dynamic homepage with featured content
+- **Organization**: Interactive team structure
+- **Research Documents**: Academic publications browsing
+- **Member Detail**: Individual researcher profiles
+- **Community Service**: Outreach activities showcase
+
+## 🔧 Development Commands
+
+### Database Management
+```bash
+# Create new migration
+php artisan make:migration create_table_name
+
+# Run migrations
+php artisan migrate
+
+# Fresh migration with seeding
+php artisan migrate:fresh --seed
+
+# Create seeder
+php artisan make:seeder TableNameSeeder
+```
+
+### Frontend Development
+```bash
+# Install packages
+npm install
+
+# Build for production
+npm run build
+
+# Watch for changes (development)
+npm run dev
+```
+
+### Code Quality
+```bash
+# Laravel Pint (code formatting)
+composer run lint
+
+# Run tests
+composer test
+
+# Run specific test
+php artisan test --filter TestName
+```
+
+### Development Server
+```bash
+# Start Laravel development server
+php artisan serve
+
+# Start with queue worker
+composer dev
+```
+
+## 👥 Team
+
+### Laboratory Head
+- **Dr. Erfan Rohadi, ST., M.Eng., Ph.D.**
+- NIP: 197201232008011006
+- Email: erfan.rohadi@polinema.ac.id
+
+### Researchers
+- **Ade Ismail, S.Kom., M.TI** - Penetration Testing & Network Security
+- **Vipkas Al Hadid Firdaus, ST., MT** - Cloud Security & Infrastructure
+- **Sofyan Noor Arief, S.ST., M.Kom.** - Application Security & Testing
+- **Meyti Eka Apriyani, ST., MT.** - Digital Forensics & Incident Response
+
+## 🔐 Security Features
+
+- **Input Validation**: Comprehensive form validation
+- **CSRF Protection**: Cross-site request forgery prevention
+- **SQL Injection Prevention**: Using Eloquent ORM
+- **XSS Protection**: Output escaping in templates
+- **File Upload Security**: Restricted file types and sizes
+- **Admin Authentication**: Secure login system
+- **Activity Logging**: Comprehensive audit trails
+
+## 📱 Browser Support
+
+- Chrome (latest 2 versions)
+- Firefox (latest 2 versions)
+- Safari (latest 2 versions)
+- Edge (latest 2 versions)
+
+## 📝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+### Development Guidelines
+- Follow PSR-12 coding standards
+- Use Laravel Pint for code formatting
+- Write tests for new features
+- Update documentation as needed
+- Keep commits atomic and well-described
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🤝 Acknowledgments
+
+- **Politeknik Negeri Malang** for institutional support
+- **Laravel Framework** for providing an excellent development platform
+- **Tailwind CSS** for the utility-first CSS framework
+- **Filament** for the beautiful admin panel
+- **Feather Icons** for the icon set
+
+## 📞 Contact
+
+- **Email**: ncs-lab@polinema.ac.id
+- **Website**: https://ncs-lab.polinema.ac.id
+- **Address**: Politeknik Negeri Malang, Jl. Soekarno Hatta No.9, Malang
+
+---
+
+> 💡 **Note**: This project is actively maintained by the Network & Cyber Security Laboratory team. For technical support or contributions, please contact the development team.

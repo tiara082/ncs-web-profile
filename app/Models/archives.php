@@ -8,7 +8,8 @@ class Archives extends Model
 {
     protected $fillable = [
         'title', 'description', 'file_path', 'category', 'uploaded_by',
-        'publication', 'year', 'cover_image', 'author_id', 'type'
+        'publication', 'year', 'cover_image', 'author_id', 'type',
+        'keywords', 'doi', 'issn_journal'
     ];
 
     public function admin()

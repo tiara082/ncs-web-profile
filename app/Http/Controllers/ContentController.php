@@ -52,7 +52,7 @@ class ContentController extends Controller
         $this->logActivity('create', 'contents', $content->id, "Created content: {$content->title}");
 
         return redirect()->route('contents.index')
-            ->with('success', 'Content berhasil ditambahkan.');
+            ->with('success', 'Content successfully added.');
     }
 
     /**
@@ -101,7 +101,7 @@ class ContentController extends Controller
         $this->logActivity('update', 'contents', $content->id, "Updated content: {$content->title}");
 
         return redirect()->route('contents.index')
-            ->with('success', 'Content berhasil diupdate.');
+            ->with('success', 'Content successfully updated.');
     }
 
     /**
@@ -117,6 +117,6 @@ class ContentController extends Controller
         $this->logActivity('delete', 'contents', null, "Deleted content: {$title}");
 
         return redirect()->route('contents.index')
-            ->with('success', 'Content berhasil dihapus.');
+            ->with('success', 'Content successfully deleted.');
     }
 }

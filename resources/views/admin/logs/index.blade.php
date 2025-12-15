@@ -9,11 +9,11 @@
         <p class="page-subtitle">Riwayat aktivitas administrator</p>
     </div>
     <div>
-        <form action="{{ route('admin_logs.destroyAll') }}" method="POST" class="d-inline" onsubmit="return confirm('Hapus semua log?')">
+        <form action="{{ route('admin_logs.destroyAll') }}" method="POST" class="d-inline" onsubmit="return confirm('Delete semua log?')">
             @csrf
             @method('DELETE')
             <button type="submit" class="btn btn-danger">
-                <i class="fas fa-trash"></i> Hapus Semua Log
+                <i class="fas fa-trash"></i> Delete Semua Log
             </button>
         </form>
     </div>

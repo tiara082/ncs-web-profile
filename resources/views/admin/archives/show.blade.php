@@ -21,8 +21,48 @@
                         <td><span class="badge bg-secondary">{{ $archive->category }}</span></td>
                     </tr>
                     <tr>
-                        <td><strong>Deskripsi</strong></td>
+                        <td><strong>Description</strong></td>
                         <td>{{ $archive->description ?? '-' }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Keywords</strong></td>
+                        <td>
+                            @if(!empty($archive->keywords))
+                                @php
+                                    $keywords = explode(',', $archive->keywords);
+                                @endphp
+                                <div class="d-flex flex-wrap gap-1">
+                                    @foreach($keywords as $keyword)
+                                        @php
+                                            $keyword = trim($keyword);
+                                            if(!empty($keyword)) {
+                                        @endphp
+                                            <span class="badge bg-info text-white">{{ $keyword }}</span>
+                                        @php
+                                            }
+                                        @endphp
+                                    @endforeach
+                                </div>
+                            @else
+                                -
+                            @endif
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>DOI</strong></td>
+                        <td>
+                            @if(!empty($archive->doi))
+                                <a href="https://doi.org/{{ $archive->doi }}" target="_blank" class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-external-link-alt"></i> {{ $archive->doi }}
+                                </a>
+                            @else
+                                -
+                            @endif
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>ISSN Journal</strong></td>
+                        <td>{{ $archive->issn_journal ?? '-' }}</td>
                     </tr>
                     <tr>
                         <td><strong>File</strong></td>
@@ -33,7 +73,7 @@
                         <td>{{ $archive->admin->username ?? '-' }}</td>
                     </tr>
                     <tr>
-                        <td><strong>Ditambahkan</strong></td>
+                        <td><strong>Created</strong></td>
                         <td>{{ $archive->created_at->format('d M Y H:i') }}</td>
                     </tr>
                 </table>
@@ -43,7 +83,7 @@
                     <form action="{{ route('archives.destroy', $archive) }}" method="POST" class="d-inline" onsubmit="return confirmDelete(event)">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> Hapus</button>
+                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> Delete</button>
                     </form>
                 </div>
             </div>

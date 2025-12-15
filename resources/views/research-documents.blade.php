@@ -280,8 +280,52 @@
                                         <!-- Publication Details -->
                                         <div class="flex items-start gap-2 mb-4 bg-slate-50 rounded-lg p-3">
                                             <i data-feather="book-open" class="text-primary flex-shrink-0 mt-0.5" width="16" height="16"></i>
-                                            <p class="text-sm text-slate-600 leading-relaxed">{{ $pub['publication'] }}</p>
+                                            <div class="flex-1">
+                                                <p class="text-sm text-slate-600 leading-relaxed">{{ $pub['publication'] }}</p>
+                                                @if(!empty($pub['issn_journal']))
+                                                <p class="text-xs text-slate-500 mt-1">ISSN: {{ $pub['issn_journal'] }}</p>
+                                                @endif
+                                            </div>
                                         </div>
+
+                                        <!-- Keywords -->
+                                        @if(!empty($pub['keywords']))
+                                        <div class="mb-4">
+                                            <div class="flex items-center gap-2 mb-2">
+                                                <i data-feather="tag" class="text-primary" width="16" height="16"></i>
+                                                <span class="text-xs font-semibold text-slate-700 uppercase tracking-wide">Keywords</span>
+                                            </div>
+                                            <div class="flex flex-wrap gap-1.5">
+                                                @php
+                                                    $keywords = explode(',', $pub['keywords']);
+                                                    foreach($keywords as $keyword) {
+                                                        $keyword = trim($keyword);
+                                                        if(!empty($keyword)) {
+                                                            echo '<span class="inline-flex items-center px-2 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full border border-primary/20">' . e($keyword) . '</span>';
+                                                        }
+                                                    }
+                                                @endphp
+                                            </div>
+                                        </div>
+                                        @endif
+
+                                        <!-- DOI -->
+                                        @if(!empty($pub['doi']))
+                                        <div class="mb-4">
+                                            <div class="flex items-center gap-2 bg-blue-50 rounded-lg p-3 border border-blue-200">
+                                                <i data-feather="link" class="text-blue-600 flex-shrink-0" width="16" height="16"></i>
+                                                <div class="flex-1 min-w-0">
+                                                    <p class="text-xs font-semibold text-blue-900 uppercase tracking-wide">DOI</p>
+                                                    <a href="https://doi.org/{{ $pub['doi'] }}" target="_blank" class="text-sm text-blue-700 hover:text-blue-900 break-all">
+                                                        https://doi.org/{{ $pub['doi'] }}
+                                                    </a>
+                                                </div>
+                                                <button onclick="copyToClipboard('https://doi.org/{{ $pub['doi'] }}')" class="flex-shrink-0 p-1.5 text-blue-600 hover:bg-blue-100 rounded transition-colors" title="Copy DOI">
+                                                    <i data-feather="copy" width="14" height="14"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        @endif
 
                                         <!-- Actions -->
                                         <div class="flex items-center gap-2 flex-wrap">

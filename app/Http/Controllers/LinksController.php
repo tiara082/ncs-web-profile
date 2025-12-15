@@ -42,7 +42,7 @@ class LinksController extends Controller
         $this->logActivity('create', 'links', $link->id, "Created link: {$link->name}");
 
         return redirect()->route('links.index')
-            ->with('success', 'Link berhasil ditambahkan.');
+            ->with('success', 'Link successfully added.');
     }
 
     /**
@@ -80,7 +80,7 @@ class LinksController extends Controller
         $this->logActivity('update', 'links', $link->id, "Updated link: {$link->name}");
 
         return redirect()->route('links.index')
-            ->with('success', 'Link berhasil diupdate.');
+            ->with('success', 'Link successfully updated.');
     }
 
     /**
@@ -95,6 +95,6 @@ class LinksController extends Controller
         $this->logActivity('delete', 'links', null, "Deleted link: {$name}");
 
         return redirect()->route('links.index')
-            ->with('success', 'Link berhasil dihapus.');
+            ->with('success', 'Link successfully deleted.');
     }
 }

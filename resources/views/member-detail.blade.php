@@ -83,33 +83,36 @@
                         <div class="text-center mb-6">
                             <h1 class="text-2xl font-bold text-secondary mb-2">{{ $member['name'] ?? 'Member Name' }}</h1>
                             <p class="text-primary font-semibold mb-1">{{ $member['position'] ?? 'Position' }}</p>
-                            <p class="text-gray-600 text-sm">{{ $member['nim'] ?? 'NIM' }}</p>
+                            <p class="text-gray-600 text-sm">NIP. {{ $member['nip'] ?? 'No NIP' }}</p>
                         </div>
                         
                         <!-- Contact Info -->
                         <div class="space-y-3 border-t pt-4">
-                            @if(isset($member['email']))
+                            <!-- Email -->
+                            @if(!empty($member['email_variations']))
                             <div class="flex items-center gap-3 text-sm">
                                 <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
                                     <i data-feather="mail" class="w-4 h-4 text-primary"></i>
                                 </div>
-                                <a href="mailto:{{ $member['email'] }}" class="text-gray-700 hover:text-primary transition-colors break-all">
-                                    {{ $member['email'] }}
+                                <a href="mailto:{{ $member['email_variations'][0] }}" class="text-gray-700 hover:text-primary transition-colors break-all">
+                                    {{ $member['email_variations'][0] }}
                                 </a>
                             </div>
                             @endif
                             
-                            @if(isset($member['phone']))
+                            <!-- Phone -->
+                            @if(!empty($member['phone_variations']))
                             <div class="flex items-center gap-3 text-sm">
                                 <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
                                     <i data-feather="phone" class="w-4 h-4 text-primary"></i>
                                 </div>
-                                <a href="tel:{{ $member['phone'] }}" class="text-gray-700 hover:text-primary transition-colors">
-                                    {{ $member['phone'] }}
+                                <a href="tel:{{ $member['phone_variations'][0] }}" class="text-gray-700 hover:text-primary transition-colors">
+                                    {{ $member['phone_variations'][0] }}
                                 </a>
                             </div>
                             @endif
                             
+                            <!-- Social Links -->
                             @if(isset($member['linkedin']))
                             <div class="flex items-center gap-3 text-sm">
                                 <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
@@ -194,7 +197,43 @@
                             <div class="p-4 bg-gradient-to-r from-gray-50 to-blue-50 rounded-xl border border-gray-200 hover:border-primary transition-colors">
                                 <h3 class="font-semibold text-secondary mb-2">{{ $research['title'] }}</h3>
                                 <p class="text-sm text-gray-600 mb-2">{{ $research['publication'] ?? '' }}</p>
-                                <p class="text-xs text-gray-500">{{ $research['year'] ?? '' }}</p>
+                                
+                                <!-- Keywords -->
+                                @if(!empty($research['keywords']))
+                                <div class="mb-2">
+                                    @php
+                                        $keywords = explode(',', $research['keywords']);
+                                    @endphp
+                                    <div class="flex flex-wrap gap-1">
+                                        @foreach($keywords as $keyword)
+                                            @php
+                                                $keyword = trim($keyword);
+                                                if(!empty($keyword)) {
+                                            @endphp
+                                                <span class="inline-flex items-center px-2 py-0.5 bg-primary/10 text-primary text-xs font-medium rounded-full border border-primary/20">
+                                                    {{ Str::limit($keyword, 20) }}
+                                                </span>
+                                            @php
+                                                }
+                                            @endphp
+                                        @endforeach
+                                    </div>
+                                </div>
+                                @endif
+                                
+                                <!-- DOI and ISSN -->
+                                <div class="flex items-center gap-4 text-xs text-gray-500">
+                                    <span>{{ $research['year'] ?? '' }}</span>
+                                    @if(!empty($research['issn_journal']))
+                                    <span>ISSN: {{ $research['issn_journal'] }}</span>
+                                    @endif
+                                    @if(!empty($research['doi']))
+                                    <a href="https://doi.org/{{ $research['doi'] }}" target="_blank" class="text-blue-600 hover:text-blue-800 flex items-center gap-1">
+                                        DOI: {{ Str::limit($research['doi'], 20) }}
+                                        <i data-feather="external-link" class="w-3 h-3"></i>
+                                    </a>
+                                    @endif
+                                </div>
                             </div>
                             @endforeach
                         </div>

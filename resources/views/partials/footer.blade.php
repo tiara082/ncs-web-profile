@@ -216,3 +216,10 @@
         </div>
     </div>
 </footer>
+
+<script>
+    // Initialize Feather Icons
+    if (typeof feather !== 'undefined') {
+        feather.replace();
+    }
+</script>

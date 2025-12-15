@@ -21,6 +21,8 @@ class DatabaseSeeder extends Seeder
             ArchiveSeeder::class,
             ResearchSeeder::class,
             CommunityServiceSeeder::class,
+            MemberPublicationsSeeder::class,
+            MemberProjectsSeeder::class,
         ]);
     }
 }

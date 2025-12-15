@@ -10,7 +10,7 @@
     </div>
     <div>
         <a href="{{ route('contents.create') }}" class="btn btn-primary">
-            <i class="fas fa-plus"></i> Tambah Content
+            <i class="fas fa-plus"></i> Add Content
         </a>
     </div>
 </div>
@@ -22,12 +22,12 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Judul</th>
-                        <th>Tipe</th>
-                        <th>Pembuat</th>
+                        <th>Title</th>
+                        <th>Type</th>
+                        <th>Created By</th>
                         <th>Categories</th>
-                        <th>Tanggal</th>
-                        <th>Aksi</th>
+                        <th>Date</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>

@@ -44,7 +44,7 @@ class MembersController extends Controller
         $this->logActivity('create', 'members', $member->id, "Created member: {$member->member_name}");
 
         return redirect()->route('members.index')
-            ->with('success', 'Member berhasil ditambahkan.');
+            ->with('success', 'Member successfully added.');
     }
 
     /**
@@ -84,7 +84,7 @@ class MembersController extends Controller
         $this->logActivity('update', 'members', $member->id, "Updated member: {$member->member_name}");
 
         return redirect()->route('members.index')
-            ->with('success', 'Member berhasil diupdate.');
+            ->with('success', 'Member successfully updated.');
     }
 
     /**
@@ -99,6 +99,6 @@ class MembersController extends Controller
         $this->logActivity('delete', 'members', null, "Deleted member: {$name}");
 
         return redirect()->route('members.index')
-            ->with('success', 'Member berhasil dihapus.');
+            ->with('success', 'Member successfully deleted.');
     }
 }

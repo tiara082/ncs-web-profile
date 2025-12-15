@@ -762,6 +762,280 @@
             background: #1e293b;
             border-color: #475569;
         }
+
+        /* Enhanced Table Styles */
+        .data-table {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .data-table thead th {
+            background: linear-gradient(135deg, #66bbf2 0%, #222f7f 100%);
+            color: white !important;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            padding: 16px 12px;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .data-table thead th::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: shimmer 3s linear infinite;
+        }
+
+        .data-table tbody tr {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+            position: relative;
+        }
+
+        .data-table tbody tr:nth-child(even) {
+            background: rgba(248, 250, 252, 0.5);
+        }
+
+        body.dark-mode .data-table tbody tr:nth-child(even) {
+            background: rgba(30, 41, 59, 0.3);
+        }
+
+        .data-table tbody tr:hover {
+            background: linear-gradient(135deg, rgba(102, 187, 242, 0.05) 0%, rgba(34, 47, 127, 0.05) 100%);
+            transform: translateX(4px);
+            box-shadow: 0 4px 20px rgba(102, 187, 242, 0.15);
+            border-color: rgba(102, 187, 242, 0.2);
+        }
+
+        .data-table tbody td {
+            padding: 14px 12px;
+            vertical-align: middle;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+            transition: all 0.3s ease;
+        }
+
+        .data-table tbody td:first-child {
+            font-weight: 600;
+            color: #374151;
+        }
+
+        /* Dark Mode Table Enhancements */
+        body.dark-mode .data-table {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.95) 100%);
+            border-color: rgba(102, 187, 242, 0.2);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        body.dark-mode .data-table thead th {
+            background: linear-gradient(135deg, rgba(102, 187, 242, 0.9) 0%, rgba(34, 47, 127, 0.9) 100%);
+            color: #ffffff !important;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        body.dark-mode .data-table tbody tr {
+            background: rgba(15, 23, 42, 0.3);
+            border-color: rgba(102, 187, 242, 0.15);
+        }
+
+        body.dark-mode .data-table tbody tr:hover {
+            background: linear-gradient(135deg, rgba(102, 187, 242, 0.15) 0%, rgba(34, 47, 127, 0.15) 100%);
+            box-shadow: 0 4px 20px rgba(102, 187, 242, 0.3);
+            border-color: rgba(102, 187, 242, 0.4);
+        }
+
+        body.dark-mode .data-table tbody td {
+            color: #e5e7eb;
+            border-color: rgba(102, 187, 242, 0.15);
+        }
+
+        body.dark-mode .data-table tbody td:first-child {
+            color: #f1f5f9;
+        }
+
+        /* Enhanced Badge Styles */
+        .data-table .badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .data-table .badge:hover {
+            transform: scale(1.05);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        body.dark-mode .data-table .badge {
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Enhanced Link Styles */
+        .data-table a {
+            color: #66bbf2;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .data-table a:hover {
+            color: #222f7f;
+            transform: translateY(-1px);
+        }
+
+        .data-table a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #66bbf2;
+            transition: width 0.3s ease;
+        }
+
+        .data-table a:hover::after {
+            width: 100%;
+        }
+
+        body.dark-mode .data-table a {
+            color: #93d5ff;
+        }
+
+        body.dark-mode .data-table a:hover {
+            color: #66bbf2;
+        }
+
+        body.dark-mode .data-table a::after {
+            background: #93d5ff;
+        }
+
+        /* Enhanced Button Styles */
+        .data-table .btn {
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid transparent;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none !important;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .data-table .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .data-table .btn:hover::before {
+            left: 100%;
+        }
+
+        .data-table .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Responsive Table Styles */
+        @media (max-width: 768px) {
+            .data-table {
+                font-size: 0.85rem;
+            }
+            
+            .data-table thead th {
+                padding: 12px 8px;
+                font-size: 0.8rem;
+            }
+            
+            .data-table tbody td {
+                padding: 10px 8px;
+            }
+            
+            .data-table .btn {
+                padding: 6px 12px;
+                font-size: 0.75rem;
+            }
+        }
+
+        /* Loading Animation */
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+
+        /* Enhanced Table Animations */
+        .data-table tbody tr {
+            animation: slideInUp 0.4s ease-out;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Status Indicators */
+        .data-table .status-active {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #10b981;
+            display: inline-block;
+            margin-right: 8px;
+            animation: pulse 2s infinite;
+        }
+
+        .data-table .status-inactive {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #6b7280;
+            display: inline-block;
+            margin-right: 8px;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        body.dark-mode .status-active {
+            background: #34d399;
+            box-shadow: 0 0 8px rgba(52, 211, 153, 0.4);
+        }
+
+        body.dark-mode .status-inactive {
+            background: #4b5563;
+        }
     </style>
     @yield('styles')
 </head>

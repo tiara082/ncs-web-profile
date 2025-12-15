@@ -53,6 +53,24 @@
                     </div>
 
                     <div class="mb-3">
+                        <label for="keywords" class="form-label">Keywords</label>
+                        <textarea class="form-control" id="keywords" name="keywords" rows="2" placeholder="e.g., machine learning, artificial intelligence, neural networks">{{ old('keywords', $archive->keywords) }}</textarea>
+                        <small class="text-muted">Separate keywords with commas. Max 1000 characters.</small>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="doi" class="form-label">DOI (Digital Object Identifier)</label>
+                        <input type="text" class="form-control" id="doi" name="doi" value="{{ old('doi', $archive->doi) }}" placeholder="e.g., 10.1000/182">
+                        <small class="text-muted">Format: 10.xxxx/xxxxx. Example: 10.1000/182</small>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="issn_journal" class="form-label">ISSN Journal</label>
+                        <input type="text" class="form-control" id="issn_journal" name="issn_journal" value="{{ old('issn_journal', $archive->issn_journal) }}" placeholder="e.g., 1234-5678">
+                        <small class="text-muted">Format: 4 digits-4 digits (e.g., 1234-5678)</small>
+                    </div>
+
+                    <div class="mb-3">
                         <label for="publication" class="form-label">Publication/Journal</label>
                         <input type="text" class="form-control" id="publication" name="publication" value="{{ old('publication', $archive->publication) }}" placeholder="e.g., IEEE Transactions">
                     </div>

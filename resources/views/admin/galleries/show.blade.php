@@ -30,7 +30,7 @@
                         <td><span class="badge bg-info">{{ $gallery->gallery_type }}</span></td>
                     </tr>
                     <tr>
-                        <td><strong>Deskripsi</strong></td>
+                        <td><strong>Description</strong></td>
                         <td>{{ $gallery->description ?? '-' }}</td>
                     </tr>
                     <tr>
@@ -38,7 +38,7 @@
                         <td>{{ $gallery->admin->username ?? '-' }}</td>
                     </tr>
                     <tr>
-                        <td><strong>Ditambahkan</strong></td>
+                        <td><strong>Created</strong></td>
                         <td>{{ $gallery->created_at->format('d M Y H:i') }}</td>
                     </tr>
                 </table>
@@ -48,7 +48,7 @@
                     <form action="{{ route('galleries.destroy', $gallery) }}" method="POST" class="d-inline" onsubmit="return confirmDelete(event)">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> Hapus</button>
+                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> Delete</button>
                     </form>
                 </div>
             </div>

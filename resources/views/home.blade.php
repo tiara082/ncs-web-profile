@@ -657,7 +657,36 @@
                                 </div>
                                 
                                 <!-- Publication Info -->
-                                <p class="text-sm text-white/60 mb-6 flex-grow">{{ Str::limit($publication['publication'], 150) }}</p>
+                                <p class="text-sm text-white/60 mb-3 flex-grow">{{ Str::limit($publication['publication'], 150) }}</p>
+                                
+                                <!-- Keywords -->
+                                @if(!empty($publication['keywords']))
+                                <div class="mb-3">
+                                    @php
+                                        $keywords = explode(',', $publication['keywords']);
+                                        $displayKeywords = array_slice($keywords, 0, 3);
+                                    @endphp
+                                    <div class="flex flex-wrap gap-1">
+                                        @foreach($displayKeywords as $keyword)
+                                            @php
+                                                $keyword = trim($keyword);
+                                                if(!empty($keyword)) {
+                                            @endphp
+                                                <span class="inline-flex items-center px-2 py-0.5 bg-white/10 text-white/80 text-xs font-medium rounded-full border border-white/20">
+                                                    {{ Str::limit($keyword, 15) }}
+                                                </span>
+                                            @php
+                                                }
+                                            @endphp
+                                        @endforeach
+                                        @if(count($keywords) > 3)
+                                            <span class="inline-flex items-center px-2 py-0.5 bg-white/10 text-white/60 text-xs font-medium rounded-full border border-white/20">
+                                                +{{ count($keywords) - 3 }}
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+                                @endif
                                 
                                 <!-- Footer -->
                                 <div class="flex items-center justify-between mt-auto">
@@ -920,7 +949,7 @@
 
                 <!-- Lab Head - Featured Card -->
                 <div class="max-w-4xl mx-auto mb-16">
-                    <a href="/member/erfan-rohadi" class="group relative block bg-gradient-to-br from-white to-blue-50/30 rounded-3xl border-2 border-primary/20 hover:border-primary transition-all duration-300 overflow-hidden hover:shadow-2xl hover:shadow-primary/20 hover:-translate-y-2">
+                    <a href="/member/erfan-rohadi,-st.,-m.eng.,-ph.d." class="group relative block bg-gradient-to-br from-white to-blue-50/30 rounded-3xl border-2 border-primary/20 hover:border-primary transition-all duration-300 overflow-hidden hover:shadow-2xl hover:shadow-primary/20 hover:-translate-y-2">
                         <div class="absolute top-0 right-0 w-40 h-40 bg-gradient-to-bl from-primary/10 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
                         <div class="grid md:grid-cols-3 gap-8 items-center p-8">
                             <div class="md:col-span-1">
@@ -944,7 +973,7 @@
                 <!-- Research Team - Grid Cards -->
                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                     <!-- Researcher 1 -->
-                    <a href="/member/ade-ismail" class="group block bg-white rounded-2xl border-2 border-border hover:border-primary/50 transition-all duration-300 overflow-hidden hover:shadow-xl hover:-translate-y-2">
+                    <a href="/member/ade-ismail,-s.kom.,-m.ti" class="group block bg-white rounded-2xl border-2 border-border hover:border-primary/50 transition-all duration-300 overflow-hidden hover:shadow-xl hover:-translate-y-2">
                         <div class="aspect-square bg-gradient-to-br from-slate-100 to-slate-50 overflow-hidden">
                             <img src="{{ asset('img/lab-member/ade_ismail.png') }}" alt="Ade Ismail" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy"/>
                         </div>
@@ -959,7 +988,7 @@
                     </a>
 
                     <!-- Researcher 2 -->
-                    <a href="/member/vipkas-al-hadid-firdaus" class="group block bg-white rounded-2xl border-2 border-border hover:border-primary/50 transition-all duration-300 overflow-hidden hover:shadow-xl hover:-translate-y-2">
+                    <a href="/member/vipkas-al-hadid-firdaus,-st.,-mt" class="group block bg-white rounded-2xl border-2 border-border hover:border-primary/50 transition-all duration-300 overflow-hidden hover:shadow-xl hover:-translate-y-2">
                         <div class="aspect-square bg-gradient-to-br from-slate-100 to-slate-50 overflow-hidden">
                             <img src="{{ asset('img/lab-member/vipkas.png') }}" alt="Vipkas Al Hadid Firdaus" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy"/>
                         </div>
@@ -974,7 +1003,7 @@
                     </a>
 
                     <!-- Researcher 3 -->
-                    <a href="/member/sofyan-noor-arief" class="group block bg-white rounded-2xl border-2 border-border hover:border-primary/50 transition-all duration-300 overflow-hidden hover:shadow-xl hover:-translate-y-2">
+                    <a href="/member/sofyan-noor-arief,-s.st.,-m.kom." class="group block bg-white rounded-2xl border-2 border-border hover:border-primary/50 transition-all duration-300 overflow-hidden hover:shadow-xl hover:-translate-y-2">
                         <div class="aspect-square bg-gradient-to-br from-slate-100 to-slate-50 overflow-hidden">
                             <img src="{{ asset('img/lab-member/sofyan.png') }}" alt="Sofyan Noor Arief" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy"/>
                         </div>
@@ -989,7 +1018,7 @@
                     </a>
 
                     <!-- Researcher 4 -->
-                    <a href="/member/meyti-eka-apriyani" class="group block bg-white rounded-2xl border-2 border-border hover:border-primary/50 transition-all duration-300 overflow-hidden hover:shadow-xl hover:-translate-y-2">
+                    <a href="/member/meyti-eka-apriyani,-st.,-mt." class="group block bg-white rounded-2xl border-2 border-border hover:border-primary/50 transition-all duration-300 overflow-hidden hover:shadow-xl hover:-translate-y-2">
                         <div class="aspect-square bg-gradient-to-br from-slate-100 to-slate-50 overflow-hidden">
                             <img src="{{ asset('img/lab-member/meyti.png') }}" alt="Meyti Eka Apriyani" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy"/>
                         </div>

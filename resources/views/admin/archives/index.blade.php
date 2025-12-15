@@ -10,7 +10,7 @@
     </div>
     <div>
         <a href="{{ route('archives.create') }}" class="btn btn-primary">
-            <i class="fas fa-plus"></i> Tambah Archive
+            <i class="fas fa-plus"></i> Add Archive
         </a>
     </div>
 </div>
@@ -22,12 +22,14 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Judul</th>
+                        <th>Title</th>
                         <th>Category</th>
+                        <th>Keywords</th>
+                        <th>DOI</th>
                         <th>File</th>
                         <th>Uploaded By</th>
-                        <th>Tanggal</th>
-                        <th>Aksi</th>
+                        <th>Date</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -36,6 +38,38 @@
                             <td>{{ $loop->iteration + ($archives->currentPage() - 1) * $archives->perPage() }}</td>
                             <td><strong>{{ Str::limit($archive->title, 40) }}</strong></td>
                             <td><span class="badge bg-secondary">{{ $archive->category }}</span></td>
+                            <td>
+                                @if(!empty($archive->keywords))
+                                    @php
+                                        $keywords = explode(',', $archive->keywords);
+                                        $displayKeywords = array_slice($keywords, 0, 2);
+                                    @endphp
+                                    @foreach($displayKeywords as $keyword)
+                                        @php
+                                            $keyword = trim($keyword);
+                                            if(!empty($keyword)) {
+                                        @endphp
+                                            <span class="badge bg-info text-white me-1">{{ Str::limit($keyword, 10) }}</span>
+                                        @php
+                                            }
+                                        @endphp
+                                    @endforeach
+                                    @if(count($keywords) > 2)
+                                        <span class="badge bg-secondary">+{{ count($keywords) - 2 }}</span>
+                                    @endif
+                                @else
+                                    -
+                                @endif
+                            </td>
+                            <td>
+                                @if(!empty($archive->doi))
+                                    <a href="https://doi.org/{{ $archive->doi }}" target="_blank" class="btn btn-sm btn-outline-primary" title="{{ $archive->doi }}">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                @else
+                                    -
+                                @endif
+                            </td>
                             <td><a href="{{ asset('storage/' . $archive->file_path) }}" target="_blank"><i class="fas fa-download"></i></a></td>
                             <td>{{ $archive->admin->username ?? '-' }}</td>
                             <td>{{ $archive->created_at->format('d M Y') }}</td>
@@ -53,7 +87,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="7" class="text-center py-4 text-muted">
+                            <td colspan="9" class="text-center py-4 text-muted">
                                 <i class="fas fa-inbox fa-3x mb-3 d-block"></i>
                                 Belum ada archive
                             </td>
